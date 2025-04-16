@@ -3,9 +3,9 @@ import { HeaderComponent } from '../../components/header/header.component';
 import { FooterComponent } from '../../components/footer/footer.component';
 
 @Component({
-  selector: 'app-forgot-password',
+  selector: 'app-sign-up',
   imports: [HeaderComponent, FooterComponent],
-  templateUrl: './forgot-password.component.html',
-  styleUrl: './forgot-password.component.scss',
+  templateUrl: './sign-up.component.html',
+  styleUrl: './sign-up.component.scss',
 })
-export class ForgotPasswordComponent {}
+export class SignUpComponent {}
