@@ -1,45 +1,37 @@
 .form-area {
-  padding: 2% 8% 8% 8%;
-  background-color: rgb(15, 15, 15);
   display: flex;
   flex-direction: column;
-  align-items: center;
-
-  h1 {
-    color: white;
-    font-weight: 200;
-    margin: 2% 0;
-  }
 }
 
 .box {
-  background-color: rgb(27, 27, 27);
   display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 500px;
-  padding: 30px;
-  border-radius: 20px;
-  border: 1px solid rgb(70, 68, 68);
-
-  h2 {
-    font-size: 15px;
-    color: white;
-    font-weight: 300;
-  }
+  flex-direction: row;
+  width: 100%;
+  height: 100vh;
 
   form {
+    padding: 10%;
     display: flex;
     flex-direction: column;
   }
 
   input {
-    background-color: rgb(15, 15, 15);
-    margin: 5px 0;
-    width: 300px;
+    width: 400px;
     height: 35px;
-    border: 1px solid rgb(70, 68, 68);
-    border-radius: 5px;
+    margin: 10px 0;
+    padding: 10px;
+    font-size: 15px;
+  }
+
+  h1 {
+    font-size: 25px;
+    font-weight: 500;
+    margin: 20px 0;
+  }
+
+  h2 {
+    font-size: 18px;
+    font-weight: 400;
   }
 
   button {
@@ -50,8 +42,43 @@
     padding: 10px;
     margin: 10px 0;
     cursor: pointer;
-    width: 300px;
     font-weight: 400;
     font-size: 17px;
+  }
+
+  a {
+    color: #6f00ff;
+    text-decoration: none;
+  }
+
+  p {
+    font-weight: 300;
+    font-size: 12px;
+    width: 400px;
+    padding: 0 0 10px 0;
+  }
+}
+
+.image {
+  background-image: url("/images/background/background.jpg");
+  color: white;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login {
+  p {
+    font-weight: 500;
+    font-size: 15px;
+  }
+}
+
+.terms {
+  p {
+    font-weight: 300;
+    font-size: 12px;
+    margin: 10px 0;
   }
 }
