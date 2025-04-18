@@ -2,18 +2,15 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  // box-shadow: 0 1px 10px rgb(182, 180, 180);
 
-  background-color: transparent;
+  background-color: white;
   width: 100%;
-  position: absolute;
-  height: 10%;
-  top: 0;
-  z-index: 1;
-  padding: 0 5% 0% 5%;
+  padding: 1% 10%;
 
   a {
     font-size: 35px;
-    color: white;
+    color: #3c0d7a;
     text-decoration: none;
     font-weight: 500;
   }
@@ -25,7 +22,7 @@
     section {
       a {
         text-decoration: none;
-        color: white;
+        color: #3c0d7a;
         cursor: pointer;
         font-size: 20px;
         transition: all 0.2s ease-in;
@@ -43,8 +40,8 @@
 
 .header-button {
   background-color: transparent;
-  color: white;
-  border: 2px solid white;
+  color: #3c0d7a;
+  border: 2px solid #3c0d7a;
   border-radius: 5px;
   padding: 10px 30px;
 

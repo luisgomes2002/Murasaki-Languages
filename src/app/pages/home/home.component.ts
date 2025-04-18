@@ -5,7 +5,7 @@ import { CardComponent } from '../../components/card/card.component';
 
 @Component({
   selector: 'app-home',
-  imports: [HeaderComponent, FooterComponent],
+  imports: [HeaderComponent, FooterComponent, CardComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })
