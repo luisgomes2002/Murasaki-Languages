@@ -15,7 +15,7 @@
   border-radius: 5px;
 
   &:hover {
-	transform: scale(1.05);
+    transform: scale(1.05);
   }
 }
 
@@ -52,6 +52,7 @@
   padding: 8%;
   border-radius: 5px;
   visibility: hidden;
+  transition: 0.2s ease-in;
 }
 
 .card-btns:hover .span-btns {
