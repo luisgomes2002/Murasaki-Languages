@@ -5,6 +5,9 @@ import "./global-style.scss";
 import Footer from "./components/footer/footer";
 import Home from "./pages/home/home";
 import Subscription from "./pages/subscription/subscription";
+import SignIn from "./pages/sign-in/sign-in";
+import SignUp from "./pages/sign-up/sign-up";
+import UserProvider from "./context/user-context";
 
 const Layout = () => {
   return (
@@ -24,6 +27,14 @@ const router = createBrowserRouter([
         element: <Home />,
       },
       {
+        path: "/sign-in",
+        element: <SignIn />,
+      },
+      {
+        path: "/sign-up",
+        element: <SignUp />,
+      },
+      {
         path: "/subscription",
         element: <Subscription />,
       },
@@ -38,6 +49,8 @@ const root = ReactDOM.createRoot(rootElement);
 
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <UserProvider>
+      <RouterProvider router={router} />
+    </UserProvider>
   </React.StrictMode>,
 );

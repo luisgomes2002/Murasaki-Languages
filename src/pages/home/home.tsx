@@ -1,6 +1,10 @@
 import { Link } from "react-router-dom";
 import Card from "../../components/card/card";
 import TransparentHeader from "../../components/transparent-header/transparent-header";
+import languages from "../../assets/images/cards/card.jpg";
+import lesson from "../../assets/images/cards/card1.jpg";
+import partners from "../../assets/images/cards/card2.jpg";
+import community from "../../assets/images/cards/card3.jpg";
 import "./home.scss";
 
 const Home = () => {
@@ -22,15 +26,14 @@ const Home = () => {
         </div>
       </div>
       <div className="cards">
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
+        <Card title="IDIOMAS" link="/" image={languages} />
+        <Card title="AULAS" link="/" image={lesson} />
+        <Card title="PARCEIROS" link="/" image={partners} />
+        <Card title="COMUNIDADE" link="/" image={community} />
       </div>
 
       <div id="about" className="about">
-        <img src="src/assets/images/murasaki/logo.png" alt="profile" />
+        <img src="src/assets/images/profile.png" alt="profile" />
         <p>
           Olá! Seja bem-vindo ao MURASAKI, o site definitivo para todos aqueles
           que desejam embarcar na emocionante jornada de aprender línguas. Sou
@@ -44,12 +47,12 @@ const Home = () => {
         </p>
       </div>
       <div className="advantages">
-        <img src="src/assets/images/murasaki/logo.png" alt="logo" />
+        <img src="src/assets/images/background/teste.png" alt="logo" />
         <section>
           <h1>Conteúdo Rico e Explicações Detalhadas</h1>
           <p>
             Aprenda com textos, notícias atualizadas, vídeos imersivos e músicas
-            – tudo acompanhado de anotações claras e explicações
+            - tudo acompanhado de anotações claras e explicações
             contextualizadas.
           </p>
           <h1>Exercícios Práticos para Fixação</h1>

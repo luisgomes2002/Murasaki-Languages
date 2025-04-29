@@ -15,7 +15,7 @@ const SubscriptionCard = ({
 }: SubscriptionCardProps) => {
   return (
     <div className="sub-card">
-      <h1 className="title">{title}</h1>
+      <h1>{title}</h1>
       <div className="sub-card-value">
         <h1>R$</h1>
         <h2>{value.toFixed(2)}</h2>

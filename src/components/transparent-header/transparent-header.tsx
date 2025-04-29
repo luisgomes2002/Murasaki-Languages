@@ -1,7 +1,11 @@
 import { Link } from "react-router-dom";
 import "./transparent-header.scss";
+import { useContext } from "react";
+import { UserContext } from "../../context/user-context";
 
 const TransparentHeader = () => {
+  const userContext = useContext(UserContext);
+
   return (
     <nav className="nav">
       <Link to="">MURASAKI</Link>
@@ -14,7 +18,13 @@ const TransparentHeader = () => {
           <Link to="">Comunidade</Link>
         </section>
 
-        <button className="header-button">Entrar</button>
+        {userContext?.user?.username ? (
+          <Link to="/">{userContext.user.username}</Link>
+        ) : (
+          <Link to="/sign-in" className="header-button-transparent">
+            Entrar
+          </Link>
+        )}
       </div>
     </nav>
   );
