@@ -1,0 +1,112 @@
+.home {
+  display: flex;
+  flex-direction: column;
+}
+
+.image {
+  width: 100%;
+  background-image: url("/src/assets/images/background/background.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100vh;
+}
+
+.home-title {
+  padding: 25% 0 0 5%;
+  margin-bottom: 5%;
+
+  h1 {
+    color: white;
+    font-size: 150px;
+    text-shadow: 1px 1px 2px black;
+  }
+
+  p {
+    color: white;
+    font-size: 20px;
+    width: 40%;
+    text-shadow: 2px 2px 2px black;
+  }
+
+  i {
+    font-size: 20px;
+    margin-left: 10%;
+  }
+}
+
+.button-home {
+  display: flex;
+  color: black;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  padding: 7px;
+  background-color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 20px;
+  margin: 10px 0;
+  cursor: pointer;
+  text-decoration: none;
+  width: 21%;
+}
+
+.cards {
+  // background-color: #f8f8f8;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 2%;
+}
+
+.about {
+  background-color: #492b7a;
+  padding: 5% 10%;
+  display: grid;
+  grid-template-columns: 30% 1fr;
+  align-items: center;
+
+  img {
+    border-radius: 50%;
+    width: 200px;
+  }
+
+  p {
+    color: white;
+    font-size: 20px;
+    font-weight: 500;
+  }
+}
+
+.advantages {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  justify-content: center;
+  padding: 5%;
+  // background-color: #f8f8f8;
+
+  img {
+    width: 600px;
+    border-radius: 15px;
+  }
+
+  section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    h1 {
+      font-size: 30px;
+      font-weight: 500;
+    }
+
+    p {
+      margin-bottom: 5%;
+      font-size: 18px;
+      font-weight: 200;
+    }
+  }
+}

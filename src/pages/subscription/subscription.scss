@@ -1,0 +1,17 @@
+.sub {
+  margin: 3% 0;
+
+  h1 {
+    text-align: center;
+    font-weight: 400;
+    font-size: 40px;
+    color: #3c0d7a;
+  }
+
+  section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+  }
+}

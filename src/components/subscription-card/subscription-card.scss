@@ -1,0 +1,72 @@
+.sub-card {
+  border: none;
+  border-radius: 10px;
+  padding: 2%;
+  margin: 2%;
+  border: 2px solid #8c85ff;
+  background-color: #fafbff;
+  width: 400px;
+  height: 500px;
+
+  .title {
+    font-size: 20px;
+    font-weight: 600;
+    color: #3c0d7a;
+  }
+
+  h2 {
+    font-size: 40px;
+    font-weight: 600;
+    margin: 27px 0px;
+    color: #3c0d7a;
+  }
+
+  h3 {
+    font-weight: 300;
+    font-size: 16px;
+    padding: 10px 0px;
+    color: #3c0d7a;
+  }
+
+  hr {
+    margin: 5% 0;
+    color: #3c0d7a70;
+  }
+
+  p {
+    font-weight: 300;
+    padding-bottom: 3%;
+    color: #3c0d7a;
+  }
+
+  button {
+    border: 2px solid #6f00ff;
+    background-color: transparent;
+    color: #6f00ff;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px 0;
+    cursor: pointer;
+    width: 100%;
+    font-weight: 400;
+    font-size: 17px;
+    transition: all 0.2s ease-in;
+  }
+
+  button:hover {
+    background-color: #6f00ff;
+    color: white;
+    transition: all 0.2s ease-in;
+  }
+
+  .sub-card-value {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: -30px;
+
+    h1 {
+      margin: 40px 0px;
+      font-size: 25px;
+    }
+  }
+}
