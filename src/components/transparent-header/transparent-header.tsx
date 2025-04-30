@@ -19,7 +19,13 @@ const TransparentHeader = () => {
         </section>
 
         {userContext?.user?.username ? (
-          <Link to="/">{userContext.user.username}</Link>
+          <>
+            <Link to="/">{userContext.user.username}</Link>
+            <button>
+              <i className="fa-solid fa-caret-down"></i>
+            </button>
+            {/* <Link to="/sign-in">Sair</Link> */}
+          </>
         ) : (
           <Link to="/sign-in" className="header-button-transparent">
             Entrar

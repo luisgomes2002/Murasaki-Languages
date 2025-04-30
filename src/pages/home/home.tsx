@@ -4,7 +4,8 @@ import TransparentHeader from "../../components/transparent-header/transparent-h
 import languages from "../../assets/images/cards/card.jpg";
 import lesson from "../../assets/images/cards/card1.jpg";
 import partners from "../../assets/images/cards/card2.jpg";
-import community from "../../assets/images/cards/card3.jpg";
+import performance from "../../assets/images/cards/card3.jpg";
+import community from "../../assets/images/cards/card4.jpg";
 import "./home.scss";
 
 const Home = () => {
@@ -29,11 +30,12 @@ const Home = () => {
         <Card title="IDIOMAS" link="/" image={languages} />
         <Card title="AULAS" link="/" image={lesson} />
         <Card title="PARCEIROS" link="/" image={partners} />
+        <Card title="DESEMPENHO" link="/" image={performance} />
         <Card title="COMUNIDADE" link="/" image={community} />
       </div>
 
       <div id="about" className="about">
-        <img src="src/assets/images/profile.png" alt="profile" />
+        <img src="src/assets/images/personal/profile.png" alt="profile" />
         <p>
           Olá! Seja bem-vindo ao MURASAKI, o site definitivo para todos aqueles
           que desejam embarcar na emocionante jornada de aprender línguas. Sou
