@@ -8,6 +8,7 @@ import Subscription from "./pages/subscription/subscription";
 import SignIn from "./pages/sign-in/sign-in";
 import SignUp from "./pages/sign-up/sign-up";
 import UserProvider from "./context/user-context";
+import Dashboard from "./pages/dashboard/dashboard";
 
 const Layout = () => {
   return (
@@ -37,6 +38,10 @@ const router = createBrowserRouter([
       {
         path: "/subscription",
         element: <Subscription />,
+      },
+      {
+        path: "/private-dashboard",
+        element: <Dashboard />,
       },
     ],
   },

@@ -1,0 +1,17 @@
+.dashboard-area {
+  display: grid;
+  grid-template-columns: 15% 1fr;
+}
+
+.side-bar {
+  background-color: black;
+  display: flex;
+  flex-direction: column;
+
+  button {
+    color: white;
+    border: none;
+    background-color: transparent;
+    padding: 20px;
+  }
+}
