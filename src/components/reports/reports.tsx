@@ -3,7 +3,7 @@ import "./reports.scss";
 
 const Reports = () => {
   return (
-    <div>
+    <div className="report-area">
       <h1 className="user-title">Reports</h1>
       <input type="text" placeholder="Pesquisar" />
       <section className="report-section">

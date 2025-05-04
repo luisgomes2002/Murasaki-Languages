@@ -3,7 +3,7 @@ import "./backlog.scss";
 
 const Backlog = () => {
   return (
-    <div>
+    <div className="backlog-area">
       <h1 className="user-title">Backlog</h1>
       <input type="text" placeholder="Pesquisar" />
 

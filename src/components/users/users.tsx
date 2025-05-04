@@ -3,7 +3,7 @@ import "./users.scss";
 
 const Users = () => {
   return (
-    <div>
+    <div className="users-area">
       <h1 className="user-title">Tabela de Usuários</h1>
       <input type="text" placeholder="Pesquisar" />
 
