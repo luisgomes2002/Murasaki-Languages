@@ -29,6 +29,7 @@ const SignIn = () => {
       const response = await signin(data);
       Cookies.set("token", response.data.token, { expires: 5 });
       navigate("/");
+      // window.location.href = "/";
     } catch (error: any) {
       setError(error.response.data.Message);
     }

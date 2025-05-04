@@ -5,6 +5,7 @@ import Overview from "../../components/overview/overview";
 import PurpleHeader from "../../components/purple-header/purple-header";
 import Backlog from "../../components/backlog/backlog";
 import Reports from "../../components/reports/reports";
+import Plans from "../../components/plans/plans";
 
 const Dashboard = () => {
   const [activeSection, setActiveSection] = useState("overview");
@@ -18,7 +19,7 @@ const Dashboard = () => {
       case "Lessons":
       // return <Lessons />;
       case "Plans":
-      // return <Plans />;
+        return <Plans />;
       case "Reports":
         return <Reports />;
       case "Backlog":
