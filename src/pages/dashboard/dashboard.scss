@@ -4,14 +4,31 @@
 }
 
 .side-bar {
-  background-color: black;
+  padding-top: 50%;
+  background-color: #0a0520;
   display: flex;
   flex-direction: column;
+  height: 100%;
 
   button {
     color: white;
     border: none;
     background-color: transparent;
     padding: 20px;
+    display: flex;
+    justify-content: flex-start;
+    gap: 10px;
+    text-align: left;
+    cursor: pointer;
+    font-size: 18px;
+    align-items: center;
+  }
+
+  button:hover {
+    background-color: #0e062e;
+  }
+
+  i {
+    padding-left: 32%;
   }
 }

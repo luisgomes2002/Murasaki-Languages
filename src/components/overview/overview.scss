@@ -1,0 +1,83 @@
+.overview {
+  display: flex;
+  padding: 5%;
+  flex-direction: column;
+
+  .overview-user {
+    display: flex;
+    flex-direction: row;
+
+    .overview-card {
+      margin: 0 30px;
+      display: flex;
+      border-radius: 5px;
+      background-color: #0a0520;
+      padding: 40px;
+      align-items: center;
+
+      p {
+        color: white;
+        font-weight: 600;
+      }
+
+      h3 {
+        color: white;
+        font-weight: 200;
+      }
+
+      i {
+        background-color: #6714d3;
+        font-size: 30px;
+        color: white;
+        width: 60px;
+        height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+      }
+
+      div {
+        padding: 0 20px;
+        text-align: left;
+      }
+    }
+  }
+
+  .overview-more-info {
+    display: grid;
+    grid-template-columns: 1040px 1fr;
+    width: 100%;
+  }
+
+  .graphic-area {
+    padding: 30px;
+    background-color: #0a0520;
+    margin: 3%;
+    border-radius: 5px;
+
+    h1 {
+      color: white;
+      text-align: left;
+      font-weight: 400;
+      padding-bottom: 5%;
+    }
+  }
+
+  .overview-pie {
+    display: flex;
+    flex-direction: column;
+    width: 73%;
+    align-items: center;
+    justify-content: center;
+    background-color: #0a0520;
+    margin: 7%;
+    border-radius: 5px;
+
+    h1 {
+      color: white;
+      text-align: left;
+      font-weight: 400;
+    }
+  }
+}
