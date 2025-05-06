@@ -1,21 +1,78 @@
 .users-area {
-  text-align: center;
+  padding: 20px;
+  background-color: #0a0a0a;
+  min-height: 100vh;
+  color: #fff;
 
-  input {
-    border-radius: 10px;
-    padding: 5px 20px;
-    width: 300px;
-    border: none;
-    font-size: 15px;
-    background: #0a0520;
-    color: white;
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+
+    .title {
+      font-size: 24px;
+      font-weight: 500;
+    }
+
+    input {
+      border-radius: 8px;
+      padding: 8px 16px;
+      width: 250px;
+      background: #1f1f1f;
+      border: 1px solid #333;
+      color: #fff;
+
+      &::placeholder {
+        color: #888;
+      }
+    }
   }
 
-  .user-title {
-    padding: 2%;
-    font-size: 40px;
-    font-weight: 200;
-    text-align: center;
-    color: #0a0520;
+  .user-table {
+    width: 100%;
+    border-collapse: collapse;
+
+    th,
+    td {
+      padding: 12px;
+      text-align: left;
+      border-bottom: 1px solid #333;
+    }
+
+    th {
+      background-color: #111;
+      font-weight: 600;
+    }
+
+    tr:hover {
+      background-color: #0a0520;
+    }
+
+    .view-btn,
+    .edit-btn,
+    .delete-btn {
+      margin-right: 5px;
+      padding: 6px 12px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .view-btn {
+      background-color: #333;
+      color: #fff;
+    }
+
+    .edit-btn {
+      background-color: #444;
+      color: #fff;
+    }
+
+    .delete-btn {
+      background-color: #a00;
+      color: #fff;
+    }
   }
 }

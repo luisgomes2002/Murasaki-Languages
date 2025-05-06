@@ -1,5 +1,4 @@
-import { createBrowserRouter, Outlet } from "react-router-dom";
-import Footer from "./components/footer/footer";
+import { createBrowserRouter } from "react-router-dom";
 import Home from "./pages/home/home";
 import SignIn from "./pages/sign-in/sign-in";
 import SignUp from "./pages/sign-up/sign-up";
@@ -7,18 +6,8 @@ import Subscription from "./pages/subscription/subscription";
 import SubscriptionUpdate from "./pages/subscription-update/subscription-update";
 import Dashboard from "./pages/dashboard/dashboard";
 
-const Layout = () => {
-  return (
-    <>
-      <Outlet />
-      <Footer />
-    </>
-  );
-};
-
 const Router = createBrowserRouter([
   {
-    element: <Layout />,
     children: [
       {
         path: "/",
