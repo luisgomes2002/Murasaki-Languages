@@ -1,6 +1,27 @@
+import { useEffect, useState } from "react";
 import "./backlog.scss";
+import { getAllBacklog } from "../../services/backlog.service";
+
+interface BacklogProps {
+  id: string;
+  user: string;
+  description: string;
+  createdAt: string;
+}
 
 const Backlog = () => {
+  const [data, setData] = useState<BacklogProps[]>([]);
+
+  const getBacklog = async () => {
+    const response = await getAllBacklog();
+    console.log(response.data);
+    setData(response.data);
+  };
+
+  useEffect(() => {
+    getBacklog();
+  }, []);
+
   return (
     <div className="backlog-area">
       <div className="header">
@@ -17,11 +38,11 @@ const Backlog = () => {
           </tr>
         </thead>
         <tbody>
-          {[...Array(13)].map((_, index) => (
+          {data.map((backlog, index) => (
             <tr key={index}>
-              <td>jidnaifh9d78shfhad7sdaf89s</td>
-              <td>04/05/2025</td>
-              <td>Criou uma conta: Luis</td>
+              <td>{backlog.user}</td>
+              <td>{backlog.createdAt}</td>
+              <td>{backlog.description}</td>
             </tr>
           ))}
         </tbody>

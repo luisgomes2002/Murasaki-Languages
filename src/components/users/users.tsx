@@ -1,6 +1,26 @@
+import { useEffect, useState } from "react";
 import "./users.scss";
+import { getAllUsers } from "../../services/user.service";
+
+interface UserProps {
+  id: string;
+  name: string;
+  email: string;
+  userType: string;
+}
 
 const Users = () => {
+  const [data, setData] = useState<UserProps[]>([]);
+
+  const getUsers = async () => {
+    const response = await getAllUsers();
+    setData(response.data);
+  };
+
+  useEffect(() => {
+    getUsers();
+  }, []);
+
   return (
     <div className="users-area">
       <div className="header">
@@ -20,12 +40,12 @@ const Users = () => {
           </tr>
         </thead>
         <tbody>
-          {[...Array(13)].map((_, index) => (
+          {data.map((user, index) => (
             <tr key={index}>
-              <td>231j2hfbndhbfys809sd</td>
-              <td>Luis Gustavo</td>
-              <td>luisgmgomes@gmail.com</td>
-              <td>ADMIN</td>
+              <td>{user.id}</td>
+              <td>{user.name}</td>
+              <td>{user.email}</td>
+              <td>{user.userType}</td>
               <td>
                 <button className="view-btn">Ver</button>
                 <button className="edit-btn">

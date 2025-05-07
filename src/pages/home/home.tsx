@@ -7,6 +7,7 @@ import partners from "../../assets/images/cards/card2.jpg";
 import performance from "../../assets/images/cards/card3.jpg";
 import community from "../../assets/images/cards/card4.jpg";
 import "./home.scss";
+import Footer from "../../components/footer/footer";
 
 const Home = () => {
   return (
@@ -79,6 +80,7 @@ const Home = () => {
           </p>
         </section>
       </div>
+      <Footer />
     </div>
   );
 };
