@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import "./users.scss";
 import { getAllUsers } from "../../services/user.service";
+import { Link } from "react-router-dom";
 
 interface UserProps {
   id: string;
@@ -42,18 +43,21 @@ const Users = () => {
         <tbody>
           {data.map((user, index) => (
             <tr key={index}>
-              <td>{user.id}</td>
+              <td>
+                <Link to={`/profile/${user.id}`}>{user.id}</Link>
+              </td>
               <td>{user.name}</td>
               <td>{user.email}</td>
               <td>{user.userType}</td>
               <td>
-                <button className="view-btn">Ver</button>
                 <button className="edit-btn">
                   <i className="fa-solid fa-pen"></i>
                 </button>
               </td>
               <td>
-                <button className="delete-btn">🗑️</button>
+                <button className="delete-btn">
+                  <i className="fa-solid fa-trash"></i>
+                </button>
               </td>
             </tr>
           ))}

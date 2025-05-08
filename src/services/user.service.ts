@@ -8,8 +8,20 @@ interface SignInProps {
   password: string;
 }
 
+interface SignUpProps {
+  name: string;
+  username: string;
+  email: string;
+  password: string;
+}
+
 export const signin = (data: SignInProps) => {
   const response = axios.post(`${baseUrl}/user/login`, data);
+  return response;
+};
+
+export const signup = (data: SignUpProps) => {
+  const response = axios.post(`${baseUrl}/user/create`, data);
   return response;
 };
 

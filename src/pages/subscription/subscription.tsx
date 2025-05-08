@@ -3,6 +3,7 @@ import SubscriptionCard from "../../components/subscription-card/subscription-ca
 import WhiteHeader from "../../components/white-header/white-header";
 import { getAllPlansService } from "../../services/plans.service";
 import "./subscription.scss";
+import Footer from "../../components/footer/footer";
 
 interface Plan {
   id: string;
@@ -46,6 +47,7 @@ const Subscription = () => {
           ))}
         </section>
       </div>
+      <Footer />
     </>
   );
 };

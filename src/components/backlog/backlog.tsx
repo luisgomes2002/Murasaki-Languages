@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import "./backlog.scss";
 import { getAllBacklog } from "../../services/backlog.service";
+import { Link } from "react-router-dom";
 
 interface BacklogProps {
   id: string;
@@ -40,8 +41,10 @@ const Backlog = () => {
         <tbody>
           {data.map((backlog, index) => (
             <tr key={index}>
-              <td>{backlog.user}</td>
-              <td>{backlog.createdAt}</td>
+              <td>
+                <Link to={`/profile/${backlog.user}`}>{backlog.user}</Link>
+              </td>
+              <td>{new Date(backlog.createdAt).toLocaleDateString("pt-BR")}</td>
               <td>{backlog.description}</td>
             </tr>
           ))}

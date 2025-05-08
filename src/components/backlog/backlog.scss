@@ -39,6 +39,15 @@
     padding: 12px;
     text-align: left;
     border-bottom: 1px solid #333;
+
+    a {
+      color: white;
+      text-decoration: none;
+    }
+
+    a:hover {
+      color: #333;
+    }
   }
 
   th {

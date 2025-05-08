@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./sign-in.scss";
 import { signin } from "../../services/user.service";
 import Cookies from "js-cookie";
@@ -13,7 +13,6 @@ interface loginProps {
 }
 
 const SignIn = () => {
-  const navigate = useNavigate();
   const [error, setError] = useState<string>("");
 
   const {
@@ -28,8 +27,7 @@ const SignIn = () => {
     try {
       const response = await signin(data);
       Cookies.set("token", response.data.token, { expires: 5 });
-      navigate("/");
-      // window.location.href = "/";
+      window.location.href = "/";
     } catch (error: any) {
       setError(error.response.data.Message);
     }
