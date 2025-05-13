@@ -7,6 +7,7 @@ import Footer from "../../components/footer/footer";
 
 interface Plan {
   id: string;
+  planId: string;
   title: string;
   description: string;
   value: number;
@@ -19,6 +20,7 @@ const Subscription = () => {
   const getAllPlans = async () => {
     try {
       const response = await getAllPlansService();
+      console.log(response.data);
       setPlans(response.data);
     } catch (error) {
       console.error("Error fetching plans:", error);
@@ -39,6 +41,7 @@ const Subscription = () => {
           {plans.map((plan) => (
             <SubscriptionCard
               key={plan.id}
+              planId={plan.planId}
               title={plan.title}
               value={plan.value}
               description={plan.description}

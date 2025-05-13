@@ -1,6 +1,7 @@
 import "./subscription-card.scss";
 
 interface SubscriptionCardProps {
+  planId: string;
   title: string;
   value: number;
   description: string;
@@ -8,6 +9,7 @@ interface SubscriptionCardProps {
 }
 
 const SubscriptionCard = ({
+  planId,
   title,
   value,
   description,
@@ -22,7 +24,18 @@ const SubscriptionCard = ({
         <h1>/mês</h1>
       </div>
       <h3>{description}</h3>
-      <button>Escolher</button>
+
+      <button
+        onClick={() =>
+          window.open(
+            `https://www.mercadopago.com.br/subscriptions/checkout?preapproval_plan_id=${planId}`,
+            "_blank",
+          )
+        }
+      >
+        Escolher
+      </button>
+
       <hr />
       {advantages.map((advantage, index) => (
         <p key={index}>✅ {advantage}</p>
