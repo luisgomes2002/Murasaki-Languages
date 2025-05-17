@@ -1,20 +1,22 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import SubscriptionCard from "../../components/subscription-card/subscription-card";
 import WhiteHeader from "../../components/white-header/white-header";
 import { getAllPlansService } from "../../services/plans.service";
 import "./subscription.scss";
 import Footer from "../../components/footer/footer";
+import { UserContext } from "../../context/user-context";
 
 interface Plan {
   id: string;
-  planId: string;
   title: string;
   description: string;
   value: number;
   advantages: string[];
+  link: string;
 }
 
 const Subscription = () => {
+  const userContext = useContext(UserContext);
   const [plans, setPlans] = useState<Plan[]>([]);
 
   const getAllPlans = async () => {
@@ -41,11 +43,12 @@ const Subscription = () => {
           {plans.map((plan) => (
             <SubscriptionCard
               key={plan.id}
-              planId={plan.planId}
               title={plan.title}
               value={plan.value}
               description={plan.description}
               advantages={plan.advantages}
+              link={plan.link}
+              userEmail={userContext?.user?.sub}
             />
           ))}
         </section>

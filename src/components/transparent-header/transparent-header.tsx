@@ -18,9 +18,9 @@ const TransparentHeader = () => {
           <Link to="">Comunidade</Link>
         </section>
 
-        {userContext?.user?.username ? (
+        {userContext?.user?.name ? (
           <>
-            <Link to="/">{userContext.user.username}</Link>
+            <Link to="/">{userContext.user.name}</Link>
             <button>
               <i className="fa-solid fa-caret-down"></i>
             </button>

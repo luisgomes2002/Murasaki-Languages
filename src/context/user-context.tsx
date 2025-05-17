@@ -4,9 +4,9 @@ import { jwtDecode } from "jwt-decode";
 
 export interface User {
   userId?: string;
-  username?: string;
+  name?: string;
   userType?: string;
-  email?: string;
+  sub?: string;
 }
 
 interface UserContextType {
