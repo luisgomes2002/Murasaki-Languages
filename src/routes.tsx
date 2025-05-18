@@ -5,6 +5,7 @@ import SignUp from "./pages/sign-up/sign-up";
 import Subscription from "./pages/subscription/subscription";
 import SubscriptionUpdate from "./pages/subscription-update/subscription-update";
 import Dashboard from "./pages/dashboard/dashboard";
+import UserPage from "./pages/user/user-page";
 
 const Router = createBrowserRouter([
   {
@@ -32,6 +33,10 @@ const Router = createBrowserRouter([
       {
         path: "/private-dashboard",
         element: <Dashboard />,
+      },
+      {
+        path: "/user-page",
+        element: <UserPage />,
       },
     ],
   },
