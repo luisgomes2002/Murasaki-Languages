@@ -5,15 +5,7 @@ import { getAllPlansService } from "../../services/plans.service";
 import "./subscription.scss";
 import Footer from "../../components/footer/footer";
 import { UserContext } from "../../context/user-context";
-
-interface Plan {
-  id: string;
-  title: string;
-  description: string;
-  value: number;
-  advantages: string[];
-  link: string;
-}
+import { Plan } from "../../util/interfaces";
 
 const Subscription = () => {
   const userContext = useContext(UserContext);
@@ -22,7 +14,6 @@ const Subscription = () => {
   const getAllPlans = async () => {
     try {
       const response = await getAllPlansService();
-      console.log(response.data);
       setPlans(response.data);
     } catch (error) {
       console.error("Error fetching plans:", error);

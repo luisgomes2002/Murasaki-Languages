@@ -28,7 +28,7 @@ const Home = () => {
         </div>
       </div>
       <div className="cards">
-        <Card title="IDIOMAS" link="/" image={languages} />
+        <Card title="IDIOMAS" link="/languages" image={languages} />
         <Card title="AULAS" link="/" image={lesson} />
         <Card title="PARCEIROS" link="/" image={partners} />
         <Card title="DESEMPENHO" link="/" image={performance} />

@@ -21,6 +21,7 @@
     "react-router-dom": "^7.5.3",
     "recharts": "^2.15.3",
     "sass": "^1.87.0",
+    "styled-components": "^6.1.18",
     "zod": "^3.24.3"
   },
   "devDependencies": {

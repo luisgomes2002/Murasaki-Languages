@@ -10,7 +10,7 @@ interface CardPros {
 const Card = ({ title, link, image }: CardPros) => {
   return (
     <div
-      className="card"
+      className="card-category"
       style={{
         backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,0.253) 0%, #000000 700%), url(${image})`,
       }}

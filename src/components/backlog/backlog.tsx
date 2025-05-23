@@ -2,20 +2,13 @@ import { useEffect, useState } from "react";
 import "./backlog.scss";
 import { getAllBacklog } from "../../services/backlog.service";
 import { Link } from "react-router-dom";
-
-interface BacklogProps {
-  id: string;
-  user: string;
-  description: string;
-  createdAt: string;
-}
+import { BacklogProps } from "../../util/interfaces";
 
 const Backlog = () => {
   const [data, setData] = useState<BacklogProps[]>([]);
 
   const getBacklog = async () => {
     const response = await getAllBacklog();
-    console.log(response.data);
     setData(response.data);
   };
 

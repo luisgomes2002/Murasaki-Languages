@@ -6,6 +6,9 @@ import Subscription from "./pages/subscription/subscription";
 import SubscriptionUpdate from "./pages/subscription-update/subscription-update";
 import Dashboard from "./pages/dashboard/dashboard";
 import UserPage from "./pages/user/user-page";
+import Languages from "./pages/languages/languages";
+import LessonBox from "./pages/lesson-box/lesson-box";
+import LessonsPage from "./pages/lesson/lesson-page";
 
 const Router = createBrowserRouter([
   {
@@ -37,6 +40,18 @@ const Router = createBrowserRouter([
       {
         path: "/user-page",
         element: <UserPage />,
+      },
+      {
+        path: "/languages",
+        element: <Languages />,
+      },
+      {
+        path: "/lesson",
+        element: <LessonsPage />,
+      },
+      {
+        path: "/lesson/:id",
+        element: <LessonBox />,
       },
     ],
   },

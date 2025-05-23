@@ -1,13 +1,13 @@
 import { Link } from "react-router-dom";
-import "./footer.scss";
+import { FooterContainer, IconsDiv } from "./footer-styled";
 
 const Footer = () => {
   return (
-    <div className="footer">
+    <FooterContainer>
       <Link to="">Murasaki</Link>
       <p>© 2025. Murasaki Languages ●</p>
 
-      <div className="icons">
+      <IconsDiv>
         <Link to="">
           <i className="fa-brands fa-instagram"></i>
         </Link>
@@ -20,8 +20,8 @@ const Footer = () => {
         <Link to="">
           <i className="fa-solid fa-envelope"></i>
         </Link>
-      </div>
-    </div>
+      </IconsDiv>
+    </FooterContainer>
   );
 };
 

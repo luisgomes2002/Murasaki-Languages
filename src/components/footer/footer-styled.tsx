@@ -1,10 +1,12 @@
-.footer {
+import styled from "styled-components";
+
+export const FooterContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 2% 4%;
   background-color: #0a0520;
-  // background-color: #492B7A;
+  /* background-color: #492b7a; */
 
   a {
     color: white;
@@ -29,12 +31,12 @@
     color: #6f00ff;
     transition: all 0.2s ease-in;
   }
-}
+`;
 
-.icons {
+export const IconsDiv = styled.div`
   margin: 0 5px;
 
   a {
     margin: 0;
   }
-}
+`;
