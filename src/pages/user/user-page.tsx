@@ -1,17 +1,30 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import Footer from "../../components/footer/footer";
 import PurpleHeader from "../../components/purple-header/purple-header";
 import { UserContext } from "../../context/user-context";
-import "./user-page.scss";
+import { getUserById } from "../../services/user.service";
+import { UserInformations } from "../../util/interfaces";
 
 const UserPage = () => {
   const userContext = useContext(UserContext);
+  const [user, setUser] = useState<UserInformations>();
 
   let link = "https://billing.stripe.com/p/login/test_14A5kwgxi8EaasegxYefC00";
+
+  const userInformations = async (id: string) => {
+    const response = await getUserById(id);
+    setUser(response.data);
+  };
+
+  useEffect(() => {
+    if (userContext?.user?.userId) userInformations(userContext.user.userId);
+  }, [userContext?.user?.userId, user]);
 
   return (
     <div>
       <PurpleHeader />
+
+      <h1>Bem vindo, {user?.name}</h1>
 
       <div>
         <button

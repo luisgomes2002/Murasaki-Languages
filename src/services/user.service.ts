@@ -1,19 +1,8 @@
 import axios from "axios";
 import Cookies from "js-cookie";
+import { SignInProps, SignUpProps } from "../util/interfaces";
 
 const baseUrl = "http://localhost:8080/api";
-
-interface SignInProps {
-  email: string;
-  password: string;
-}
-
-interface SignUpProps {
-  name: string;
-  username: string;
-  email: string;
-  password: string;
-}
 
 export const signin = (data: SignInProps) => {
   const response = axios.post(`${baseUrl}/user/login`, data);
@@ -31,5 +20,15 @@ export const getAllUsers = () => {
       Authorization: `Bearer ${Cookies.get("token")}`,
     },
   });
+  return response;
+};
+
+export const getUserById = (id: string) => {
+  const response = axios.get(`${baseUrl}/user/list/${id}`, {
+    headers: {
+      Authorization: `Bearer ${Cookies.get("token")}`,
+    },
+  });
+
   return response;
 };

@@ -15,7 +15,7 @@ const TransparentHeader = () => {
 
   return (
     <TransparenNav>
-      <Link to="">MURASAKI</Link>
+      <Link to="/">MURASAKI</Link>
 
       <RightDiv>
         <Section>
@@ -27,7 +27,7 @@ const TransparentHeader = () => {
 
         {userContext?.user?.name ? (
           <>
-            <StyledLink to="/">{userContext.user.name}</StyledLink>
+            <StyledLink to="/user-page">{userContext.user.name}</StyledLink>
             <Button>
               <i className="fa-solid fa-caret-down"></i>
             </Button>

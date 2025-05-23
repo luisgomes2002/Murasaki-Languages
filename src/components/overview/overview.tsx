@@ -10,64 +10,124 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
-import "./overview.scss";
 
-const data = [
-  { month: "-18 ", quantity: 1500 },
-  { month: "18-25", quantity: 3000 },
-  { month: "25-29", quantity: 3000 },
-  { month: "30-39", quantity: 4000 },
-  { month: "40+", quantity: 2500 },
-];
-
-const dataGender = [
-  { name: "Man", value: 400 },
-  { name: "Woman", value: 300 },
-  { name: "Others", value: 100 },
-];
-
-const COLORS = ["#6714D3", "#10B981", "#FFF"]; // roxo, verde, amarelo
+import {
+  Card,
+  GraphicArea,
+  MoreInfo,
+  PieArea,
+  UserOverview,
+  Wrapper,
+} from "./overview-styled";
+import { useEffect, useState } from "react";
+import { getMetrics, getMetricsByDate } from "../../services/metrics.service";
+import { Metrics, MetricsDates } from "../../util/interfaces";
 
 const Overview = () => {
+  const [dates, setDates] = useState<MetricsDates[]>([]);
+  const [metrics, setMetrics] = useState<Metrics>();
+  const [selectedDate, setSelectedDate] = useState<string>("");
+
+  const metricsDate = async () => {
+    try {
+      const response = await getMetrics();
+      setDates(response.data);
+    } catch (error: any) {
+      console.log(error);
+    }
+  };
+
+  const metricsByDates = async (date: string) => {
+    try {
+      const response = await getMetricsByDate(date);
+      setMetrics(response.data);
+    } catch (error: any) {
+      console.log(error);
+    }
+  };
+
+  const data = [
+    { month: "-18", quantity: metrics?.userAgeDistribution.under18 },
+    { month: "18-25", quantity: metrics?.userAgeDistribution["18-25"] },
+    { month: "25-29", quantity: metrics?.userAgeDistribution["25-29"] },
+    { month: "30-39", quantity: metrics?.userAgeDistribution["30-39"] },
+    { month: "40+", quantity: metrics?.userAgeDistribution["40plus"] },
+  ];
+
+  const dataGender = [
+    { name: "Man", value: metrics?.topGender.MALE },
+    { name: "Woman", value: metrics?.topGender.FEMALE },
+    { name: "Others", value: metrics?.topGender.OTHER },
+    { name: "None", value: metrics?.topGender.NONE },
+  ];
+
+  const COLORS = ["#260452", "#229abe", "#FFF", "#86769c"];
+
+  useEffect(() => {
+    metricsDate();
+    if (selectedDate) metricsByDates(selectedDate);
+  }, [selectedDate]);
+
   return (
-    <div className="overview">
-      <div className="overview-user">
-        <div className="overview-card">
-          <i className="fa-solid fa-user"></i>
-          <div>
-            <p>1600</p>
-            <h3>Total Users</h3>
-          </div>
-        </div>
+    <Wrapper>
+      <UserOverview>
+        {[
+          { value: metrics?.totalUsers, label: "Total Users" },
+          { value: metrics?.activeUsers, label: "Active Users" },
+          { value: metrics?.bannedUsers, label: "Banned Users" },
+          { value: metrics?.deletedUsers, label: "Deleted Users" },
+        ].map((item, idx) => (
+          <Card key={idx}>
+            <i className="fa-solid fa-user"></i>
+            <div>
+              <p>{item.value}</p>
+              <h3>{item.label}</h3>
+            </div>
+          </Card>
+        ))}
+      </UserOverview>
 
-        <div className="overview-card">
-          <i className="fa-solid fa-user"></i>
-          <div>
-            <p>1535</p>
-            <h3>Active Users</h3>
-          </div>
-        </div>
+      <MoreInfo>
+        <GraphicArea>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+            }}
+          >
+            <h1>Users by Age</h1>
 
-        <div className="overview-card">
-          <i className="fa-solid fa-user"></i>
-          <div>
-            <p>7</p>
-            <h3>Banned Users</h3>
+            <div style={{ display: "flex", alignItems: "center" }}>
+              <label style={{ color: "#fff", marginRight: "10px" }}>
+                Selecione uma data:
+              </label>
+              <select
+                value={selectedDate}
+                onChange={(e) => setSelectedDate(e.target.value)}
+                style={{
+                  padding: "10px",
+                  borderRadius: "8px",
+                  border: "1px solid #0a0a0a",
+                  fontSize: "16px",
+                  backgroundColor: "#0a0a0a",
+                  color: "#fff",
+                }}
+              >
+                <option value="" disabled>
+                  Selecione uma data
+                </option>
+                {dates.map((item) =>
+                  item.dateTimes.map((d, idx) => (
+                    <option key={`${item.id}-${idx}`} value={d}>
+                      {new Date(d).toLocaleDateString("pt-BR")}
+                    </option>
+                  )),
+                )}
+              </select>
+            </div>
           </div>
-        </div>
 
-        <div className="overview-card">
-          <i className="fa-solid fa-user"></i>
-          <div>
-            <p>20</p>
-            <h3>Deleted Users</h3>
-          </div>
-        </div>
-      </div>
-
-      <div className="overview-more-info">
-        <div className="graphic-area">
-          <h1>Users by Age</h1>
           <ResponsiveContainer width="100%" height={400}>
             <BarChart
               data={data}
@@ -76,20 +136,17 @@ const Overview = () => {
               <XAxis dataKey="month" tick={{ fill: "white", fontSize: 12 }} />
               <YAxis tick={{ fill: "white", fontSize: 12 }} />
               <Tooltip
-                contentStyle={{
-                  backgroundColor: "#fff",
-                }}
+                contentStyle={{ backgroundColor: "#fff" }}
                 labelStyle={{ color: "#6B7280" }}
                 itemStyle={{ color: "#4B5563" }}
               />
-
               <Legend />
               <Bar dataKey="quantity" stackId="a" fill="#8B5CF6" barSize={30} />
             </BarChart>
           </ResponsiveContainer>
-        </div>
+        </GraphicArea>
 
-        <div className="overview-pie">
+        <PieArea>
           <h1>Users by Gender</h1>
           <ResponsiveContainer width="100%" height={300}>
             <PieChart>
@@ -120,19 +177,9 @@ const Overview = () => {
               <Legend wrapperStyle={{ fontSize: 15 }} />
             </PieChart>
           </ResponsiveContainer>
-        </div>
-      </div>
-      {/* <div>
-        <h2>Lessons</h2>
-        <h3>Top languages</h3>
-        <h3>Total Lesson</h3>
-      </div>
-      <div>
-        <h2>Posts</h2>
-        <h3>Total Posts</h3>
-        <h3>Posts Last 30 Days</h3>
-      </div> */}
-    </div>
+        </PieArea>
+      </MoreInfo>
+    </Wrapper>
   );
 };
 
