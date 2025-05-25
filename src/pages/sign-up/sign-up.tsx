@@ -1,20 +1,29 @@
 import { Link } from "react-router-dom";
-import "./sign-up.scss";
 import { signup } from "../../services/user.service";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { SignUpSchema } from "../../schemas/sign-up-schema";
-
-interface CreateUserProps {
-  name: string;
-  username: string;
-  email: string;
-  password: string;
-}
+import {
+  BoxSignUp,
+  ErrorMessage,
+  FormContainer,
+  ImageSignUp,
+  Label,
+  LoginText,
+  StyledForm,
+  StyledInput,
+  StyledSelect,
+  SubmitButton,
+  TermsText,
+  Text,
+  Title,
+} from "./sign-up-styled";
+import { SignUpProps } from "../../util/interfaces";
 
 const SignUp = () => {
   const [error, setError] = useState<string>("");
+  const [message, setMessage] = useState<string>("");
 
   const {
     register,
@@ -24,64 +33,98 @@ const SignUp = () => {
     resolver: zodResolver(SignUpSchema),
   });
 
-  const CreateAccount = async (data: CreateUserProps) => {
+  const CreateAccount = async (data: SignUpProps) => {
     try {
       await signup(data);
       window.location.href = "/sign-in";
     } catch (error: any) {
-      setError(error.response.data.Message);
+      setMessage(error.response.data.Message);
+      setError(error.response.data.Error);
     }
   };
 
   return (
-    <div className="form-sign-up">
-      <div className="box-sign-up">
-        <div className="image-sign-up"></div>
-        <form onSubmit={handleSubmit(CreateAccount)}>
-          <h1>Inscreva-se no Murasaki</h1>
-          <h2>Nome</h2>
-          <input {...register("name")} type="text" placeholder="Nome" />
-          <span>{errors.name?.message}</span>
-          <h2>Username</h2>
-          <input {...register("username")} type="text" placeholder="Username" />
-          <span>{errors.username?.message}</span>
-          <h2>Email</h2>
-          <input {...register("email")} type="email" placeholder="Email" />
-          <span>{errors.email?.message}</span>
-          <h2>Senha</h2>
-          <input
+    <FormContainer>
+      <BoxSignUp>
+        <ImageSignUp />
+        <StyledForm onSubmit={handleSubmit(CreateAccount)}>
+          <Title>Inscreva-se no Murasaki</Title>
+
+          <Label>Nome</Label>
+          <StyledInput {...register("name")} type="text" placeholder="Nome" />
+          <ErrorMessage>{errors.name?.message}</ErrorMessage>
+
+          <Label>Username</Label>
+          <StyledInput
+            {...register("username")}
+            type="text"
+            placeholder="Username"
+          />
+          <ErrorMessage>{errors.username?.message}</ErrorMessage>
+
+          <Label>Email</Label>
+          <StyledInput
+            {...register("email")}
+            type="email"
+            placeholder="Email"
+          />
+          <ErrorMessage>{errors.email?.message}</ErrorMessage>
+
+          <Label>Gênero</Label>
+          <StyledSelect {...register("gender")}>
+            <option value="">Selecione</option>
+            <option value="MALE">Masculino</option>
+            <option value="FEMALE">Feminino</option>
+            <option value="OTHER">Outro</option>
+            <option value="NONE">Não informar</option>
+          </StyledSelect>
+          <ErrorMessage>{errors.gender?.message}</ErrorMessage>
+
+          <Label>Data de nascimento</Label>
+          <StyledInput {...register("birthdate")} type="date" />
+          <ErrorMessage>{errors.birthdate?.message}</ErrorMessage>
+
+          <Label>Senha</Label>
+          <StyledInput
             {...register("password")}
             type="password"
             placeholder="Senha"
           />
-          <span>{errors.password?.message}</span>
-          <p className="specification">
+          <ErrorMessage>{errors.password?.message}</ErrorMessage>
+
+          <Text>
             A senha deve ter pelo menos 8 caracteres, incluindo um número e uma
             letra minúscula.
-          </p>
-          <h2>Confirmar senha</h2>
-          <input
+          </Text>
+
+          <Label>Confirmar senha</Label>
+          <StyledInput
             {...register("confirmPassword")}
             type="password"
             placeholder="Confirmar senha"
           />
-          <span>{errors.confirmPassword?.message}</span>
-          <span>{error}</span>
-          <button>Criar</button>
+          <ErrorMessage>{errors.confirmPassword?.message}</ErrorMessage>
+
+          <ErrorMessage>{error}</ErrorMessage>
+          <ErrorMessage>{message}</ErrorMessage>
+
+          <SubmitButton type="submit">Criar</SubmitButton>
+
           <div className="login">
-            <p>
-              Já tem uma contar? <Link to="/sign-in">Entrar</Link>
-            </p>
+            <LoginText>
+              Já tem uma conta? <Link to="/sign-in">Entrar</Link>
+            </LoginText>
           </div>
-          <p className="terms">
+
+          <TermsText>
             Ao criar uma conta, você concorda com os Termos de Serviço. Para
             mais informações sobre as práticas de privacidade da Murasaki
             Languages, consulte a Política de Privacidade. Ocasionalmente,
             enviaremos e-mails relacionados à sua conta.
-          </p>
-        </form>
-      </div>
-    </div>
+          </TermsText>
+        </StyledForm>
+      </BoxSignUp>
+    </FormContainer>
   );
 };
 

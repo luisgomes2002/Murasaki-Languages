@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-import "./users.scss";
 import { getAllUsers } from "../../services/user.service";
 import { Link } from "react-router-dom";
+import Dashboardtitle from "../dashboard-title/dashboard-title";
+import { InfoTable, EditButton, DeleteButton, Table } from "./users-styled";
 
 interface UserProps {
   id: string;
@@ -23,13 +24,9 @@ const Users = () => {
   }, []);
 
   return (
-    <div className="users-area">
-      <div className="header">
-        <h1 className="title">Lista de Usuários</h1>
-        <input type="text" placeholder="Pesquisar por nome ou email" />
-      </div>
-
-      <table className="user-table">
+    <Table>
+      <Dashboardtitle sectionTitle="Lista de Usuários" />
+      <InfoTable>
         <thead>
           <tr>
             <th>ID</th>
@@ -50,20 +47,20 @@ const Users = () => {
               <td>{user.email}</td>
               <td>{user.userType}</td>
               <td>
-                <button className="edit-btn">
+                <EditButton>
                   <i className="fa-solid fa-pen"></i>
-                </button>
+                </EditButton>
               </td>
               <td>
-                <button className="delete-btn">
+                <DeleteButton>
                   <i className="fa-solid fa-trash"></i>
-                </button>
+                </DeleteButton>
               </td>
             </tr>
           ))}
         </tbody>
-      </table>
-    </div>
+      </InfoTable>
+    </Table>
   );
 };
 

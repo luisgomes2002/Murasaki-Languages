@@ -1,7 +1,11 @@
-.card-category {
+import styled from "styled-components";
+
+export const CardCategory = styled.div<{ image: string }>`
   width: 300px;
   height: 450px;
   margin: 15px;
+  background-image: ${({ image }) =>
+    `linear-gradient(to bottom, rgba(0,0,0,0.253) 0%, #000000 700%), url(${image})`};
   background-size: cover;
   background-position: center;
   transform: scale(1);
@@ -11,11 +15,10 @@
   &:hover {
     transform: scale(1.05);
   }
-}
+`;
 
-.card-btns {
+export const CardBtns = styled.div`
   height: 100%;
-
   padding: 10%;
   text-align: center;
   cursor: pointer;
@@ -28,9 +31,9 @@
     width: 100%;
     height: 100%;
   }
-}
+`;
 
-.span-card {
+export const SpanCard = styled.span`
   color: white;
 
   h3 {
@@ -38,18 +41,18 @@
     font-size: 30px;
     font-weight: 500;
   }
-}
+`;
 
-.span-btns {
+export const SpanBtns = styled.span`
   background-color: #000000;
   color: white;
   padding: 8%;
   border-radius: 5px;
   visibility: hidden;
   transition: 0.2s ease-in;
-}
 
-.card-btns:hover .span-btns {
-  transition: 0.3s ease-in;
-  visibility: visible;
-}
+  ${CardBtns}:hover & {
+    transition: 0.3s ease-in;
+    visibility: visible;
+  }
+`;

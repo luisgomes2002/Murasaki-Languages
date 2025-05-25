@@ -1,29 +1,24 @@
 import { Link } from "react-router-dom";
-import "./card.scss";
+import { CardCategory, CardBtns, SpanCard, SpanBtns } from "./card-styled";
 
-interface CardPros {
+interface CardProps {
   title: string;
   link: string;
   image: string;
 }
 
-const Card = ({ title, link, image }: CardPros) => {
+const Card = ({ title, link, image }: CardProps) => {
   return (
-    <div
-      className="card-category"
-      style={{
-        backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,0.253) 0%, #000000 700%), url(${image})`,
-      }}
-    >
-      <div className="card-btns">
+    <CardCategory image={image}>
+      <CardBtns>
         <Link to={link}>
-          <span className="span-card">
+          <SpanCard>
             <h3>{title}</h3>
-          </span>
-          <span className="span-btns">MOSTRAR MAIS</span>
+          </SpanCard>
+          <SpanBtns>MOSTRAR MAIS</SpanBtns>
         </Link>
-      </div>
-    </div>
+      </CardBtns>
+    </CardCategory>
   );
 };
 

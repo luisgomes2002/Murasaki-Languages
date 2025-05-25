@@ -6,6 +6,7 @@ import Backlog from "../../components/backlog/backlog";
 import Reports from "../../components/reports/reports";
 import Plans from "../../components/plans/plans";
 import { Link } from "react-router-dom";
+import LessonsList from "../../components/lessons/lessons";
 
 const Dashboard = () => {
   const [activeSection, setActiveSection] = useState("overview");
@@ -17,7 +18,7 @@ const Dashboard = () => {
       case "Users":
         return <Users />;
       case "Lessons":
-      // return <Lessons />;
+        return <LessonsList />;
       case "Plans":
         return <Plans />;
       case "Reports":

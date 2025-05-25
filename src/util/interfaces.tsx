@@ -8,6 +8,8 @@ export interface SignUpProps {
   username: string;
   email: string;
   password: string;
+  gender: string;
+  birthdate: string;
 }
 
 export interface CompleteLessonProps {
@@ -141,4 +143,44 @@ export interface Metrics {
     OTHER: number;
     NONE: number;
   };
+}
+
+export interface LanguagesCardProps {
+  link: string;
+  name: string;
+  image: string;
+  isActive: boolean;
+}
+
+export interface CreateLessonCollection {
+  userId: string;
+  collectionName: string;
+}
+
+export interface LessonCollection {
+  id: string;
+  languageName: string;
+  lessonsId: string[];
+}
+
+export interface CreateLesson {
+  title: string;
+  text: string;
+  links: string[];
+  languageType: string;
+  japaneseLevels: string;
+  ankiLink: string;
+  thumbLink: string;
+}
+
+export interface LessonUpdate {
+  id: string;
+  title: string;
+  text: string | object;
+  links: string[];
+  name: string;
+  languageType: string;
+  japaneseLevels: string;
+  ankiLink: string;
+  thumbLink: string;
 }

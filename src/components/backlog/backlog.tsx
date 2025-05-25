@@ -3,6 +3,7 @@ import "./backlog.scss";
 import { getAllBacklog } from "../../services/backlog.service";
 import { Link } from "react-router-dom";
 import { BacklogProps } from "../../util/interfaces";
+import Dashboardtitle from "../dashboard-title/dashboard-title";
 
 const Backlog = () => {
   const [data, setData] = useState<BacklogProps[]>([]);
@@ -18,11 +19,7 @@ const Backlog = () => {
 
   return (
     <div className="backlog-area">
-      <div className="header">
-        <h1 className="title">Backlog</h1>
-        <input type="text" placeholder="Pesquisar por data" />
-      </div>
-
+      <Dashboardtitle sectionTitle="Backlog" />
       <table className="backlog-table">
         <thead>
           <tr>

@@ -13,8 +13,10 @@ import {
   Card,
 } from "./lesson-page-styled";
 import { PublishedLesson } from "../../util/interfaces";
+import { useParams } from "react-router-dom";
 
 const LessonsPage = () => {
+  const { name } = useParams();
   const [published, setPublished] = useState<PublishedLesson[]>([]);
 
   const publishedLesson = async () => {
@@ -27,7 +29,7 @@ const LessonsPage = () => {
   };
 
   useEffect(() => {
-    publishedLesson();
+    if (name == "Japonês") publishedLesson();
   }, []);
 
   return (
@@ -71,9 +73,9 @@ const LessonsPage = () => {
 
         <Lessons>
           <Text>
-            <h1>Aprenda Japonês com Facilidade</h1>
+            <h1>Aprenda {name} com Facilidade</h1>
             <p>
-              Nesta seção, você terá acesso a aulas de japonês, exercícios
+              Nesta seção, você terá acesso a aulas de {name}, exercícios
               interativos, flashcards do Anki para download e um relatório de
               desempenho personalizado para acompanhar sua evolução nos estudos
               de forma prática e eficiente.

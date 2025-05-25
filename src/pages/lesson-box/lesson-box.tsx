@@ -126,6 +126,8 @@ const LessonBox = () => {
   }, [id, userContext?.user.userId]);
 
   useEffect(() => {
+    console.log(lesson?.text);
+
     if (completedLesson && id) {
       setIsCompleted(completedLesson.includes(id));
     }
@@ -146,7 +148,6 @@ const LessonBox = () => {
             <i className="fa-solid fa-check"></i>
           </CompletedButton>
         </ImgVideoBox>
-
         <TextSection>
           <Options $activeSection={activeSection}>
             <button onClick={() => setActiveSection("text")}>Texto</button>
