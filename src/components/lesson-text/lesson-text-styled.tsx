@@ -26,10 +26,8 @@ export const ExplanationsBox = styled.div`
 
 export const LessonTextDecoration = styled.div`
   p {
-    padding: 0 0 30px 0;
-    margin: 0 0 30px 0;
+    padding: 0 0 10px 0;
     width: 1000px;
-    border-bottom: 1px solid #ffffff90;
     color: white;
   }
 `;
@@ -37,6 +35,9 @@ export const LessonTextDecoration = styled.div`
 export const InfoBox = styled.div`
   display: flex;
   justify-content: space-between;
+  border-top: 1px solid #ffffff90;
+  padding-top: 20px;
+  margin-top: 50px;
 
   span {
     display: flex;

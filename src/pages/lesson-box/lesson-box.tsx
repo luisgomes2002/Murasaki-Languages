@@ -19,6 +19,7 @@ import {
 import { UserContext } from "../../context/user-context";
 import LessonText from "../../components/lesson-text/lesson-text";
 import LessonWorksheet from "../../components/lesson-worksheet/lesson-worksheet";
+import { formatDate } from "../../util/format-date";
 
 const LessonBox = () => {
   const { id } = useParams();
@@ -29,7 +30,7 @@ const LessonBox = () => {
   const [activeSection, setActiveSection] = useState("text");
 
   const renderContent = () => {
-    if (!lesson || !lesson.text || !lesson.explanations) return null;
+    if (!lesson) return <p>Carregando...</p>;
 
     switch (activeSection) {
       case "text":
@@ -126,8 +127,6 @@ const LessonBox = () => {
   }, [id, userContext?.user.userId]);
 
   useEffect(() => {
-    console.log(lesson?.text);
-
     if (completedLesson && id) {
       setIsCompleted(completedLesson.includes(id));
     }
@@ -138,6 +137,8 @@ const LessonBox = () => {
       <PurpleHeader />
       <LessonBoxArea>
         <ImgVideoBox>
+          <h3>{lesson?.name}</h3>
+          <p>{formatDate(lesson?.createAt)}</p>
           <h1>{lesson?.title}</h1>
           {videoContent}
           <CompletedButton
@@ -155,7 +156,6 @@ const LessonBox = () => {
               Atividades
             </button>
           </Options>
-
           {renderContent()}
         </TextSection>
       </LessonBoxArea>

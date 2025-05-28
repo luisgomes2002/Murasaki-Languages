@@ -1,4 +1,5 @@
 import { Editor } from "@tiptap/react";
+import { MenuButton, MenuContainer } from "./menu-bar-styled";
 
 interface MenuBarProps {
   editor: Editor | null;
@@ -10,37 +11,36 @@ const MenuBar = ({ editor }: MenuBarProps) => {
   }
 
   return (
-    <div
+    <MenuContainer
       style={{
         display: "flex",
         gap: "8px",
         padding: "8px",
-        borderBottom: "1px solid #333",
         flexWrap: "wrap",
       }}
     >
-      <button
+      <MenuButton
         onClick={() => editor.chain().focus().toggleBold().run()}
-        className={editor.isActive("bold") ? "is-active" : ""}
+        active={editor.isActive("bold")}
         title="Bold"
       >
-        B
-      </button>
-      <button
+        <i className="fa-solid fa-bold"></i>
+      </MenuButton>
+      <MenuButton
         onClick={() => editor.chain().focus().toggleItalic().run()}
-        className={editor.isActive("italic") ? "is-active" : ""}
+        active={editor.isActive("italic")}
         title="Italic"
       >
-        I
-      </button>
-      <button
+        <i className="fa-solid fa-italic"></i>
+      </MenuButton>
+      <MenuButton
         onClick={() => editor.chain().focus().toggleStrike().run()}
-        className={editor.isActive("strike") ? "is-active" : ""}
+        active={editor.isActive("strike")}
         title="Strikethrough"
       >
-        S
-      </button>
-    </div>
+        <i className="fa-solid fa-strikethrough"></i>
+      </MenuButton>
+    </MenuContainer>
   );
 };
 

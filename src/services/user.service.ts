@@ -10,7 +10,6 @@ export const signin = (data: SignInProps) => {
 };
 
 export const signup = (data: SignUpProps) => {
-  console.log(data);
   const response = axios.post(`${baseUrl}/user/create`, data);
   return response;
 };

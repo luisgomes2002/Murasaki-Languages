@@ -18,6 +18,18 @@ export const ImgVideoBox = styled.div`
     color: white;
   }
 
+  h3 {
+    color: white;
+    font-weight: 200;
+    font-size: 12px;
+  }
+
+  p {
+    color: white;
+    font-weight: 100;
+    font-size: 15px;
+  }
+
   iframe {
     width: 1000px;
     height: 600px;

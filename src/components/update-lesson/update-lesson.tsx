@@ -12,8 +12,12 @@ import Footer from "../footer/footer";
 import PurpleHeader from "../purple-header/purple-header";
 import { getLessonById, updateLesson } from "../../services/lessons.service";
 import { Conversation } from "../../util/interfaces";
-import { useEffect, useState } from "react";
-import Cookies from "js-cookie";
+import { useContext, useEffect, useState } from "react";
+import { EditorContent, useEditor } from "@tiptap/react";
+import StarterKit from "@tiptap/starter-kit";
+import { StyledEditor } from "./update-lesson-styled";
+import MenuBar from "../text-bar/meu-bar";
+import { UserContext } from "../../context/user-context";
 
 const UpdateLesson = () => {
   const { id } = useParams();
@@ -28,6 +32,7 @@ const UpdateLesson = () => {
   const [anki, setAnki] = useState("");
   const [error, setError] = useState<string>("");
   const [loading, setLoading] = useState(false);
+  const userContext = useContext(UserContext);
 
   useEffect(() => {
     if (id) getLessonToUpdate(id);
@@ -38,13 +43,16 @@ const UpdateLesson = () => {
       const response = await getLessonById(id);
       const lessonData = response.data;
       setLesson(lessonData);
-      setTitle(lessonData.title || "");
-      setEditorState(lessonData.text || "");
-      setLinksList(lessonData.links || []);
-      setLanguage(lessonData.languageType || "");
-      setLevel(lessonData.japaneseLevels || "");
-      setThumb(lessonData.thumbLink || "");
-      setAnki(lessonData.ankiLink || "");
+      setTitle(lessonData.title);
+      setEditorState(lessonData.text);
+      setLinksList(lessonData.links);
+      setLanguage(lessonData.languageType);
+      setLevel(lessonData.japaneseLevels);
+      setThumb(lessonData.thumbLink);
+      setAnki(lessonData.ankiLink);
+
+      if (editor) editor.commands.setContent(lessonData.text);
+      else setEditorState(lessonData.text);
     } catch (error: any) {
       console.error(error);
       setError("Erro ao carregar aula.");
@@ -64,15 +72,9 @@ const UpdateLesson = () => {
   const updateThisLesson = async () => {
     if (!lesson) return;
 
-    const userId = Cookies.get("userId");
-    if (!userId) {
-      setError("Usuário não autenticado.");
-      return;
-    }
-
     const updateData = {
       id: lesson.id,
-      title,
+      title: title,
       text: editorState,
       links: linksList,
       name: lesson.name,
@@ -80,12 +82,16 @@ const UpdateLesson = () => {
       japaneseLevels: level,
       ankiLink: anki,
       thumbLink: thumb,
+      visibility: lesson.visibility,
+      published: lesson.published,
     };
+
+    console.log(updateData);
 
     try {
       setLoading(true);
       setError("");
-      await updateLesson(updateData, userId);
+      await updateLesson(updateData, userContext?.user.userId);
       alert("Aula atualizada com sucesso!");
     } catch (error: any) {
       console.error(error.response);
@@ -94,6 +100,14 @@ const UpdateLesson = () => {
       setLoading(false);
     }
   };
+
+  const editor = useEditor({
+    extensions: [StarterKit],
+    content: "",
+    onUpdate: ({ editor }) => {
+      setEditorState(editor.getHTML());
+    },
+  });
 
   return (
     <div>
@@ -108,10 +122,12 @@ const UpdateLesson = () => {
           onChange={(e) => setTitle(e.target.value)}
         />
 
-        <LexicalEditor
-          onChange={(state) => setEditorState(JSON.stringify(state))}
-          initialEditorState={editorState}
-        />
+        {editor && (
+          <StyledEditor>
+            <EditorContent editor={editor} />
+            <MenuBar editor={editor} />
+          </StyledEditor>
+        )}
 
         <LinksContainer>
           <input

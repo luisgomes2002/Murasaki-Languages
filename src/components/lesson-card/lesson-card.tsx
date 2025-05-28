@@ -1,4 +1,3 @@
-import { TextLimit } from "../../text-limit";
 import { formatDate } from "../../util/format-date";
 import {
   LessonCardWrapper,
@@ -13,7 +12,6 @@ interface LessonCardPros {
   title: string;
   level: string;
   createAt: string;
-  text: string;
   visibility: string;
 }
 
@@ -30,7 +28,6 @@ const LessonCard = (data: LessonCardPros) => {
         <h1>{data.title}</h1>
         <h2>Dificuldade: {data.level}</h2>
         <h3>{formatDate(data.createAt)}</h3>
-        <TextLimit text={data.text} limit={40} type="text" />
       </InfoLessonCard>
     </LessonCardWrapper>
   );

@@ -17,7 +17,7 @@ export const getAllLessons = (page = 0, size = 10) => {
   return response;
 };
 
-export const getAllPublishedLesson = () => {
+export const getAllPublishedTrueLesson = () => {
   const response = axios.get(`${baseUrl}/lesson/published-true`, {
     headers: {
       Authorization: `Bearer ${Cookies.get("token")}`,
@@ -58,5 +58,53 @@ export const updateLesson = (data: LessonUpdate, userId: string) => {
       },
     },
   );
+  return response;
+};
+
+export const getJapaneseLessonByLevel = (level: string) => {
+  const response = axios.get(`${baseUrl}/lesson/japanese-level/${level}`, {
+    headers: {
+      Authorization: `Bearer ${Cookies.get("token")}`,
+    },
+  });
+  return response;
+};
+
+export const getPublicJapaneseLessonByLevel = (level: string) => {
+  const response = axios.get(
+    `${baseUrl}/lesson/japanese-level-public/${level}`,
+    {
+      headers: {
+        Authorization: `Bearer ${Cookies.get("token")}`,
+      },
+    },
+  );
+  return response;
+};
+
+export const getPublicLesson = () => {
+  const response = axios.get(`${baseUrl}/lesson/public`, {
+    headers: {
+      Authorization: `Bearer ${Cookies.get("token")}`,
+    },
+  });
+  return response;
+};
+
+export const getJapanesePublicLesson = () => {
+  const response = axios.get(`${baseUrl}/lesson/japanese/public`, {
+    headers: {
+      Authorization: `Bearer ${Cookies.get("token")}`,
+    },
+  });
+  return response;
+};
+
+export const getAllJapaneseLessonsByPublishedTrue = () => {
+  const response = axios.get(`${baseUrl}/lesson/all-japanese/published/`, {
+    headers: {
+      Authorization: `Bearer ${Cookies.get("token")}`,
+    },
+  });
   return response;
 };
