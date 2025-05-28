@@ -1,20 +1,46 @@
 import { useEffect, useState } from "react";
 import Dashboardtitle from "../dashboard-title/dashboard-title";
 import { Table, InfoTable, EditButton } from "../users/users-styled";
-import { LessonsOptions } from "./lessons-styled";
-import { getAllLessons } from "../../services/lessons.service";
+import {
+  CreateLesson,
+  LessonsOptions,
+  SelectAndCreateLesson,
+} from "./lessons-styled";
+import {
+  getAllLessons,
+  getLessonByVisibility,
+} from "../../services/lessons.service";
 import { Conversation } from "../../util/interfaces";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const LessonsList = () => {
   const [lessons, setLessons] = useState<Conversation[]>([]);
+  const [selectedVisibility, setSelectedVisibility] = useState<string | null>(
+    null,
+  );
+  const navigate = useNavigate();
 
-  const fetchLessons = async () => {
+  const fetchLessons = async (visibility?: string) => {
     try {
-      const response = await getAllLessons();
-      setLessons(response.data ?? []);
+      if (visibility) {
+        const response = await getLessonByVisibility(visibility);
+        setLessons(response.data ?? []);
+      } else {
+        const response = await getAllLessons();
+        setLessons(response.data ?? []);
+      }
     } catch (error) {
       console.error("Erro ao buscar aulas:", error);
+    }
+  };
+
+  const handleCheckboxClick = (visibility: string) => {
+    if (selectedVisibility === visibility) {
+      setSelectedVisibility(null);
+      fetchLessons(); // fetch all
+    } else {
+      setSelectedVisibility(visibility);
+      fetchLessons(visibility);
     }
   };
 
@@ -25,17 +51,28 @@ const LessonsList = () => {
   return (
     <Table>
       <Dashboardtitle sectionTitle="Lista de Aulas" />
-      {["PUBLIC", "PRIVATE"].map((nivel) => (
-        <LessonsOptions key={nivel}>
-          <input type="checkbox" id={`checkbox-${nivel.toLowerCase()}`} />
-          <label
-            htmlFor={`checkbox-${nivel.toLowerCase()}`}
-            className="custom-checkbox"
-          />
-          <p>{nivel}</p>
-        </LessonsOptions>
-      ))}
-      <button>New</button>
+      <SelectAndCreateLesson>
+        <div>
+          {["PUBLIC", "PRIVATE"].map((nivel) => (
+            <LessonsOptions key={nivel}>
+              <input
+                type="checkbox"
+                id={`checkbox-${nivel.toLowerCase()}`}
+                checked={selectedVisibility === nivel}
+                onChange={() => handleCheckboxClick(nivel)}
+              />
+              <label
+                htmlFor={`checkbox-${nivel.toLowerCase()}`}
+                className="custom-checkbox"
+              />
+              <p>{nivel}</p>
+            </LessonsOptions>
+          ))}
+        </div>
+        <CreateLesson type="button" onClick={() => navigate("/lesson/create")}>
+          <i className="fa-solid fa-book-bookmark"></i> New
+        </CreateLesson>
+      </SelectAndCreateLesson>
       <InfoTable>
         <thead>
           <tr>

@@ -25,7 +25,6 @@ const LessonWorksheet = ({ worksheets, anki }: LessonWorksheetProps) => {
 
   useEffect(() => {
     if (worksheets.length > 0) getWorksheet(worksheets);
-    console.log(anki);
   }, [worksheets, anki]);
 
   return (

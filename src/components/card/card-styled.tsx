@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const CardCategory = styled.div<{ image: string }>`
+export const CardCategory = styled.div<{ image: string; active: boolean }>`
   width: 300px;
   height: 450px;
   margin: 15px;
@@ -11,9 +11,11 @@ export const CardCategory = styled.div<{ image: string }>`
   transform: scale(1);
   transition: all 0.3s ease-in;
   border-radius: 5px;
+  filter: ${({ active }) => (active ? "none" : "grayscale(1)")};
+  pointer-events: ${({ active }) => (active ? "auto" : "none")};
 
   &:hover {
-    transform: scale(1.05);
+    transform: ${({ active }) => (active ? "scale(1.05)" : "scale(1)")};
   }
 `;
 
@@ -21,15 +23,20 @@ export const CardBtns = styled.div`
   height: 100%;
   padding: 10%;
   text-align: center;
-  cursor: pointer;
 
-  a {
+  a,
+  div {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     text-decoration: none;
     width: 100%;
     height: 100%;
+    cursor: pointer;
+  }
+
+  div {
+    cursor: default;
   }
 `;
 
@@ -55,4 +62,13 @@ export const SpanBtns = styled.span`
     transition: 0.3s ease-in;
     visibility: visible;
   }
+`;
+
+export const InactiveOverlay = styled.div`
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(20, 20, 20, 0.4);
+  border-radius: 5px;
+  z-index: 2;
 `;

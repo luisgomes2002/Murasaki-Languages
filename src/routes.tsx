@@ -9,8 +9,8 @@ import UserPage from "./pages/user/user-page";
 import Languages from "./pages/languages/languages";
 import LessonBox from "./pages/lesson-box/lesson-box";
 import LessonsPage from "./pages/lesson/lesson-page";
-import UpdateLesson from "./components/update-lesson/update-lesson";
-import CreateLessons from "./components/create-lessons/create-lessons";
+import CreateLessons from "./pages/create-lessons/create-lessons";
+import LessonMenu from "./pages/lesson-menu/lesson-menu";
 
 const Router = createBrowserRouter([
   {
@@ -55,7 +55,7 @@ const Router = createBrowserRouter([
         path: "/lesson/:id",
         element: <LessonBox />,
       },
-      { path: "/lesson/update/:id", element: <UpdateLesson /> },
+      { path: "/lesson/update/:id", element: <LessonMenu /> },
       { path: "/lesson/create", element: <CreateLessons /> },
     ],
   },

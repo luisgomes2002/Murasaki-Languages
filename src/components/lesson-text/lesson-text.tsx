@@ -8,7 +8,6 @@ import {
 } from "./lesson-text-styled";
 
 const LessonText = ({ text, explanation }: LessonTextProps) => {
-  console.log("Props recebidas:", { text, explanation });
   const [detailedExplanations, setDetailedExplanations] = useState<
     Explanation[]
   >([]);
@@ -19,7 +18,6 @@ const LessonText = ({ text, explanation }: LessonTextProps) => {
         ids.map((id) => getExplanationId(id)),
       );
 
-      console.log("Dados da lesson:", responses);
       const allExplanations = responses.map((res) => res.data);
       setDetailedExplanations(allExplanations.flat());
     } catch (error) {

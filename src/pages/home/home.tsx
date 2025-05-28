@@ -28,11 +28,16 @@ const Home = () => {
         </div>
       </div>
       <div className="cards">
-        <Card title="IDIOMAS" link="/languages" image={languages} />
-        <Card title="AULAS" link="/" image={lesson} />
-        <Card title="PARCEIROS" link="/" image={partners} />
-        <Card title="DESEMPENHO" link="/" image={performance} />
-        <Card title="COMUNIDADE" link="/" image={community} />
+        <Card
+          title="IDIOMAS"
+          link="/languages"
+          image={languages}
+          active={true}
+        />
+        <Card title="AULAS" link="/" image={lesson} active={false} />
+        <Card title="PARCEIROS" link="/" image={partners} active={false} />
+        <Card title="DESEMPENHO" link="/" image={performance} active={true} />
+        <Card title="COMUNIDADE" link="/" image={community} active={false} />
       </div>
 
       <div id="about" className="about">

@@ -4,6 +4,7 @@ import PurpleHeader from "../../components/purple-header/purple-header";
 import { UserContext } from "../../context/user-context";
 import { getUserById } from "../../services/user.service";
 import { UserInformations } from "../../util/interfaces";
+import { Link } from "react-router-dom";
 
 const UserPage = () => {
   const userContext = useContext(UserContext);
@@ -25,6 +26,7 @@ const UserPage = () => {
       <PurpleHeader />
 
       <h1>Bem vindo, {user?.name}</h1>
+      <Link to="/private-dashboard">dashboard</Link>
 
       <div>
         <button

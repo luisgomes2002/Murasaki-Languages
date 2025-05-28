@@ -15,7 +15,9 @@ const TransparentHeader = () => {
 
   return (
     <TransparenNav>
-      <Link to="/">MURASAKI</Link>
+      <Link to="/">
+        MURASAKI<span>BETA</span>
+      </Link>
 
       <RightDiv>
         <Section>

@@ -15,10 +15,22 @@ export const TransparenNav = styled.nav`
   padding: 0 5%;
 
   > a {
+    display: flex;
+    align-items: center;
+
     font-size: 35px;
     color: white;
     text-decoration: none;
     font-weight: 500;
+
+    span {
+      font-size: 11px;
+      color: black;
+      background-color: #fff;
+      border-radius: 10px;
+      margin: 0 5px;
+      padding: 0 8px;
+    }
   }
 `;
 

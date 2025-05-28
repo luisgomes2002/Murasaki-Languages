@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Button } from "../transparent-header/transparent-header-styled";
+import { Button } from "../../components/transparent-header/transparent-header-styled";
 
 export const CreateLessonArea = styled.div`
   padding: 2% 0;

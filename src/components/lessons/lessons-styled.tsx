@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const LessonsOptions = styled.div`
   display: flex;
   margin: 10px 0;
+  padding-right: 10px;
 
   p {
     margin-left: 5px;
@@ -27,4 +28,24 @@ export const LessonsOptions = styled.div`
     background-color: #6f00ff;
     border-color: #6f00ff;
   }
+`;
+
+export const CreateLesson = styled.button`
+  color: white;
+  background-color: #6f00ff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+`;
+
+export const SelectAndCreateLesson = styled.div`
+  display: flex;
+  justify-content: space-between;
+
+  div {
+    display: flex;
+  }
+  margin-bottom: 10px;
 `;

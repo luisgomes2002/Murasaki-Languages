@@ -45,7 +45,6 @@ const LessonsPage = () => {
       try {
         let allLessons: PublishedLesson[] = [];
 
-        // Nenhum nível e não está filtrando por gratuitos
         if (selectedLevels.length === 0 && !onlyFree) {
           const res = await getAllJapaneseLessonsByPublishedTrue();
           allLessons = res.data;

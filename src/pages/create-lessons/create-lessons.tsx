@@ -14,9 +14,10 @@ import { CreateLesson } from "../../util/interfaces";
 import { UserContext } from "../../context/user-context";
 import { EditorContent, useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
-import MenuBar from "../text-bar/meu-bar";
-import PurpleHeader from "../purple-header/purple-header";
-import Footer from "../footer/footer";
+import MenuBar from "../../components/text-bar/meu-bar";
+import PurpleHeader from "../../components/purple-header/purple-header";
+import Footer from "../../components/footer/footer";
+import { useNavigate } from "react-router-dom";
 
 const CreateLessons = () => {
   const [linkInput, setLinkInput] = useState("");
@@ -30,6 +31,7 @@ const CreateLessons = () => {
   const userContext = useContext(UserContext);
   const [error, setError] = useState<string>("");
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const editor = useEditor({
     extensions: [StarterKit],
@@ -58,12 +60,13 @@ const CreateLessons = () => {
         setLoading(false);
         return;
       }
-
       const response = await createLessonService(
         lessonData,
         userContext?.user.userId,
       );
       setLesson(response.data);
+      console.log(response.data);
+      console.log(response.data.id);
 
       setTitle("");
       editor?.commands.clearContent();
@@ -72,6 +75,7 @@ const CreateLessons = () => {
       setLevel("");
       setAnki("");
       setThumb("");
+      navigate(`/private-dashboard`);
     } catch (error: any) {
       setError(error.response?.data?.message || "Erro ao criar aula");
       console.log(error);

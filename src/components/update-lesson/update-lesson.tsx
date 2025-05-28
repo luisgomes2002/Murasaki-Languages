@@ -7,9 +7,7 @@ import {
   LinksContainer,
   LinksList,
   MainButton,
-} from "../create-lessons/create-lessons-styled";
-import Footer from "../footer/footer";
-import PurpleHeader from "../purple-header/purple-header";
+} from "../../pages/create-lessons/create-lessons-styled";
 import { getLessonById, updateLesson } from "../../services/lessons.service";
 import { Conversation } from "../../util/interfaces";
 import { useContext, useEffect, useState } from "react";
@@ -72,6 +70,13 @@ const UpdateLesson = () => {
   const updateThisLesson = async () => {
     if (!lesson) return;
 
+    const userId = userContext?.user.userId;
+
+    if (!userId) {
+      setError("Usuário não autenticado.");
+      return;
+    }
+
     const updateData = {
       id: lesson.id,
       title: title,
@@ -86,12 +91,10 @@ const UpdateLesson = () => {
       published: lesson.published,
     };
 
-    console.log(updateData);
-
     try {
       setLoading(true);
       setError("");
-      await updateLesson(updateData, userContext?.user.userId);
+      await updateLesson(updateData, userId);
       alert("Aula atualizada com sucesso!");
     } catch (error: any) {
       console.error(error.response);
@@ -110,142 +113,134 @@ const UpdateLesson = () => {
   });
 
   return (
-    <div>
-      <PurpleHeader />
-      <CreateLessonArea>
-        <h1>Editar aula</h1>
+    <CreateLessonArea>
+      <h1>Editar aula</h1>
 
+      <input
+        type="text"
+        placeholder="Title"
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
+      />
+
+      {editor && (
+        <StyledEditor>
+          <EditorContent editor={editor} />
+          <MenuBar editor={editor} />
+        </StyledEditor>
+      )}
+
+      <LinksContainer>
         <input
           type="text"
-          placeholder="Title"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
+          placeholder="Links"
+          value={linkInput}
+          onChange={(e) => setLinkInput(e.target.value)}
+          style={{ flex: 1, marginRight: "10px" }}
         />
+        <LessonButton type="button" onClick={addLink}>
+          <i className="fa-solid fa-plus"></i>
+        </LessonButton>
+      </LinksContainer>
 
-        {editor && (
-          <StyledEditor>
-            <EditorContent editor={editor} />
-            <MenuBar editor={editor} />
-          </StyledEditor>
-        )}
+      <LinksList>
+        {linksList.map((link, index) => (
+          <li
+            key={index}
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              paddingBottom: "10px",
+            }}
+          >
+            <a href={link} target="_blank" rel="noopener noreferrer">
+              {link}
+            </a>
+            <LessonButton type="button" onClick={() => removeLink(index)}>
+              <i className="fa-solid fa-trash"></i>
+            </LessonButton>
+          </li>
+        ))}
+      </LinksList>
 
-        <LinksContainer>
-          <input
-            type="text"
-            placeholder="Links"
-            value={linkInput}
-            onChange={(e) => setLinkInput(e.target.value)}
-            style={{ flex: 1, marginRight: "10px" }}
-          />
-          <LessonButton type="button" onClick={addLink}>
-            <i className="fa-solid fa-plus"></i>
-          </LessonButton>
-        </LinksContainer>
+      <LabelOptions>
+        <div>
+          <label>Language:</label>
+          <select
+            value={language}
+            onChange={(e) => {
+              setLanguage(e.target.value);
+              setLevel("");
+            }}
+          >
+            <option value="">Select</option>
+            <option value="JP">Japonês</option>
+            <option value="EN">Inglês</option>
+            <option value="KO">Coreano</option>
+          </select>
+        </div>
 
-        <LinksList>
-          {linksList.map((link, index) => (
-            <li
-              key={index}
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-                paddingBottom: "10px",
-              }}
-            >
-              <a href={link} target="_blank" rel="noopener noreferrer">
-                {link}
-              </a>
-              <LessonButton type="button" onClick={() => removeLink(index)}>
-                <i className="fa-solid fa-trash"></i>
-              </LessonButton>
-            </li>
-          ))}
-        </LinksList>
+        <div>
+          <label>Level:</label>
+          <select value={level} onChange={(e) => setLevel(e.target.value)}>
+            <option value="">Select</option>
+            {language === "JP" && (
+              <>
+                <option value="N5">N5</option>
+                <option value="N4">N4</option>
+                <option value="N3">N3</option>
+                <option value="N2">N2</option>
+                <option value="N1">N1</option>
+              </>
+            )}
+            {language === "EN" && (
+              <>
+                <option value="A1">A1</option>
+                <option value="A2">A2</option>
+                <option value="B1">B1</option>
+                <option value="B2">B2</option>
+                <option value="C1">C1</option>
+                <option value="C2">C2</option>
+              </>
+            )}
+            {language === "KO" && (
+              <>
+                <option value="TOPIK I - Level 1">TOPIK I - Level 1</option>
+                <option value="TOPIK I - Level 2">TOPIK I - Level 2</option>
+                <option value="TOPIK II - Level 3">TOPIK II - Level 3</option>
+                <option value="TOPIK II - Level 4">TOPIK II - Level 4</option>
+                <option value="TOPIK II - Level 5">TOPIK II - Level 5</option>
+                <option value="TOPIK II - Level 6">TOPIK II - Level 6</option>
+              </>
+            )}
+          </select>
+        </div>
+      </LabelOptions>
 
-        <LabelOptions>
-          <div>
-            <label>Language:</label>
-            <select
-              value={language}
-              onChange={(e) => {
-                setLanguage(e.target.value);
-                setLevel("");
-              }}
-            >
-              <option value="">Select</option>
-              <option value="JP">Japonês</option>
-              <option value="EN">Inglês</option>
-              <option value="KO">Coreano</option>
-            </select>
-          </div>
+      <input
+        type="text"
+        placeholder="Thumb"
+        value={thumb}
+        onChange={(e) => setThumb(e.target.value)}
+      />
 
-          <div>
-            <label>Level:</label>
-            <select value={level} onChange={(e) => setLevel(e.target.value)}>
-              <option value="">Select</option>
-              {language === "JP" && (
-                <>
-                  <option value="N5">N5</option>
-                  <option value="N4">N4</option>
-                  <option value="N3">N3</option>
-                  <option value="N2">N2</option>
-                  <option value="N1">N1</option>
-                </>
-              )}
-              {language === "EN" && (
-                <>
-                  <option value="A1">A1</option>
-                  <option value="A2">A2</option>
-                  <option value="B1">B1</option>
-                  <option value="B2">B2</option>
-                  <option value="C1">C1</option>
-                  <option value="C2">C2</option>
-                </>
-              )}
-              {language === "KO" && (
-                <>
-                  <option value="TOPIK I - Level 1">TOPIK I - Level 1</option>
-                  <option value="TOPIK I - Level 2">TOPIK I - Level 2</option>
-                  <option value="TOPIK II - Level 3">TOPIK II - Level 3</option>
-                  <option value="TOPIK II - Level 4">TOPIK II - Level 4</option>
-                  <option value="TOPIK II - Level 5">TOPIK II - Level 5</option>
-                  <option value="TOPIK II - Level 6">TOPIK II - Level 6</option>
-                </>
-              )}
-            </select>
-          </div>
-        </LabelOptions>
+      <input
+        type="text"
+        placeholder="Anki"
+        value={anki}
+        onChange={(e) => setAnki(e.target.value)}
+      />
 
-        <input
-          type="text"
-          placeholder="Thumb"
-          value={thumb}
-          onChange={(e) => setThumb(e.target.value)}
-        />
+      <Error>
+        <i className="fa-solid fa-circle-info"></i>
+        {error}
+      </Error>
 
-        <input
-          type="text"
-          placeholder="Anki"
-          value={anki}
-          onChange={(e) => setAnki(e.target.value)}
-        />
-
-        <Error>
-          <i className="fa-solid fa-circle-info"></i>
-          {error}
-        </Error>
-
-        <MainButton type="button" onClick={updateThisLesson} disabled={loading}>
-          {loading ? (
-            <i className="fa-solid fa-spinner fa-spin" />
-          ) : (
-            "Atualizar"
-          )}
-        </MainButton>
-      </CreateLessonArea>
-      <Footer />
-    </div>
+      <MainButton type="button" onClick={updateThisLesson} disabled={loading}>
+        {loading ? <i className="fa-solid fa-spinner fa-spin" /> : "Atualizar"}
+      </MainButton>
+    </CreateLessonArea>
   );
 };
 

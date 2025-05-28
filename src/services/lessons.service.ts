@@ -108,3 +108,12 @@ export const getAllJapaneseLessonsByPublishedTrue = () => {
   });
   return response;
 };
+
+export const getLessonByVisibility = (visibility: string) => {
+  const response = axios.get(`${baseUrl}/lesson/visibility/${visibility}`, {
+    headers: {
+      Authorization: `Bearer ${Cookies.get("token")}`,
+    },
+  });
+  return response;
+};
