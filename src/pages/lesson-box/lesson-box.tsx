@@ -1,7 +1,7 @@
 import { useContext, useEffect, useMemo, useState } from "react";
 import Footer from "../../components/footer/footer";
 import PurpleHeader from "../../components/purple-header/purple-header";
-import { getLessonById } from "../../services/lessons.service";
+import { getLessonByIdService } from "../../services/lessons.service";
 import { useParams } from "react-router-dom";
 import {
   CompletedButton,
@@ -12,9 +12,9 @@ import {
 } from "./lesson-box-styled";
 import { CompleteLessonProps, Conversation } from "../../util/interfaces";
 import {
-  completeLesson,
-  getCompletedLesson,
-  removeLesson,
+  completeLessonService,
+  getCompletedLessonService,
+  removeLessonService,
 } from "../../services/completed-lesson.service";
 import { UserContext } from "../../context/user-context";
 import LessonText from "../../components/lesson-text/lesson-text";
@@ -69,7 +69,7 @@ const LessonBox = () => {
 
   const getLesson = async (id: string) => {
     try {
-      const response = await getLessonById(id);
+      const response = await getLessonByIdService(id);
       setLesson(response.data);
     } catch (error: any) {
       console.log(error);
@@ -78,7 +78,7 @@ const LessonBox = () => {
 
   const getUserCompletedLesson = async (userId: string) => {
     try {
-      const response = await getCompletedLesson(userId);
+      const response = await getCompletedLessonService(userId);
       const completedLessons: string[] =
         response.data[0]?.completedLessons || [];
       setCompletedLesson(completedLessons);
@@ -89,7 +89,7 @@ const LessonBox = () => {
 
   const completeThisLesson = async (data: CompleteLessonProps) => {
     try {
-      await completeLesson(data);
+      await completeLessonService(data);
     } catch (error: any) {
       console.log(error);
     }
@@ -97,7 +97,7 @@ const LessonBox = () => {
 
   const removeThisLesson = async (data: CompleteLessonProps) => {
     try {
-      await removeLesson(data);
+      await removeLessonService(data);
     } catch (error: any) {
       console.log(error);
     }

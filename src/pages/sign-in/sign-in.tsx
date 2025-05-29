@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import "./sign-in.scss";
-import { signin } from "../../services/user.service";
+import { signinService } from "../../services/user.service";
 import Cookies from "js-cookie";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -25,7 +25,7 @@ const SignIn = () => {
 
   const login = async (data: loginProps) => {
     try {
-      const response = await signin(data);
+      const response = await signinService(data);
       Cookies.set("token", response.data.token, { expires: 5 });
       window.location.href = "/";
     } catch (error: any) {

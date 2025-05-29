@@ -4,7 +4,7 @@ import { CreateLessonCollection } from "../util/interfaces";
 
 const baseUrl = "http://localhost:8080/api";
 
-export const allLessonCollection = () => {
+export const allLessonCollectionService = () => {
   const response = axios.get(`${baseUrl}/lesson-collection/`, {
     headers: {
       Authorization: `Bearer ${Cookies.get("token")}`,
@@ -13,7 +13,7 @@ export const allLessonCollection = () => {
   return response;
 };
 
-export const createLessonCollection = (data: CreateLessonCollection) => {
+export const createLessonCollectionService = (data: CreateLessonCollection) => {
   const response = axios.post(
     `${baseUrl}/lesson-collection/create/${data.userId}`,
     data.collectionName,

@@ -4,7 +4,7 @@ import { DeleteExplanationProps, ExplanationProps } from "../util/interfaces";
 
 const baseUrl = "http://localhost:8080/api";
 
-export const getExplanationId = (explanationId: string) => {
+export const getExplanationIdService = (explanationId: string) => {
   const response = axios.get(`${baseUrl}/explanation/${explanationId}`, {
     headers: {
       Authorization: `Bearer ${Cookies.get("token")}`,
@@ -13,7 +13,7 @@ export const getExplanationId = (explanationId: string) => {
   return response;
 };
 
-export const createExplanation = (
+export const createExplanationService = (
   explanation: ExplanationProps,
   lessonId: string,
   userId: string,
@@ -30,7 +30,7 @@ export const createExplanation = (
   return response;
 };
 
-export const UpdateExplanation = (
+export const updateExplanationService = (
   explanation: ExplanationProps,
   explanationId: string,
   userId: string,
@@ -47,7 +47,9 @@ export const UpdateExplanation = (
   return response;
 };
 
-export const DeleteExplanation = (explanation: DeleteExplanationProps) => {
+export const DeleteExplanationService = (
+  explanation: DeleteExplanationProps,
+) => {
   const response = axios.post(
     `${baseUrl}/explanation/delete/${explanation.explanationId}/${explanation.lessonId}/${explanation.userId}`,
     explanation,

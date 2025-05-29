@@ -4,7 +4,7 @@ import { CreateLesson, LessonUpdate } from "../util/interfaces";
 
 const baseUrl = "http://localhost:8080/api";
 
-export const getAllLessons = (page = 0, size = 10) => {
+export const getAllLessonsService = (page = 0, size = 10) => {
   const response = axios.get(`${baseUrl}/lesson/`, {
     params: {
       page,
@@ -17,7 +17,7 @@ export const getAllLessons = (page = 0, size = 10) => {
   return response;
 };
 
-export const getAllPublishedTrueLesson = () => {
+export const getAllPublishedTrueLessonService = () => {
   const response = axios.get(`${baseUrl}/lesson/published-true`, {
     headers: {
       Authorization: `Bearer ${Cookies.get("token")}`,
@@ -26,7 +26,7 @@ export const getAllPublishedTrueLesson = () => {
   return response;
 };
 
-export const getLessonById = (id: string) => {
+export const getLessonByIdService = (id: string) => {
   const response = axios.get(`${baseUrl}/lesson/${id}`, {
     headers: {
       Authorization: `Bearer ${Cookies.get("token")}`,
@@ -44,11 +44,11 @@ export const createLessonService = (data: CreateLesson, userid: string) => {
   return response;
 };
 
-export const publishLessons = () => {
+export const publishLessonsService = () => {
   const response = axios.post(`${baseUrl}/lesson/publish/`);
 };
 
-export const updateLesson = (data: LessonUpdate, userId: string) => {
+export const updateLessonService = (data: LessonUpdate, userId: string) => {
   const response = axios.put(
     `${baseUrl}/lesson/update/${data.id}/${userId}`,
     data,
@@ -61,7 +61,7 @@ export const updateLesson = (data: LessonUpdate, userId: string) => {
   return response;
 };
 
-export const getJapaneseLessonByLevel = (level: string) => {
+export const getJapaneseLessonByLevelService = (level: string) => {
   const response = axios.get(`${baseUrl}/lesson/japanese-level/${level}`, {
     headers: {
       Authorization: `Bearer ${Cookies.get("token")}`,
@@ -70,7 +70,7 @@ export const getJapaneseLessonByLevel = (level: string) => {
   return response;
 };
 
-export const getPublicJapaneseLessonByLevel = (level: string) => {
+export const getPublicJapaneseLessonByLevelService = (level: string) => {
   const response = axios.get(
     `${baseUrl}/lesson/japanese-level-public/${level}`,
     {
@@ -82,7 +82,7 @@ export const getPublicJapaneseLessonByLevel = (level: string) => {
   return response;
 };
 
-export const getPublicLesson = () => {
+export const getPublicLessonService = () => {
   const response = axios.get(`${baseUrl}/lesson/public`, {
     headers: {
       Authorization: `Bearer ${Cookies.get("token")}`,
@@ -91,7 +91,7 @@ export const getPublicLesson = () => {
   return response;
 };
 
-export const getJapanesePublicLesson = () => {
+export const getJapanesePublicLessonService = () => {
   const response = axios.get(`${baseUrl}/lesson/japanese/public`, {
     headers: {
       Authorization: `Bearer ${Cookies.get("token")}`,
@@ -100,7 +100,7 @@ export const getJapanesePublicLesson = () => {
   return response;
 };
 
-export const getAllJapaneseLessonsByPublishedTrue = () => {
+export const getAllJapaneseLessonsByPublishedTrueService = () => {
   const response = axios.get(`${baseUrl}/lesson/all-japanese/published/`, {
     headers: {
       Authorization: `Bearer ${Cookies.get("token")}`,
@@ -109,7 +109,7 @@ export const getAllJapaneseLessonsByPublishedTrue = () => {
   return response;
 };
 
-export const getLessonByVisibility = (visibility: string) => {
+export const getLessonByVisibilityService = (visibility: string) => {
   const response = axios.get(`${baseUrl}/lesson/visibility/${visibility}`, {
     headers: {
       Authorization: `Bearer ${Cookies.get("token")}`,

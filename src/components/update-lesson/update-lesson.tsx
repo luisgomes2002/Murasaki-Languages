@@ -8,7 +8,10 @@ import {
   LinksList,
   MainButton,
 } from "../../pages/create-lessons/create-lessons-styled";
-import { getLessonById, updateLesson } from "../../services/lessons.service";
+import {
+  getLessonByIdService,
+  updateLessonService,
+} from "../../services/lessons.service";
 import { Conversation } from "../../util/interfaces";
 import { useContext, useEffect, useState } from "react";
 import { EditorContent, useEditor } from "@tiptap/react";
@@ -38,7 +41,7 @@ const UpdateLesson = () => {
 
   const getLessonToUpdate = async (id: string) => {
     try {
-      const response = await getLessonById(id);
+      const response = await getLessonByIdService(id);
       const lessonData = response.data;
       setLesson(lessonData);
       setTitle(lessonData.title);
@@ -94,7 +97,7 @@ const UpdateLesson = () => {
     try {
       setLoading(true);
       setError("");
-      await updateLesson(updateData, userId);
+      await updateLessonService(updateData, userId);
       alert("Aula atualizada com sucesso!");
     } catch (error: any) {
       console.error(error.response);

@@ -4,17 +4,17 @@ import { SignInProps, SignUpProps } from "../util/interfaces";
 
 const baseUrl = "http://localhost:8080/api";
 
-export const signin = (data: SignInProps) => {
+export const signinService = (data: SignInProps) => {
   const response = axios.post(`${baseUrl}/user/login`, data);
   return response;
 };
 
-export const signup = (data: SignUpProps) => {
+export const signupService = (data: SignUpProps) => {
   const response = axios.post(`${baseUrl}/user/create`, data);
   return response;
 };
 
-export const getAllUsers = () => {
+export const getAllUsersService = () => {
   const response = axios.get(`${baseUrl}/user/`, {
     headers: {
       Authorization: `Bearer ${Cookies.get("token")}`,
@@ -23,7 +23,7 @@ export const getAllUsers = () => {
   return response;
 };
 
-export const getUserById = (id: string) => {
+export const getUserByIdService = (id: string) => {
   const response = axios.get(`${baseUrl}/user/list/${id}`, {
     headers: {
       Authorization: `Bearer ${Cookies.get("token")}`,

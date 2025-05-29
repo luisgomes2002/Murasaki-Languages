@@ -20,7 +20,10 @@ import {
   Wrapper,
 } from "./overview-styled";
 import { useEffect, useState } from "react";
-import { getMetrics, getMetricsByDate } from "../../services/metrics.service";
+import {
+  getMetricsService,
+  getMetricsByDateService,
+} from "../../services/metrics.service";
 import { Metrics, MetricsDates } from "../../util/interfaces";
 
 const Overview = () => {
@@ -30,7 +33,7 @@ const Overview = () => {
 
   const metricsDate = async () => {
     try {
-      const response = await getMetrics();
+      const response = await getMetricsService();
       setDates(response.data);
     } catch (error: any) {
       console.log(error);
@@ -39,7 +42,7 @@ const Overview = () => {
 
   const metricsByDates = async (date: string) => {
     try {
-      const response = await getMetricsByDate(date);
+      const response = await getMetricsByDateService(date);
       setMetrics(response.data);
     } catch (error: any) {
       console.log(error);

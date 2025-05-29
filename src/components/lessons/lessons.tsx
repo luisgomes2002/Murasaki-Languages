@@ -7,8 +7,8 @@ import {
   SelectAndCreateLesson,
 } from "./lessons-styled";
 import {
-  getAllLessons,
-  getLessonByVisibility,
+  getAllLessonsService,
+  getLessonByVisibilityService,
 } from "../../services/lessons.service";
 import { Conversation } from "../../util/interfaces";
 import { Link, useNavigate } from "react-router-dom";
@@ -23,10 +23,10 @@ const LessonsList = () => {
   const fetchLessons = async (visibility?: string) => {
     try {
       if (visibility) {
-        const response = await getLessonByVisibility(visibility);
+        const response = await getLessonByVisibilityService(visibility);
         setLessons(response.data ?? []);
       } else {
-        const response = await getAllLessons();
+        const response = await getAllLessonsService();
         setLessons(response.data ?? []);
       }
     } catch (error) {

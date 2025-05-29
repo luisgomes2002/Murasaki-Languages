@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { signup } from "../../services/user.service";
+import { signupService } from "../../services/user.service";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -35,7 +35,7 @@ const SignUp = () => {
 
   const CreateAccount = async (data: SignUpProps) => {
     try {
-      await signup(data);
+      await signupService(data);
       window.location.href = "/sign-in";
     } catch (error: any) {
       setMessage(error.response.data.Message);

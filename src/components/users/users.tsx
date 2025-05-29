@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getAllUsers } from "../../services/user.service";
+import { getAllUsersService } from "../../services/user.service";
 import { Link } from "react-router-dom";
 import Dashboardtitle from "../dashboard-title/dashboard-title";
 import { InfoTable, EditButton, DeleteButton, Table } from "./users-styled";
@@ -15,7 +15,7 @@ const Users = () => {
   const [data, setData] = useState<UserProps[]>([]);
 
   const getUsers = async () => {
-    const response = await getAllUsers();
+    const response = await getAllUsersService();
     setData(response.data);
   };
 

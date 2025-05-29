@@ -4,7 +4,7 @@ import { CompleteLessonProps } from "../util/interfaces";
 
 const baseUrl = "http://localhost:8080/api";
 
-export const getCompletedLesson = (userId: string) => {
+export const getCompletedLessonService = (userId: string) => {
   const response = axios.get(`${baseUrl}/completed-lesson/${userId}`, {
     headers: {
       Authorization: `Bearer ${Cookies.get("token")}`,
@@ -13,7 +13,7 @@ export const getCompletedLesson = (userId: string) => {
   return response;
 };
 
-export const completeLesson = (data: CompleteLessonProps) => {
+export const completeLessonService = (data: CompleteLessonProps) => {
   const response = axios.post(
     `${baseUrl}/completed-lesson/add/${data.userId}/${data.lessonId}`,
     {},
@@ -26,7 +26,7 @@ export const completeLesson = (data: CompleteLessonProps) => {
   return response;
 };
 
-export const removeLesson = (data: CompleteLessonProps) => {
+export const removeLessonService = (data: CompleteLessonProps) => {
   const response = axios.delete(
     `${baseUrl}/completed-lesson/remove/${data.userId}/${data.lessonId}`,
     {

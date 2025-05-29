@@ -3,12 +3,10 @@ import Footer from "../../components/footer/footer";
 import LessonCard from "../../components/lesson-card/lesson-card";
 import TransparentHeader from "../../components/transparent-header/transparent-header";
 import {
-  getAllJapaneseLessonsByPublishedTrue,
-  getAllPublishedTrueLesson,
-  getJapaneseLessonByLevel,
-  getJapanesePublicLesson,
-  getPublicJapaneseLessonByLevel,
-  getPublicLesson,
+  getAllJapaneseLessonsByPublishedTrueService,
+  getJapaneseLessonByLevelService,
+  getPublicJapaneseLessonByLevelService,
+  getPublicLessonService,
 } from "../../services/lessons.service";
 import {
   LessonsBackground,
@@ -46,16 +44,16 @@ const LessonsPage = () => {
         let allLessons: PublishedLesson[] = [];
 
         if (selectedLevels.length === 0 && !onlyFree) {
-          const res = await getAllJapaneseLessonsByPublishedTrue();
+          const res = await getAllJapaneseLessonsByPublishedTrueService();
           allLessons = res.data;
         } else if (selectedLevels.length === 0 && onlyFree) {
-          const res = await getPublicLesson();
+          const res = await getPublicLessonService();
           allLessons = res.data;
         } else {
           const promises = selectedLevels.map((level) =>
             onlyFree
-              ? getPublicJapaneseLessonByLevel(level)
-              : getJapaneseLessonByLevel(level),
+              ? getPublicJapaneseLessonByLevelService(level)
+              : getJapaneseLessonByLevelService(level),
           );
 
           const responses = await Promise.all(promises);
@@ -73,7 +71,7 @@ const LessonsPage = () => {
 
   useEffect(() => {
     if (name === "Japonês") {
-      getAllJapaneseLessonsByPublishedTrue()
+      getAllJapaneseLessonsByPublishedTrueService()
         .then((res) => setPublished(res.data))
         .catch((err) => console.error(err));
     }

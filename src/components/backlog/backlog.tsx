@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import "./backlog.scss";
-import { getAllBacklog } from "../../services/backlog.service";
+import { getAllBacklogService } from "../../services/backlog.service";
 import { Link } from "react-router-dom";
 import { BacklogProps } from "../../util/interfaces";
 import Dashboardtitle from "../dashboard-title/dashboard-title";
@@ -9,7 +9,7 @@ const Backlog = () => {
   const [data, setData] = useState<BacklogProps[]>([]);
 
   const getBacklog = async () => {
-    const response = await getAllBacklog();
+    const response = await getAllBacklogService();
     setData(response.data);
   };
 

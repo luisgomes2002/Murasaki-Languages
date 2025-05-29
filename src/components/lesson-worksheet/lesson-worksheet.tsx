@@ -6,7 +6,7 @@ import {
   QuestionFeedback,
   WorksheetBox,
 } from "./lesson-worksheet-styled";
-import { getWorksheetId } from "../../services/worksheet.service";
+import { getWorksheetIdService } from "../../services/worksheet.service";
 
 const LessonWorksheet = ({ worksheets, anki }: LessonWorksheetProps) => {
   const [detailedWorksheets, setDetailedWorksheets] = useState<Worksheets[]>(
@@ -15,7 +15,9 @@ const LessonWorksheet = ({ worksheets, anki }: LessonWorksheetProps) => {
 
   const getWorksheet = async (ids: string[]) => {
     try {
-      const responses = await Promise.all(ids.map((id) => getWorksheetId(id)));
+      const responses = await Promise.all(
+        ids.map((id) => getWorksheetIdService(id)),
+      );
       const allWorksheet = responses.map((res) => res.data);
       setDetailedWorksheets(allWorksheet);
     } catch (error) {

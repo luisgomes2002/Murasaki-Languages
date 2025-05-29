@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getExplanationId } from "../../services/explanation.service";
+import { getExplanationIdService } from "../../services/explanation.service";
 import { Explanation, LessonTextProps } from "../../util/interfaces";
 import {
   ExplanationsBox,
@@ -15,7 +15,7 @@ const LessonText = ({ text, explanation }: LessonTextProps) => {
   const getExplanation = async (ids: string[]) => {
     try {
       const responses = await Promise.all(
-        ids.map((id) => getExplanationId(id)),
+        ids.map((id) => getExplanationIdService(id)),
       );
 
       const allExplanations = responses.map((res) => res.data);
