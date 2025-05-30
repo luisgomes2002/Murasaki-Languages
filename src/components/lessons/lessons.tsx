@@ -11,14 +11,15 @@ import {
   getLessonByVisibilityService,
 } from "../../services/lessons.service";
 import { Conversation } from "../../util/interfaces";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import CreateLessonModal from "../create-lesson-modal/create-lesson-modal";
 
 const LessonsList = () => {
   const [lessons, setLessons] = useState<Conversation[]>([]);
   const [selectedVisibility, setSelectedVisibility] = useState<string | null>(
     null,
   );
-  const navigate = useNavigate();
+  const [showModal, setShowModal] = useState(false);
 
   const fetchLessons = async (visibility?: string) => {
     try {
@@ -37,7 +38,7 @@ const LessonsList = () => {
   const handleCheckboxClick = (visibility: string) => {
     if (selectedVisibility === visibility) {
       setSelectedVisibility(null);
-      fetchLessons(); // fetch all
+      fetchLessons();
     } else {
       setSelectedVisibility(visibility);
       fetchLessons(visibility);
@@ -49,65 +50,76 @@ const LessonsList = () => {
   }, []);
 
   return (
-    <Table>
-      <Dashboardtitle sectionTitle="Lista de Aulas" />
-      <SelectAndCreateLesson>
-        <div>
-          {["PUBLIC", "PRIVATE"].map((nivel) => (
-            <LessonsOptions key={nivel}>
-              <input
-                type="checkbox"
-                id={`checkbox-${nivel.toLowerCase()}`}
-                checked={selectedVisibility === nivel}
-                onChange={() => handleCheckboxClick(nivel)}
-              />
-              <label
-                htmlFor={`checkbox-${nivel.toLowerCase()}`}
-                className="custom-checkbox"
-              />
-              <p>{nivel}</p>
-            </LessonsOptions>
-          ))}
-        </div>
-        <CreateLesson type="button" onClick={() => navigate("/lesson/create")}>
-          <i className="fa-solid fa-book-bookmark"></i> New
-        </CreateLesson>
-      </SelectAndCreateLesson>
-      <InfoTable>
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Title</th>
-            <th>Language</th>
-            <th>Level</th>
-            <th>Published</th>
-            <th>Visibility</th>
-            <th>Update</th>
-          </tr>
-        </thead>
-        <tbody>
-          {lessons.map((lesson, index) => (
-            <tr key={index}>
-              <td>
-                <Link to={`/lesson/${lesson.id}`}>{lesson.id}</Link>
-              </td>
-              <td>{lesson.title}</td>
-              <td>{lesson.languageType}</td>
-              <td>{lesson.japaneseLevels}</td>
-              <td>{lesson.published ? "True" : "False"} </td>
-              <td>{lesson.visibility}</td>
-              <td>
-                <Link to={`/lesson/update/${lesson.id}`}>
-                  <EditButton type="button">
-                    <i className="fa-solid fa-pen"></i>
-                  </EditButton>
-                </Link>
-              </td>
+    <>
+      <Table>
+        <Dashboardtitle sectionTitle="Lista de Aulas" />
+        <SelectAndCreateLesson>
+          <div>
+            {["PUBLIC", "PRIVATE"].map((nivel) => (
+              <LessonsOptions key={nivel}>
+                <input
+                  type="checkbox"
+                  id={`checkbox-${nivel.toLowerCase()}`}
+                  checked={selectedVisibility === nivel}
+                  onChange={() => handleCheckboxClick(nivel)}
+                />
+                <label
+                  htmlFor={`checkbox-${nivel.toLowerCase()}`}
+                  className="custom-checkbox"
+                />
+                <p>{nivel}</p>
+              </LessonsOptions>
+            ))}
+          </div>
+          <CreateLesson type="button" onClick={() => setShowModal(true)}>
+            <i className="fa-solid fa-book-bookmark"></i> New
+          </CreateLesson>
+        </SelectAndCreateLesson>
+        <InfoTable>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Title</th>
+              <th>Language</th>
+              <th>Level</th>
+              <th>Published</th>
+              <th>Visibility</th>
+              <th>Update</th>
             </tr>
-          ))}
-        </tbody>
-      </InfoTable>
-    </Table>
+          </thead>
+          <tbody>
+            {lessons.map((lesson, index) => (
+              <tr key={index}>
+                <td>
+                  <Link to={`/lesson/${lesson.id}`}>{lesson.id}</Link>
+                </td>
+                <td>{lesson.title}</td>
+                <td>{lesson.languageType}</td>
+                <td>{lesson.japaneseLevels}</td>
+                <td>{lesson.published ? "True" : "False"}</td>
+                <td>{lesson.visibility}</td>
+                <td>
+                  <Link to={`/lesson/update/${lesson.id}`}>
+                    <EditButton type="button">
+                      <i className="fa-solid fa-pen"></i>
+                    </EditButton>
+                  </Link>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </InfoTable>
+      </Table>
+
+      {showModal && (
+        <CreateLessonModal
+          onClose={() => {
+            setShowModal(false);
+            fetchLessons();
+          }}
+        />
+      )}
+    </>
   );
 };
 

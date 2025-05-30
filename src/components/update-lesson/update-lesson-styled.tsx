@@ -12,8 +12,8 @@ export const StyledEditor = styled.div`
     color: white;
     min-height: 400px;
     max-height: 400px;
-    min-width: 670px;
-    max-width: 670px;
+    min-width: 760px;
+    max-width: 760px;
     overflow-y: auto;
   }
 

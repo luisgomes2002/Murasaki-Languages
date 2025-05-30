@@ -4,11 +4,9 @@ import { Button } from "../../components/transparent-header/transparent-header-s
 export const CreateLessonArea = styled.div`
   padding: 2% 0;
   background-color: #0a0a0a;
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
 
   h1 {
     color: white;
@@ -17,7 +15,7 @@ export const CreateLessonArea = styled.div`
   }
 
   input {
-    width: 40%;
+    width: 760px;
     border-radius: 8px;
     padding: 8px 16px;
     background: #1f1f1f;
@@ -90,7 +88,7 @@ export const LinksContainer = styled.div`
   display: flex;
   align-items: center;
   margin: 10px 0 0 0;
-  width: 40%;
+  width: 760px;
 `;
 
 export const LinksList = styled.ul`
@@ -124,9 +122,10 @@ export const EditorContainer = styled.div`
     line-height: 1.5;
     outline: none;
     color: white;
-    min-height: 400px;
-    max-height: 400px;
+    min-height: 300px;
+    max-height: 300px;
     min-width: 760px;
+    max-width: 760px;
     overflow-y: auto;
   }
 

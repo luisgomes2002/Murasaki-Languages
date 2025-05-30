@@ -61,6 +61,7 @@ export const CompletedButton = styled.section<{ $isCompleted: boolean }>`
     color: ${({ $isCompleted }) => ($isCompleted ? "white" : "#6f00ff")};
     font-size: 12px;
     padding-right: 5px;
+    font-weight: 300;
   }
 
   i {

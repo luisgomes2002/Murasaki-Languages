@@ -7,7 +7,7 @@ import {
   LinksContainer,
   LinksList,
   MainButton,
-} from "../../pages/create-lessons/create-lessons-styled";
+} from "../create-lessons/create-lessons-styled";
 import {
   getLessonByIdService,
   updateLessonService,
@@ -34,6 +34,8 @@ const UpdateLesson = () => {
   const [error, setError] = useState<string>("");
   const [loading, setLoading] = useState(false);
   const userContext = useContext(UserContext);
+  const [visibility, setVisibility] = useState("");
+  const [published, setPublished] = useState("");
 
   useEffect(() => {
     if (id) getLessonToUpdate(id);
@@ -51,6 +53,8 @@ const UpdateLesson = () => {
       setLevel(lessonData.japaneseLevels);
       setThumb(lessonData.thumbLink);
       setAnki(lessonData.ankiLink);
+      setVisibility(lessonData.visibility);
+      setPublished(lessonData.published ? "TRUE" : "FALSE");
 
       if (editor) editor.commands.setContent(lessonData.text);
       else setEditorState(lessonData.text);
@@ -90,8 +94,8 @@ const UpdateLesson = () => {
       japaneseLevels: level,
       ankiLink: anki,
       thumbLink: thumb,
-      visibility: lesson.visibility,
-      published: lesson.published,
+      visibility,
+      published: published === "TRUE",
     };
 
     try {
@@ -207,7 +211,7 @@ const UpdateLesson = () => {
                 <option value="C2">C2</option>
               </>
             )}
-            {language === "KO" && (
+            {language === "KR" && (
               <>
                 <option value="TOPIK I - Level 1">TOPIK I - Level 1</option>
                 <option value="TOPIK I - Level 2">TOPIK I - Level 2</option>
@@ -234,11 +238,36 @@ const UpdateLesson = () => {
         value={anki}
         onChange={(e) => setAnki(e.target.value)}
       />
+      <LabelOptions>
+        <div>
+          <label>Visibility:</label>
+          <select
+            value={visibility}
+            onChange={(e) => setVisibility(e.target.value)}
+          >
+            <option value="PUBLIC">Public</option>
+            <option value="PRIVATE">Private</option>
+          </select>
+        </div>
 
-      <Error>
-        <i className="fa-solid fa-circle-info"></i>
-        {error}
-      </Error>
+        <div>
+          <label>Published:</label>
+          <select
+            value={published}
+            onChange={(e) => setPublished(e.target.value)}
+          >
+            <option value="TRUE">TRUE</option>
+            <option value="FALSE">FALSE</option>
+          </select>
+        </div>
+      </LabelOptions>
+
+      {error && (
+        <Error>
+          <i className="fa-solid fa-circle-info"></i>
+          {error}
+        </Error>
+      )}
 
       <MainButton type="button" onClick={updateThisLesson} disabled={loading}>
         {loading ? <i className="fa-solid fa-spinner fa-spin" /> : "Atualizar"}

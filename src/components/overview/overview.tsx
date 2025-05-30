@@ -67,8 +67,30 @@ const Overview = () => {
   const COLORS = ["#260452", "#229abe", "#FFF", "#86769c"];
 
   useEffect(() => {
-    metricsDate();
-    if (selectedDate) metricsByDates(selectedDate);
+    const fetchDates = async () => {
+      try {
+        const response = await getMetricsService();
+        setDates(response.data);
+
+        if (response.data.length > 0) {
+          const lastItem = response.data[response.data.length - 1];
+          if (lastItem.dateTimes.length > 0) {
+            const lastDate = lastItem.dateTimes[lastItem.dateTimes.length - 1];
+            setSelectedDate(lastDate);
+          }
+        }
+      } catch (error: any) {
+        console.log(error);
+      }
+    };
+
+    fetchDates();
+  }, []);
+
+  useEffect(() => {
+    if (selectedDate) {
+      metricsByDates(selectedDate);
+    }
   }, [selectedDate]);
 
   return (

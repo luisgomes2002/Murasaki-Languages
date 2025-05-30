@@ -1,8 +1,8 @@
 import { useState } from "react";
 import UpdateLesson from "../../components/update-lesson/update-lesson";
-import Explanation from "../../components/explanation/explanation";
 import Worksheets from "../../components/worksheets/worksheets";
 import { Link } from "react-router-dom";
+import ExplanationCreateAndUpdate from "../../components/explanation/explanation";
 
 const LessonMenu = () => {
   const [activeSection, setActiveSection] = useState("update");
@@ -12,7 +12,7 @@ const LessonMenu = () => {
       case "update":
         return <UpdateLesson />;
       case "explanation":
-        return <Explanation />;
+        return <ExplanationCreateAndUpdate />;
       case "worksheet":
         return <Worksheets />;
 
