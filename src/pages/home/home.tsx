@@ -55,7 +55,10 @@ const Home = () => {
         </p>
       </div>
       <div className="advantages">
-        <img src="src/assets/images/background/teste.png" alt="logo" />
+        <img
+          src="src/assets/images/background/auth-background.png"
+          alt="logo"
+        />
         <section>
           <h1>Conteúdo Rico e Explicações Detalhadas</h1>
           <p>

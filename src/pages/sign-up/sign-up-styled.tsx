@@ -9,11 +9,10 @@ export const BoxSignUp = styled.div`
   display: flex;
   flex-direction: row;
   width: 100%;
-  height: 100vh;
 `;
 
 export const ImageSignUp = styled.div`
-  background-image: url("/src/assets/images/background/teste.png");
+  background-image: url("/src/assets/images/background/auth-background-long.png");
   color: white;
   flex: 1;
   display: flex;
@@ -25,13 +24,13 @@ export const ImageSignUp = styled.div`
 
 export const StyledForm = styled.form`
   padding: 5% 10%;
-  width: 800px;
+  width: 47%;
   display: flex;
   flex-direction: column;
 `;
 
 export const StyledSelect = styled.select`
-  width: 400px;
+  width: 100%;
   height: 35px;
   margin: 10px 0;
   padding: 10px;
@@ -42,7 +41,7 @@ export const StyledSelect = styled.select`
 `;
 
 export const StyledInput = styled.input`
-  width: 400px;
+  width: 100%;
   height: 35px;
   margin: 10px 0;
   padding: 10px;

@@ -1,11 +1,21 @@
 import { Link } from "react-router-dom";
-import "./sign-in.scss";
 import { signinService } from "../../services/user.service";
 import Cookies from "js-cookie";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { SignInSchema } from "../../schemas/sign-in-schema";
 import { useState } from "react";
+import {
+  BoxSignUp,
+  ErrorMessage,
+  FormContainer,
+  StyledForm,
+  StyledInput,
+  SubmitButton,
+  Title,
+} from "../sign-up/sign-up-styled";
+import { Label } from "recharts";
+import { BoxSignIn, ImageSignIn } from "./sign-in-stylex";
 
 interface loginProps {
   email: string;
@@ -33,14 +43,14 @@ const SignIn = () => {
     }
   };
   return (
-    <div className="form-sign-in">
-      <div className="box-sign-in">
-        <div className="image-sign-in"></div>
-        <form onSubmit={handleSubmit(login)}>
-          <h1>Entrar no Murasaki</h1>
+    <FormContainer>
+      <BoxSignIn>
+        <ImageSignIn />
+        <StyledForm onSubmit={handleSubmit(login)}>
+          <Title>Entrar no Murasaki</Title>
 
-          <h2>Email</h2>
-          <input
+          <Label>Email</Label>
+          <StyledInput
             {...register("email")}
             type="email"
             placeholder="Email"
@@ -49,10 +59,10 @@ const SignIn = () => {
               register("email").onChange(e);
             }}
           />
-          <span>{errors.email?.message}</span>
+          <ErrorMessage>{errors.email?.message}</ErrorMessage>
 
-          <h2>Senha</h2>
-          <input
+          <Label>Senha</Label>
+          <StyledInput
             {...register("password")}
             type="password"
             placeholder="Senha"
@@ -61,20 +71,20 @@ const SignIn = () => {
               register("password").onChange(e);
             }}
           />
-          <span>{errors.password?.message}</span>
-          <span>{error}</span>
-          <button>Entra</button>
-          <button className="google-button">
+          <ErrorMessage>{errors.password?.message}</ErrorMessage>
+          <ErrorMessage>{error}</ErrorMessage>
+          <SubmitButton>Entra</SubmitButton>
+          <SubmitButton>
             Entrar com <i className="fa-brands fa-google"></i>
-          </button>
+          </SubmitButton>
           <div className="login">
             <p>
               Não tem uma contar? <Link to="/sign-up">Criar uma conta</Link>
             </p>
           </div>
-        </form>
-      </div>
-    </div>
+        </StyledForm>
+      </BoxSignIn>
+    </FormContainer>
   );
 };
 
