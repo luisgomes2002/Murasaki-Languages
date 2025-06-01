@@ -14,7 +14,7 @@ export const SignUpSchema = z
     gender: z.enum(["MALE", "FEMALE", "OTHER", "NONE"], {
       required_error: "Gênero é obrigatório",
     }),
-    birthdate: z.string().refine((date) => !isNaN(Date.parse(date)), {
+    birth: z.string().refine((date) => !isNaN(Date.parse(date)), {
       message: "Data inválida",
     }),
   })

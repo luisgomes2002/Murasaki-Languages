@@ -132,7 +132,7 @@ const LessonsPage = () => {
                 key={index}
                 id={lesson.id}
                 createAt={lesson.createAt}
-                level={lesson.japaneseLevels}
+                level={lesson.languagesLevels}
                 thumbLink={lesson.thumbLink}
                 title={lesson.title}
                 visibility={lesson.visibility}

@@ -8,7 +8,7 @@ export const CreateLessonSchema = z
     languageType: z.enum(["JP", "EN", "KO"], {
       required_error: "Idioma é obrigatório",
     }),
-    japaneseLevels: z.string().optional(),
+    languagesLevels: z.string().optional(),
     ankiLink: z
       .string()
       .url("Link do Anki inválido")
@@ -24,12 +24,12 @@ export const CreateLessonSchema = z
     (data) => {
       if (data.languageType === "JP") {
         return ["N5", "N4", "N3", "N2", "N1"].includes(
-          data.japaneseLevels || "",
+          data.languagesLevels || "",
         );
       }
       if (data.languageType === "EN") {
         return ["A1", "A2", "B1", "B2", "C1", "C2"].includes(
-          data.japaneseLevels || "",
+          data.languagesLevels || "",
         );
       }
       if (data.languageType === "KO") {
@@ -40,12 +40,12 @@ export const CreateLessonSchema = z
           "TOPIK_II_LEVEL_4",
           "TOPIK_II_LEVEL_5",
           "TOPIK_II_LEVEL_6",
-        ].includes(data.japaneseLevels || "");
+        ].includes(data.languagesLevels || "");
       }
       return false;
     },
     {
       message: "Nível inválido para o idioma selecionado",
-      path: ["japaneseLevels"],
+      path: ["languagesLevels"],
     },
   );

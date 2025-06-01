@@ -95,7 +95,7 @@ const LessonsList = () => {
                 </td>
                 <td>{lesson.title}</td>
                 <td>{lesson.languageType}</td>
-                <td>{lesson.japaneseLevels}</td>
+                <td>{lesson.languagesLevels}</td>
                 <td>{lesson.published ? "True" : "False"}</td>
                 <td>{lesson.visibility}</td>
                 <td>

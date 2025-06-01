@@ -29,12 +29,23 @@ const UserProvider = ({ children }: UserProviderProps) => {
 
     if (token) {
       try {
-        const decoded = jwtDecode<User>(token);
-        setUser(decoded);
+        const decoded = jwtDecode<User & { exp: number }>(token);
+        const currentTime = Date.now() / 1000;
+        console.log(decoded);
+
+        if (decoded.exp < currentTime) {
+          Cookies.remove("token");
+          setUser({});
+        } else {
+          setUser(decoded);
+        }
       } catch (err) {
         console.error("Erro ao decodificar token:", err);
         Cookies.remove("token");
+        setUser({});
       }
+    } else {
+      setUser({});
     }
   }, []);
 

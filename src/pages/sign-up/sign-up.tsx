@@ -24,6 +24,7 @@ import { SignUpProps } from "../../util/interfaces";
 const SignUp = () => {
   const [error, setError] = useState<string>("");
   const [message, setMessage] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(false);
 
   const {
     register,
@@ -35,11 +36,14 @@ const SignUp = () => {
 
   const CreateAccount = async (data: SignUpProps) => {
     try {
+      setLoading(true);
       await signupService(data);
       window.location.href = "/sign-in";
     } catch (error: any) {
       setMessage(error.response.data.Message);
       setError(error.response.data.Error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -81,8 +85,8 @@ const SignUp = () => {
           <ErrorMessage>{errors.gender?.message}</ErrorMessage>
 
           <Label>Data de nascimento</Label>
-          <StyledInput {...register("birthdate")} type="date" />
-          <ErrorMessage>{errors.birthdate?.message}</ErrorMessage>
+          <StyledInput {...register("birth")} type="date" />
+          <ErrorMessage>{errors.birth?.message}</ErrorMessage>
 
           <Label>Senha</Label>
           <StyledInput
@@ -108,7 +112,9 @@ const SignUp = () => {
           <ErrorMessage>{error}</ErrorMessage>
           <ErrorMessage>{message}</ErrorMessage>
 
-          <SubmitButton type="submit">Criar</SubmitButton>
+          <SubmitButton type="submit">
+            {loading ? <i className="fa-solid fa-c fa-spin" /> : "Criar"}
+          </SubmitButton>
 
           <div className="login">
             <LoginText>

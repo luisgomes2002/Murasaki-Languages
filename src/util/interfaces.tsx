@@ -9,7 +9,7 @@ export interface SignUpProps {
   email: string;
   password: string;
   gender: string;
-  birthdate: string;
+  birth: string;
 }
 
 export interface CompleteLessonProps {
@@ -26,7 +26,7 @@ export interface Conversation {
   links: string[];
   name: string;
   languageType: string;
-  japaneseLevels: string;
+  languagesLevels: string;
   createAt: string;
   updatedAt: string;
   published: boolean;
@@ -73,7 +73,7 @@ export interface PublishedLesson {
   links: string[];
   name: string;
   languageType: string;
-  japaneseLevels: string;
+  languagesLevels: string;
   createAt: string;
   published: boolean;
   visibility: string;
@@ -168,7 +168,7 @@ export interface CreateLesson {
   text: string;
   links: string[];
   languageType: string;
-  japaneseLevels: string;
+  languagesLevels: string;
   ankiLink: string;
   thumbLink: string;
 }
@@ -180,7 +180,7 @@ export interface LessonUpdate {
   links: string[];
   name: string;
   languageType: string;
-  japaneseLevels: string;
+  languagesLevels: string;
   ankiLink: string;
   thumbLink: string;
 }

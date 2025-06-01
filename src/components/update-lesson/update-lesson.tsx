@@ -50,7 +50,7 @@ const UpdateLesson = () => {
       setEditorState(lessonData.text);
       setLinksList(lessonData.links);
       setLanguage(lessonData.languageType);
-      setLevel(lessonData.japaneseLevels);
+      setLevel(lessonData.languagesLevels);
       setThumb(lessonData.thumbLink);
       setAnki(lessonData.ankiLink);
       setVisibility(lessonData.visibility);
@@ -91,7 +91,7 @@ const UpdateLesson = () => {
       links: linksList,
       name: lesson.name,
       languageType: language,
-      japaneseLevels: level,
+      languagesLevels: level,
       ankiLink: anki,
       thumbLink: thumb,
       visibility,

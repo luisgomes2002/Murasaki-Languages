@@ -46,7 +46,7 @@ const CreateLessons = () => {
         text: editorText,
         links: linksList,
         languageType: language,
-        japaneseLevels: level,
+        languagesLevels: level,
         ankiLink: anki,
         thumbLink: thumb,
       };
@@ -56,10 +56,14 @@ const CreateLessons = () => {
         setLoading(false);
         return;
       }
+
       const response = await createLessonService(
         lessonData,
         userContext?.user.userId,
       );
+
+      console.log(response);
+
       setLesson(response.data);
       console.log(response.data);
       console.log(response.data.id);
