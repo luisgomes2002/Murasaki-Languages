@@ -24,7 +24,6 @@ const CreateLessons = () => {
   const [anki, setAnki] = useState("");
   const [language, setLanguage] = useState("");
   const [level, setLevel] = useState("");
-  const [lesson, setLesson] = useState<CreateLesson>();
   const userContext = useContext(UserContext);
   const [error, setError] = useState<string>("");
   const [loading, setLoading] = useState(false);
@@ -57,16 +56,7 @@ const CreateLessons = () => {
         return;
       }
 
-      const response = await createLessonService(
-        lessonData,
-        userContext?.user.userId,
-      );
-
-      console.log(response);
-
-      setLesson(response.data);
-      console.log(response.data);
-      console.log(response.data.id);
+      await createLessonService(lessonData, userContext?.user.userId);
 
       setTitle("");
       editor?.commands.clearContent();

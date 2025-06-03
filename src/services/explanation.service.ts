@@ -35,7 +35,7 @@ export const updateExplanationService = (
   explanationId: string,
   userId: string,
 ) => {
-  const response = axios.post(
+  const response = axios.put(
     `${baseUrl}/explanation/update/${explanationId}/${userId}`,
     explanation,
     {
@@ -47,12 +47,11 @@ export const updateExplanationService = (
   return response;
 };
 
-export const DeleteExplanationService = (
+export const deleteExplanationService = (
   explanation: DeleteExplanationProps,
 ) => {
-  const response = axios.post(
+  const response = axios.delete(
     `${baseUrl}/explanation/delete/${explanation.explanationId}/${explanation.lessonId}/${explanation.userId}`,
-    explanation,
     {
       headers: {
         Authorization: `Bearer ${Cookies.get("token")}`,

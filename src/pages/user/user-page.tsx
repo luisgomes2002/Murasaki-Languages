@@ -44,6 +44,7 @@ const UserPage = () => {
       <Footer />
     </div>
   );
+  ``;
 };
 
 export default UserPage;

@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 export const ExplanationsBox = styled.div`
   margin-top: 5%;
+  width: 1000px;
 
   h1 {
     font-size: 18px;
@@ -18,7 +19,7 @@ export const ExplanationsBox = styled.div`
   }
 
   p {
-    padding: 30px 0;
+    padding: 7px 0;
     width: 1000px;
     color: white;
   }

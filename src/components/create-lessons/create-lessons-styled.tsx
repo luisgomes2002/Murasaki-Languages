@@ -101,9 +101,9 @@ export const LinksList = styled.ul`
 `;
 
 export const Error = styled.span`
-  border: 1px solid #e91d1d;
+  border: 1px solid #a32525;
   padding: 10px;
-  color: #e91d1d;
+  color: #a32525;
   margin: 10px;
   border-radius: 15px;
 

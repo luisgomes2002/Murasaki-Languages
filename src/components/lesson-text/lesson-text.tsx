@@ -46,7 +46,7 @@ const LessonText = ({ text, explanation }: LessonTextProps) => {
 
           <h1>{item.phrase}</h1>
           <h2>{item.translation}</h2>
-          <p>{item.explanation}</p>
+          <p dangerouslySetInnerHTML={{ __html: item.explanation }} />
         </div>
       ))}
     </ExplanationsBox>
