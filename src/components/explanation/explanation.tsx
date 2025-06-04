@@ -40,7 +40,6 @@ const CreateExplanation = () => {
         lessonId,
         userId,
       );
-      console.log(response.data);
 
       showNotification(response.data.Message, "success");
       setPhrase("");
@@ -79,6 +78,17 @@ const CreateExplanation = () => {
         type="button"
         onClick={() => {
           if (!editor) {
+            showNotification("Digie uma explicação", "error");
+            return;
+          }
+
+          if (!id) {
+            showNotification("Id não encontrado", "error");
+            return;
+          }
+
+          if (!userContext?.user.userId) {
+            showNotification("Usuário não autenticado", "error");
             return;
           }
 

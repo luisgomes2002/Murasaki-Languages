@@ -25,27 +25,22 @@ import {
   getMetricsByDateService,
 } from "../../services/metrics.service";
 import { Metrics, MetricsDates } from "../../util/interfaces";
+import { Notification } from "../notifications-box/notifications-box";
+import { useNotification } from "../notifications-box/useNotification";
 
 const Overview = () => {
   const [dates, setDates] = useState<MetricsDates[]>([]);
   const [metrics, setMetrics] = useState<Metrics>();
   const [selectedDate, setSelectedDate] = useState<string>("");
-
-  const metricsDate = async () => {
-    try {
-      const response = await getMetricsService();
-      setDates(response.data);
-    } catch (error: any) {
-      console.log(error);
-    }
-  };
+  const { message, type, showNotification, hideNotification } =
+    useNotification();
 
   const metricsByDates = async (date: string) => {
     try {
       const response = await getMetricsByDateService(date);
       setMetrics(response.data);
     } catch (error: any) {
-      console.log(error);
+      showNotification(error.response?.data?.Message, "error");
     }
   };
 
@@ -80,7 +75,7 @@ const Overview = () => {
           }
         }
       } catch (error: any) {
-        console.log(error);
+        showNotification(error.response?.data?.Message, "error");
       }
     };
 
@@ -204,6 +199,14 @@ const Overview = () => {
           </ResponsiveContainer>
         </PieArea>
       </MoreInfo>
+
+      {message && (
+        <Notification
+          message={message}
+          type={type}
+          onClose={hideNotification}
+        />
+      )}
     </Wrapper>
   );
 };

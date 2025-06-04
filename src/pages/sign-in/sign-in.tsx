@@ -6,7 +6,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { SignInSchema } from "../../schemas/sign-in-schema";
 import { useState } from "react";
 import {
-  BoxSignUp,
   ErrorMessage,
   FormContainer,
   StyledForm,

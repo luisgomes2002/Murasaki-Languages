@@ -7,7 +7,7 @@ export const useNotification = () => {
   const [type, setType] = useState<NotificationType>("success");
 
   const showNotification = useCallback(
-    (msg: string, type: NotificationType = "success", duration = 6000) => {
+    (msg: string, type: NotificationType = "success", duration = 10000) => {
       setMessage(msg);
       setType(type);
       setTimeout(() => setMessage(null), duration);

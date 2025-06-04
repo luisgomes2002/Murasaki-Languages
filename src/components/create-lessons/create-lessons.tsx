@@ -15,6 +15,8 @@ import { UserContext } from "../../context/user-context";
 import { EditorContent, useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import MenuBar from "../../components/text-bar/meu-bar";
+import { useNotification } from "../notifications-box/useNotification";
+import { Notification } from "../notifications-box/notifications-box";
 
 const CreateLessons = () => {
   const [linkInput, setLinkInput] = useState("");
@@ -25,8 +27,9 @@ const CreateLessons = () => {
   const [language, setLanguage] = useState("");
   const [level, setLevel] = useState("");
   const userContext = useContext(UserContext);
-  const [error, setError] = useState<string>("");
   const [loading, setLoading] = useState(false);
+  const { message, type, showNotification, hideNotification } =
+    useNotification();
 
   const editor = useEditor({
     extensions: [StarterKit],
@@ -36,7 +39,6 @@ const CreateLessons = () => {
   const createLessonFuncion = async () => {
     try {
       setLoading(true);
-      setError("");
 
       const editorText = editor ? editor.getHTML() : "";
 
@@ -56,7 +58,11 @@ const CreateLessons = () => {
         return;
       }
 
-      await createLessonService(lessonData, userContext?.user.userId);
+      const response = await createLessonService(
+        lessonData,
+        userContext?.user.userId,
+      );
+      showNotification(response.data.Message, "success");
 
       setTitle("");
       editor?.commands.clearContent();
@@ -66,7 +72,7 @@ const CreateLessons = () => {
       setAnki("");
       setThumb("");
     } catch (error: any) {
-      setError(error.response?.data?.Message || "Erro ao criar aula");
+      showNotification(error.response?.data?.Message, "error");
     } finally {
       setLoading(false);
     }
@@ -197,11 +203,12 @@ const CreateLessons = () => {
         onChange={(e) => setAnki(e.target.value)}
       />
 
-      {error && (
-        <Error>
-          <i className="fa-solid fa-circle-info"></i>
-          {error}
-        </Error>
+      {message && (
+        <Notification
+          message={message}
+          type={type}
+          onClose={hideNotification}
+        />
       )}
 
       <MainButton

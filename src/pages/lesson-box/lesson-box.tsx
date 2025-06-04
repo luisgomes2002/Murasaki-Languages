@@ -20,6 +20,8 @@ import { UserContext } from "../../context/user-context";
 import LessonText from "../../components/lesson-text/lesson-text";
 import LessonWorksheet from "../../components/lesson-worksheet/lesson-worksheet";
 import { formatDate } from "../../util/format-date";
+import { useNotification } from "../../components/notifications-box/useNotification";
+import { Notification } from "../../components/notifications-box/notifications-box";
 
 const LessonBox = () => {
   const { id } = useParams();
@@ -28,6 +30,8 @@ const LessonBox = () => {
   const [isCompleted, setIsCompleted] = useState(false);
   const userContext = useContext(UserContext);
   const [activeSection, setActiveSection] = useState("text");
+  const { message, type, showNotification, hideNotification } =
+    useNotification();
 
   const renderContent = () => {
     if (!lesson) return <p>Carregando...</p>;
@@ -54,7 +58,9 @@ const LessonBox = () => {
   const videoContent = useMemo(() => {
     if (!lesson) return null;
 
-    return lesson.links && lesson.links.length > 0 ? (
+    return lesson.links && lesson.links.length > 1 ? (
+      <img src={lesson?.thumbLink} alt={lesson?.title} />
+    ) : (
       <iframe
         width="1905"
         height="742"
@@ -62,8 +68,6 @@ const LessonBox = () => {
         title={lesson.title}
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
       ></iframe>
-    ) : (
-      <img src={lesson?.thumbLink} alt={lesson?.title} />
     );
   }, [lesson]);
 
@@ -71,8 +75,9 @@ const LessonBox = () => {
     try {
       const response = await getLessonByIdService(id);
       setLesson(response.data);
+      showNotification(response.data.Message, "success");
     } catch (error: any) {
-      console.log(error);
+      showNotification(error.response?.data?.Message, "error");
     }
   };
 
@@ -82,24 +87,27 @@ const LessonBox = () => {
       const completedLessons: string[] =
         response.data[0]?.completedLessons || [];
       setCompletedLesson(completedLessons);
+      showNotification(response.data.Message, "success");
     } catch (error: any) {
-      console.log(error);
+      showNotification(error.response?.data?.Message, "error");
     }
   };
 
   const completeThisLesson = async (data: CompleteLessonProps) => {
     try {
-      await completeLessonService(data);
+      const response = await completeLessonService(data);
+      showNotification(response.data, "success");
     } catch (error: any) {
-      console.log(error);
+      showNotification(error.response?.data, "error");
     }
   };
 
   const removeThisLesson = async (data: CompleteLessonProps) => {
     try {
-      await removeLessonService(data);
+      const response = await removeLessonService(data);
+      showNotification(response.data, "error");
     } catch (error: any) {
-      console.log(error);
+      showNotification(error.response?.data, "error");
     }
   };
 
@@ -138,7 +146,7 @@ const LessonBox = () => {
       <LessonBoxArea>
         <ImgVideoBox>
           <h3>{lesson?.name}</h3>
-          <p>{formatDate(lesson?.createAt)}</p>
+          <p>{lesson?.createAt ? formatDate(lesson.createAt) : ""}</p>
           <h1>{lesson?.title}</h1>
           {videoContent}
           <CompletedButton
@@ -160,6 +168,14 @@ const LessonBox = () => {
         </TextSection>
       </LessonBoxArea>
       <Footer />
+
+      {message && (
+        <Notification
+          message={message}
+          type={type}
+          onClose={hideNotification}
+        />
+      )}
     </>
   );
 };

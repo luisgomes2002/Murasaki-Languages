@@ -40,7 +40,6 @@ export const ImgVideoBox = styled.div`
   img {
     width: 1000px;
     height: 600px;
-    border-radius: 10px;
   }
 `;
 

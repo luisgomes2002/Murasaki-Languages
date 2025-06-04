@@ -44,8 +44,8 @@ const UpdateExplanationSection = () => {
 
       const allExplanations = response.map((res) => res.data);
       setExplations(allExplanations.flat());
-    } catch (error) {
-      console.log(error);
+    } catch (error: any) {
+      showNotification(error.response?.data?.Message, "error");
     }
   };
 
@@ -60,14 +60,6 @@ const UpdateExplanationSection = () => {
   return (
     <ExplanationUpdateArea>
       <h1>Update Explanations</h1>
-
-      {message && (
-        <Notification
-          message={message}
-          type={type}
-          onClose={hideNotification}
-        />
-      )}
 
       {explations.map((explanation, index) => (
         <ExplanationCardCreate key={index}>
@@ -85,6 +77,11 @@ const UpdateExplanationSection = () => {
               </button>
               <button
                 onClick={async () => {
+                  if (!id || !userContext?.user.userId) {
+                    showNotification("Missing user or lesson ID", "error");
+                    return;
+                  }
+
                   await deleteExplanationService({
                     explanationId: explanation.id,
                     lessonId: id,
@@ -109,6 +106,14 @@ const UpdateExplanationSection = () => {
             setShowModal(false);
             setSelectedExplanationId("");
           }}
+        />
+      )}
+
+      {message && (
+        <Notification
+          message={message}
+          type={type}
+          onClose={hideNotification}
         />
       )}
     </ExplanationUpdateArea>
