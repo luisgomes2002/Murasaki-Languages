@@ -2,7 +2,6 @@ import { EditorContent, useEditor } from "@tiptap/react";
 import {
   CreateLessonArea,
   EditorContainer,
-  Error,
   MainButton,
 } from "../create-lessons/create-lessons-styled";
 import StarterKit from "@tiptap/starter-kit";
@@ -14,6 +13,8 @@ import {
   updateExplanationService,
 } from "../../services/explanation.service";
 import { UserContext } from "../../context/user-context";
+import { Notification } from "../notifications-box/notifications-box";
+import { useNotification } from "../notifications-box/useNotification";
 
 interface Props {
   explanationIdByModal: string;
@@ -23,9 +24,10 @@ const UpdateExplanation = ({ explanationIdByModal }: Props) => {
   const [phrase, setPhrase] = useState("");
   const [translation, setTranslation] = useState("");
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string>("");
   const userContext = useContext(UserContext);
   const [editorState, setEditorState] = useState<string>("");
+  const { message, type, showNotification, hideNotification } =
+    useNotification();
 
   useEffect(() => {
     getExplanationToUpdate();
@@ -49,7 +51,7 @@ const UpdateExplanation = ({ explanationIdByModal }: Props) => {
       if (editor) editor.commands.setContent(response.data.explanation);
       else setEditorState(response.data.explanation);
     } catch (error: any) {
-      setError(error.response?.data?.Message);
+      showNotification(error.response?.data?.Message, "error");
     }
   };
 
@@ -64,7 +66,6 @@ const UpdateExplanation = ({ explanationIdByModal }: Props) => {
 
     try {
       setLoading(true);
-      setError("");
 
       if (!userContext?.user?.userId) {
         console.error("Usuário não está autenticado.");
@@ -72,17 +73,18 @@ const UpdateExplanation = ({ explanationIdByModal }: Props) => {
         return;
       }
 
-      await updateExplanationService(
+      const response = await updateExplanationService(
         explantionData,
         explanationToUpdateId,
         userContext.user.userId,
       );
-      alert("Aula atualizada com sucesso!");
+
+      showNotification(response.data.Message, "success");
       setPhrase("");
       setTranslation("");
       editor?.commands.clearContent();
     } catch (error: any) {
-      setError(error.response?.data?.Message);
+      showNotification(error.response?.data?.Message, "error");
     } finally {
       setLoading(false);
     }
@@ -108,13 +110,6 @@ const UpdateExplanation = ({ explanationIdByModal }: Props) => {
         <MenuBar editor={editor} />
       </EditorContainer>
 
-      {error && (
-        <Error>
-          <i className="fa-solid fa-circle-info"></i>
-          {error}
-        </Error>
-      )}
-
       <MainButton
         type="button"
         onClick={() => updateExplanation(explanationIdByModal)}
@@ -122,6 +117,14 @@ const UpdateExplanation = ({ explanationIdByModal }: Props) => {
       >
         {loading ? <i className="fa-solid fa-c fa-spin" /> : "Update"}
       </MainButton>
+
+      {message && (
+        <Notification
+          message={message}
+          type={type}
+          onClose={hideNotification}
+        />
+      )}
     </CreateLessonArea>
   );
 };

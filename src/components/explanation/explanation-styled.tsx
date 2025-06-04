@@ -6,6 +6,7 @@ export const ExplanationUpdateArea = styled.div`
   justify-content: center;
   flex-direction: column;
   background-color: #0a0a0a;
+  min-height: 100vh;
 
   h1 {
     font-weight: 100;

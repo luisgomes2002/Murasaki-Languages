@@ -2,18 +2,23 @@ import { useState } from "react";
 import UpdateLesson from "../../components/update-lesson/update-lesson";
 import Worksheets from "../../components/worksheets/worksheets";
 import { Link } from "react-router-dom";
-import ExplanationCreateAndUpdate from "../../components/explanation/explanation";
+import CreateExplanation from "../../components/explanation/explanation";
+import UpdateExplanationSection from "../../components/update-explanation-section/update-explanation-section";
 
 const LessonMenu = () => {
   const [activeSection, setActiveSection] = useState("update");
 
   const renderContent = () => {
     switch (activeSection) {
-      case "update":
+      case "update-lesson":
         return <UpdateLesson />;
-      case "explanation":
-        return <ExplanationCreateAndUpdate />;
-      case "worksheet":
+      case "create-explanation":
+        return <CreateExplanation />;
+      case "update-explanation":
+        return <UpdateExplanationSection />;
+      case "create-worksheet":
+        return <Worksheets />;
+      case "update-worksheet":
         return <Worksheets />;
 
       default:
@@ -28,22 +33,34 @@ const LessonMenu = () => {
           <Link to="/">MURASAKI</Link>
         </div>
         <button
-          onClick={() => setActiveSection("update")}
-          className={activeSection === "update" ? "active" : ""}
+          onClick={() => setActiveSection("update-lesson")}
+          className={activeSection === "update-lesson" ? "active" : ""}
         >
-          <i className="fa-solid fa-pen"></i> Update
+          <i className="fa-solid fa-pen"></i> Update Lesson
         </button>
         <button
-          onClick={() => setActiveSection("explanation")}
-          className={activeSection === "explanation" ? "active" : ""}
+          onClick={() => setActiveSection("create-explanation")}
+          className={activeSection === "create-explanation" ? "active" : ""}
         >
-          <i className="fa-solid fa-book-open"></i>Explanation
+          <i className="fa-solid fa-book-open"></i>Create Explanation
         </button>
         <button
-          onClick={() => setActiveSection("worksheet")}
-          className={activeSection === "worksheet" ? "active" : ""}
+          onClick={() => setActiveSection("update-explanation")}
+          className={activeSection === "update-explanation" ? "active" : ""}
         >
-          <i className="fa-solid fa-person-chalkboard"></i> Worksheet
+          <i className="fa-solid fa-book-open"></i>Update Explanation
+        </button>
+        <button
+          onClick={() => setActiveSection("create-worksheet")}
+          className={activeSection === "create-worksheet" ? "active" : ""}
+        >
+          <i className="fa-solid fa-person-chalkboard"></i>Create Worksheet
+        </button>
+        <button
+          onClick={() => setActiveSection("update-worksheet")}
+          className={activeSection === "update-worksheet" ? "active" : ""}
+        >
+          <i className="fa-solid fa-person-chalkboard"></i>Update Worksheet
         </button>
       </section>
 

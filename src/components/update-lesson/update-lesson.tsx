@@ -1,7 +1,6 @@
 import { useParams } from "react-router-dom";
 import {
   CreateLessonArea,
-  Error,
   LabelOptions,
   LessonButton,
   LinksContainer,
@@ -19,6 +18,8 @@ import StarterKit from "@tiptap/starter-kit";
 import { StyledEditor } from "./update-lesson-styled";
 import MenuBar from "../text-bar/meu-bar";
 import { UserContext } from "../../context/user-context";
+import { useNotification } from "../notifications-box/useNotification";
+import { Notification } from "../notifications-box/notifications-box";
 
 const UpdateLesson = () => {
   const { id } = useParams();
@@ -31,11 +32,12 @@ const UpdateLesson = () => {
   const [level, setLevel] = useState("");
   const [thumb, setThumb] = useState("");
   const [anki, setAnki] = useState("");
-  const [error, setError] = useState<string>("");
   const [loading, setLoading] = useState(false);
   const userContext = useContext(UserContext);
   const [visibility, setVisibility] = useState("");
   const [published, setPublished] = useState("");
+  const { message, type, showNotification, hideNotification } =
+    useNotification();
 
   useEffect(() => {
     if (id) getLessonToUpdate(id);
@@ -60,7 +62,7 @@ const UpdateLesson = () => {
       else setEditorState(lessonData.text);
     } catch (error: any) {
       console.error(error);
-      setError("Erro ao carregar aula.");
+      showNotification(error.response?.data?.Message, "error");
     }
   };
 
@@ -80,7 +82,7 @@ const UpdateLesson = () => {
     const userId = userContext?.user.userId;
 
     if (!userId) {
-      setError("Usuário não autenticado.");
+      showNotification("Usuário não autenticado", "error");
       return;
     }
 
@@ -100,12 +102,10 @@ const UpdateLesson = () => {
 
     try {
       setLoading(true);
-      setError("");
-      await updateLessonService(updateData, userId);
-      alert("Aula atualizada com sucesso!");
+      const response = await updateLessonService(updateData, userId);
+      showNotification(response.data.Message, "success");
     } catch (error: any) {
-      console.error(error.response);
-      setError("Erro ao atualizar aula.");
+      showNotification(error.response?.data?.Message, "error");
     } finally {
       setLoading(false);
     }
@@ -262,11 +262,12 @@ const UpdateLesson = () => {
         </div>
       </LabelOptions>
 
-      {error && (
-        <Error>
-          <i className="fa-solid fa-circle-info"></i>
-          {error}
-        </Error>
+      {message && (
+        <Notification
+          message={message}
+          type={type}
+          onClose={hideNotification}
+        />
       )}
 
       <MainButton type="button" onClick={updateThisLesson} disabled={loading}>
