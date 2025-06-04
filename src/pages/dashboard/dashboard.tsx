@@ -7,6 +7,7 @@ import Reports from "../../components/reports/reports";
 import Plans from "../../components/plans/plans";
 import { Link } from "react-router-dom";
 import LessonsList from "../../components/lessons/lessons";
+import BackButton from "../../components/back-button/back-button";
 
 const Dashboard = () => {
   const [activeSection, setActiveSection] = useState("overview");
@@ -73,6 +74,7 @@ const Dashboard = () => {
           >
             <i className="fa-solid fa-file-lines"></i> Backlog
           </button>
+          <BackButton url="/" />
         </section>
 
         <section className="content-area">{renderContent()}</section>

@@ -26,7 +26,7 @@ const UserPage = () => {
       <PurpleHeader />
 
       <h1>Bem vindo, {user?.name}</h1>
-      <Link to="/private-dashboard">dashboard</Link>
+      <Link to="/dashboard">dashboard</Link>
 
       <div>
         <button

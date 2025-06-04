@@ -35,7 +35,7 @@ const Router = createBrowserRouter([
         element: <SubscriptionUpdate />,
       },
       {
-        path: "/private-dashboard",
+        path: "/dashboard",
         element: <Dashboard />,
       },
       {
