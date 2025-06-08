@@ -78,6 +78,7 @@ export const LessonButton = styled(Button)`
   background-color: #7a14be;
   padding: 3px 6px;
   border-radius: 5px;
+  margin-left: 10px;
 
   &:hover {
     background-color: #8e2edd;

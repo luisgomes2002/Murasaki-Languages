@@ -6,7 +6,6 @@ import {
   LinksContainer,
   LinksList,
   MainButton,
-  Error,
   EditorContainer,
 } from "./create-lessons-styled";
 import { createLessonService } from "../../services/lessons.service";

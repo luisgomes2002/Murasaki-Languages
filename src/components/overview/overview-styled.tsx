@@ -55,8 +55,7 @@ export const MoreInfo = styled.div`
 `;
 
 export const GraphicArea = styled.div`
-  padding: 30px;
-  margin: 3%;
+  padding-top: 5%;
   border-radius: 5px;
 
   h1 {
@@ -79,6 +78,16 @@ export const PieArea = styled.div`
   h1 {
     color: white;
     text-align: left;
+    font-weight: 400;
+  }
+`;
+
+export const PopularLanguages = styled.div`
+  margin: 0 4%;
+
+  h1 {
+    color: white;
+    padding-bottom: 2%;
     font-weight: 400;
   }
 `;

@@ -16,6 +16,7 @@ import {
   GraphicArea,
   MoreInfo,
   PieArea,
+  PopularLanguages,
   UserOverview,
   Wrapper,
 } from "./overview-styled";
@@ -50,6 +51,12 @@ const Overview = () => {
     { month: "25-29", quantity: metrics?.userAgeDistribution["25-29"] },
     { month: "30-39", quantity: metrics?.userAgeDistribution["30-39"] },
     { month: "40+", quantity: metrics?.userAgeDistribution["40plus"] },
+  ];
+
+  const dataLanguages = [
+    { month: "JAPANESE", quantity: metrics?.topLanguages.JP },
+    { month: "ENGLISH", quantity: metrics?.topLanguages.EN },
+    { month: "SPANISH", quantity: metrics?.topLanguages.ES },
   ];
 
   const dataGender = [
@@ -106,99 +113,124 @@ const Overview = () => {
           </Card>
         ))}
       </UserOverview>
-
-      <MoreInfo>
-        <GraphicArea>
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "space-between",
-            }}
-          >
-            <h1>Users by Age</h1>
-
-            <div style={{ display: "flex", alignItems: "center" }}>
-              <label style={{ color: "#fff", marginRight: "10px" }}>
-                Selecione uma data:
-              </label>
-              <select
-                value={selectedDate}
-                onChange={(e) => setSelectedDate(e.target.value)}
-                style={{
-                  padding: "10px",
-                  borderRadius: "8px",
-                  border: "1px solid #0a0a0a",
-                  fontSize: "16px",
-                  backgroundColor: "#0a0a0a",
-                  color: "#fff",
-                }}
-              >
-                <option value="" disabled>
-                  Selecione uma data
-                </option>
-                {dates.map((item) =>
-                  item.dateTimes.map((d, idx) => (
-                    <option key={`${item.id}-${idx}`} value={d}>
-                      {new Date(d).toLocaleDateString("pt-BR")}
-                    </option>
-                  )),
-                )}
-              </select>
-            </div>
-          </div>
-
-          <ResponsiveContainer width="100%" height={400}>
-            <BarChart
-              data={data}
-              margin={{ top: 20, right: 30, left: 0, bottom: 5 }}
+      <PopularLanguages>
+        <MoreInfo>
+          <GraphicArea>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+              }}
             >
-              <XAxis dataKey="month" tick={{ fill: "white", fontSize: 12 }} />
-              <YAxis tick={{ fill: "white", fontSize: 12 }} />
-              <Tooltip
-                contentStyle={{ backgroundColor: "#fff" }}
-                labelStyle={{ color: "#6B7280" }}
-                itemStyle={{ color: "#4B5563" }}
-              />
-              <Legend />
-              <Bar dataKey="quantity" stackId="a" fill="#8B5CF6" barSize={30} />
-            </BarChart>
-          </ResponsiveContainer>
-        </GraphicArea>
+              <h1>Users by Age</h1>
 
-        <PieArea>
-          <h1>Users by Gender</h1>
-          <ResponsiveContainer width="100%" height={300}>
-            <PieChart>
-              <Pie
-                data={dataGender}
-                cx="50%"
-                cy="50%"
-                labelLine={false}
-                outerRadius={70}
-                fill="#6714D3"
-                dataKey="value"
+              <div style={{ display: "flex", alignItems: "center" }}>
+                <label style={{ color: "#fff", marginRight: "10px" }}>
+                  Selecione uma data:
+                </label>
+                <select
+                  value={selectedDate}
+                  onChange={(e) => setSelectedDate(e.target.value)}
+                  style={{
+                    padding: "10px",
+                    borderRadius: "8px",
+                    border: "1px solid #0a0a0a",
+                    fontSize: "16px",
+                    backgroundColor: "#0a0a0a",
+                    color: "#fff",
+                  }}
+                >
+                  <option value="" disabled>
+                    Selecione uma data
+                  </option>
+                  {dates.map((item) =>
+                    item.dateTimes.map((d, idx) => (
+                      <option key={`${item.id}-${idx}`} value={d}>
+                        {new Date(d).toLocaleDateString("pt-BR")}
+                      </option>
+                    )),
+                  )}
+                </select>
+              </div>
+            </div>
+
+            <ResponsiveContainer width="100%" height={400}>
+              <BarChart
+                data={data}
+                margin={{ top: 20, right: 30, left: 0, bottom: 5 }}
               >
-                {dataGender.map((entry, index) => (
-                  <Cell
-                    key={`cell-${index}`}
-                    fill={COLORS[index % COLORS.length]}
-                  />
-                ))}
-              </Pie>
-              <Tooltip
-                contentStyle={{
-                  backgroundColor: "#fff",
-                  borderRadius: 8,
-                  border: "none",
-                }}
-                itemStyle={{ color: "#4B5563" }}
-              />
-              <Legend wrapperStyle={{ fontSize: 15 }} />
-            </PieChart>
-          </ResponsiveContainer>
-        </PieArea>
-      </MoreInfo>
+                <XAxis dataKey="month" tick={{ fill: "white", fontSize: 12 }} />
+                <YAxis tick={{ fill: "white", fontSize: 12 }} />
+                <Tooltip
+                  contentStyle={{ backgroundColor: "#fff" }}
+                  labelStyle={{ color: "#6B7280" }}
+                  itemStyle={{ color: "#4B5563" }}
+                />
+                <Legend />
+                <Bar
+                  dataKey="quantity"
+                  stackId="a"
+                  fill="#8B5CF6"
+                  barSize={30}
+                />
+              </BarChart>
+            </ResponsiveContainer>
+          </GraphicArea>
+
+          <PieArea>
+            <h1>Users by Gender</h1>
+            <ResponsiveContainer width="100%" height={300}>
+              <PieChart>
+                <Pie
+                  data={dataGender}
+                  cx="50%"
+                  cy="50%"
+                  labelLine={false}
+                  outerRadius={70}
+                  fill="#6714D3"
+                  dataKey="value"
+                >
+                  {dataGender.map((entry, index) => (
+                    <Cell
+                      key={`cell-${index}`}
+                      fill={COLORS[index % COLORS.length]}
+                    />
+                  ))}
+                </Pie>
+                <Tooltip
+                  contentStyle={{
+                    backgroundColor: "#fff",
+                    borderRadius: 8,
+                    border: "none",
+                  }}
+                  itemStyle={{ color: "#4B5563" }}
+                />
+                <Legend wrapperStyle={{ fontSize: 15 }} />
+              </PieChart>
+            </ResponsiveContainer>
+          </PieArea>
+        </MoreInfo>
+
+        <h1>Popular Languages</h1>
+
+        <ResponsiveContainer width="100%" height={400}>
+          <BarChart
+            data={dataLanguages}
+            margin={{ top: 20, right: 30, left: 0, bottom: 5 }}
+          >
+            <XAxis dataKey="month" tick={{ fill: "white", fontSize: 12 }} />
+            <YAxis tick={{ fill: "white", fontSize: 12 }} />
+            <Tooltip
+              contentStyle={{ backgroundColor: "#fff" }}
+              labelStyle={{ color: "#6B7280" }}
+              itemStyle={{ color: "#4B5563" }}
+            />
+            <Legend />
+            <Bar dataKey="quantity" stackId="a" fill="#8B5CF6" barSize={30} />
+          </BarChart>
+        </ResponsiveContainer>
+      </PopularLanguages>
 
       {message && (
         <Notification

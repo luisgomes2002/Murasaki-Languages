@@ -1,6 +1,6 @@
 import { useState } from "react";
 import UpdateLesson from "../../components/update-lesson/update-lesson";
-import Worksheets from "../../components/worksheets/worksheets";
+import CreateWorksheets from "../../components/worksheets/create-worksheets";
 import { Link } from "react-router-dom";
 import CreateExplanation from "../../components/explanation/explanation";
 import UpdateExplanationSection from "../../components/update-explanation-section/update-explanation-section";
@@ -18,9 +18,9 @@ const LessonMenu = () => {
       case "update-explanation":
         return <UpdateExplanationSection />;
       case "create-worksheet":
-        return <Worksheets />;
+        return <CreateWorksheets />;
       case "update-worksheet":
-        return <Worksheets />;
+        return <CreateWorksheets />;
 
       default:
         return <UpdateLesson />;

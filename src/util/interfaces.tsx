@@ -50,6 +50,13 @@ export interface Worksheets {
   explanation: string;
 }
 
+export interface WorksheetsProps {
+  question: string;
+  options: string[];
+  answer: string;
+  explanation: string;
+}
+
 export interface Plan {
   id: string;
   title: string;
