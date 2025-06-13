@@ -1,25 +1,41 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Dashboardtitle from "../dashboard-title/dashboard-title";
-import { Table, InfoTable, EditButton } from "../users/users-styled";
+import {
+  Table,
+  InfoTable,
+  EditButton,
+  DeleteButton,
+} from "../users/users-styled";
 import {
   CreateLesson,
   LessonsOptions,
   SelectAndCreateLesson,
 } from "./lessons-styled";
 import {
+  deleteLessonService,
   getAllLessonsService,
   getLessonByVisibilityService,
 } from "../../services/lessons.service";
-import { Conversation } from "../../util/interfaces";
+import { Conversation, DeleteLessonProps } from "../../util/interfaces";
 import { Link } from "react-router-dom";
 import CreateLessonModal from "../create-lesson-modal/create-lesson-modal";
+import DeletePopup from "../delete-popup/delete-popup";
+import { UserContext } from "../../context/user-context";
+import { useNotification } from "../notifications-box/useNotification";
+import { Notification } from "../notifications-box/notifications-box";
 
 const LessonsList = () => {
   const [lessons, setLessons] = useState<Conversation[]>([]);
   const [selectedVisibility, setSelectedVisibility] = useState<string | null>(
     null,
   );
+  const [deleteLesson, setDeleteLesson] = useState<DeleteLessonProps | null>(
+    null,
+  );
   const [showModal, setShowModal] = useState(false);
+  const userContext = useContext(UserContext);
+  const { message, type, showNotification, hideNotification } =
+    useNotification();
 
   const fetchLessons = async (visibility?: string) => {
     try {
@@ -42,6 +58,27 @@ const LessonsList = () => {
     } else {
       setSelectedVisibility(visibility);
       fetchLessons(visibility);
+    }
+  };
+
+  const handleDeleteLesson = async () => {
+    if (!deleteLesson || !userContext?.user.userId) {
+      showNotification("Missing user or lesson ID", "error");
+      return;
+    }
+
+    try {
+      await deleteLessonService({
+        lessonId: deleteLesson.lessonId,
+        userId: userContext?.user.userId,
+        lessonName: deleteLesson.lessonName,
+      });
+      showNotification("Atividade deletada", "success");
+    } catch (error: any) {
+      showNotification(error.response?.data?.Message, "error");
+    } finally {
+      setDeleteLesson(null);
+      // await fetchLessons(); -- NÃO ATUALIZA POR CAUSA DO CACHE --
     }
   };
 
@@ -85,6 +122,7 @@ const LessonsList = () => {
               <th>Published</th>
               <th>Visibility</th>
               <th>Update</th>
+              <th>Delete</th>
             </tr>
           </thead>
           <tbody>
@@ -105,11 +143,36 @@ const LessonsList = () => {
                     </EditButton>
                   </Link>
                 </td>
+                <td>
+                  <DeleteButton
+                    type="button"
+                    onClick={() => {
+                      setDeleteLesson({
+                        lessonId: lesson.id,
+                        userId: userContext?.user.userId,
+                        lessonName: lesson.title,
+                      });
+                    }}
+                  >
+                    <i className="fa-solid fa-trash"></i>
+                  </DeleteButton>
+                </td>
               </tr>
             ))}
           </tbody>
         </InfoTable>
       </Table>
+
+      {deleteLesson && (
+        <DeletePopup
+          title="Confirmar exclusão"
+          description="Tem certeza que deseja excluir esse atividade? Essa ação não poderá ser desfeita."
+          onConfirm={handleDeleteLesson}
+          onCancel={() => setDeleteLesson(null)}
+          confirmText="Excluir"
+          cancelText="Cancelar"
+        />
+      )}
 
       {showModal && (
         <CreateLessonModal
@@ -117,6 +180,14 @@ const LessonsList = () => {
             setShowModal(false);
             fetchLessons();
           }}
+        />
+      )}
+
+      {message && (
+        <Notification
+          message={message}
+          type={type}
+          onClose={hideNotification}
         />
       )}
     </>

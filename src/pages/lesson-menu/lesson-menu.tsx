@@ -1,10 +1,11 @@
 import { useState } from "react";
 import UpdateLesson from "../../components/update-lesson/update-lesson";
-import CreateWorksheets from "../../components/worksheets/create-worksheets";
+import CreateWorksheets from "../../components/create-worksheets/create-worksheets";
 import { Link } from "react-router-dom";
 import CreateExplanation from "../../components/explanation/explanation";
 import UpdateExplanationSection from "../../components/update-explanation-section/update-explanation-section";
 import BackButton from "../../components/back-button/back-button";
+import UpdateWorksheetsSection from "../../components/update-worksheets-section/update-worksheets-section";
 
 const LessonMenu = () => {
   const [activeSection, setActiveSection] = useState("update");
@@ -20,7 +21,7 @@ const LessonMenu = () => {
       case "create-worksheet":
         return <CreateWorksheets />;
       case "update-worksheet":
-        return <CreateWorksheets />;
+        return <UpdateWorksheetsSection />;
 
       default:
         return <UpdateLesson />;

@@ -203,3 +203,20 @@ export interface DeleteExplanationProps {
   lessonId: string;
   userId: string;
 }
+
+export interface DeleteWorksheetPros {
+  worksheetId: string;
+  lessonId: string;
+  userId: string;
+}
+
+export interface WorksheetsUpdateProps {
+  worksheetId: string;
+  userId: string;
+}
+
+export interface DeleteLessonProps {
+  lessonId: string;
+  userId: string;
+  lessonName: string;
+}

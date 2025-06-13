@@ -26,6 +26,8 @@ const Dashboard = () => {
         return <Reports />;
       case "Backlog":
         return <Backlog />;
+      case "Collection":
+        return <Backlog />;
       default:
         return <Overview />;
     }
@@ -69,11 +71,18 @@ const Dashboard = () => {
             <i className="fa-solid fa-file"></i> Reports
           </button>
           <button
+            onClick={() => setActiveSection("Collection")}
+            className={activeSection === "Collection" ? "active" : ""}
+          >
+            <i className="fa-solid fa-file-lines"></i> Collection
+          </button>
+          <button
             onClick={() => setActiveSection("Backlog")}
             className={activeSection === "Backlog" ? "active" : ""}
           >
             <i className="fa-solid fa-file-lines"></i> Backlog
           </button>
+
           <BackButton url="/" />
         </section>
 

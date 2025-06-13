@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const ExplanationUpdateArea = styled.div`
+export const LessonsCreateAndUpdateArea = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -35,7 +35,7 @@ export const ExplanationUpdateArea = styled.div`
   }
 `;
 
-export const ExplanationCardCreate = styled.div`
+export const ExplanationAndWorksheetsCardCreate = styled.div`
   background-color: #1f1f1f;
   padding: 20px;
   width: 70%;

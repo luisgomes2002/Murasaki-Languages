@@ -1,52 +1,61 @@
 import { useContext, useState } from "react";
-import { ExplanationUpdateArea } from "../explanation/explanation-styled";
-import { useNotification } from "../notifications-box/useNotification";
-import { Notification } from "../notifications-box/notifications-box";
-import { createWorksheetsService } from "../../services/worksheet.service";
-import { useParams } from "react-router-dom";
-import { UserContext } from "../../context/user-context";
 import {
+  CreateLessonArea,
+  EditorContainer,
   LessonButton,
   LinksContainer,
   LinksList,
   MainButton,
 } from "../create-lessons/create-lessons-styled";
-import { WorksheetsProps } from "../../util/interfaces";
+import { useNotification } from "../notifications-box/useNotification";
+import { UserContext } from "../../context/user-context";
+import { updateWorksheetsSection } from "../../services/worksheet.service";
+import { Notification } from "../notifications-box/notifications-box";
+import { EditorContent, useEditor } from "@tiptap/react";
+import StarterKit from "@tiptap/starter-kit";
+import MenuBar from "../text-bar/meu-bar";
 
-const CreateWorksheets = () => {
-  const { id } = useParams();
+interface Props {
+  worksheetsIdByModal: string;
+}
+
+const UpdateWorksheet = ({ worksheetsIdByModal }: Props) => {
+  const { message, type, showNotification, hideNotification } =
+    useNotification();
+  const [loading, setLoading] = useState(false);
   const [question, setQuestion] = useState("");
   const [answer, setAnswer] = useState("");
   const [options, setOptions] = useState<string[]>([]);
   const [optionsInput, setOptionsInput] = useState("");
-  const [explanation, setExplanation] = useState("");
+  const [editorState, setEditorState] = useState<string>("");
   const userContext = useContext(UserContext);
-  const [loading, setLoading] = useState(false);
-  const { message, type, showNotification, hideNotification } =
-    useNotification();
 
-  const createWorkSheets = async (lessonId: string, userId: string) => {
+  const editor = useEditor({
+    extensions: [StarterKit],
+    content: "",
+    onUpdate: ({ editor }) => {
+      setEditorState(editor.getHTML());
+    },
+  });
+
+  const getWorksheetToUpdate = async () => {};
+
+  const UpdateWorksheets = async (worksheetToUpdateId: string) => {
     try {
       setLoading(true);
 
-      const workSheetData: WorksheetsProps = {
-        question: question,
-        options: options,
-        answer: answer,
-        explanation: explanation,
-      };
+      if (!userContext?.user?.userId) {
+        console.error("Usuário não está autenticado.");
+        setLoading(false);
+        return;
+      }
 
-      const response = await createWorksheetsService(
-        lessonId,
-        userId,
-        workSheetData,
-      );
+      const response = await updateWorksheetsSection({
+        worksheetId: worksheetToUpdateId,
+        userId: userContext.user.userId,
+      });
+
       showNotification(response.data.Message, "success");
-
-      setQuestion("");
-      setOptions([]);
-      setAnswer("");
-      setExplanation("");
     } catch (error: any) {
       showNotification(error.response?.data?.Message, "error");
     } finally {
@@ -65,9 +74,7 @@ const CreateWorksheets = () => {
   };
 
   return (
-    <ExplanationUpdateArea>
-      <h1>Create Worksheets</h1>
-
+    <CreateLessonArea>
       <input
         type="text"
         placeholder="Question"
@@ -113,12 +120,18 @@ const CreateWorksheets = () => {
         value={answer}
         onChange={(e) => setAnswer(e.target.value)}
       />
-      <input
-        type="text"
-        placeholder="Explanation"
-        value={explanation}
-        onChange={(e) => setExplanation(e.target.value)}
-      />
+      <EditorContainer>
+        <EditorContent editor={editor} />
+        <MenuBar editor={editor} />
+      </EditorContainer>
+
+      <MainButton
+        type="button"
+        onClick={() => UpdateWorksheets(worksheetsIdByModal)}
+        disabled={loading}
+      >
+        {loading ? <i className="fa-solid fa-c fa-spin" /> : "Update"}
+      </MainButton>
 
       {message && (
         <Notification
@@ -127,28 +140,8 @@ const CreateWorksheets = () => {
           onClose={hideNotification}
         />
       )}
-
-      <MainButton
-        type="button"
-        onClick={() => {
-          if (!id) {
-            showNotification("Id não encontrado", "error");
-            return;
-          }
-
-          if (!userContext?.user.userId) {
-            showNotification("Usuário não autenticado", "error");
-            return;
-          }
-
-          createWorkSheets(id, userContext?.user.userId);
-        }}
-        disabled={loading}
-      >
-        {loading ? <i className="fa-solid fa-c fa-spin" /> : "Criar"}
-      </MainButton>
-    </ExplanationUpdateArea>
+    </CreateLessonArea>
   );
 };
 
-export default CreateWorksheets;
+export default UpdateWorksheet;

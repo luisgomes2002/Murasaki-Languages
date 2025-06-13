@@ -1,6 +1,10 @@
 import axios from "axios";
 import Cookies from "js-cookie";
-import { CreateLesson, LessonUpdate } from "../util/interfaces";
+import {
+  CreateLesson,
+  DeleteLessonProps,
+  LessonUpdate,
+} from "../util/interfaces";
 
 const baseUrl = "http://localhost:8080/api";
 
@@ -115,5 +119,17 @@ export const getLessonByVisibilityService = (visibility: string) => {
       Authorization: `Bearer ${Cookies.get("token")}`,
     },
   });
+  return response;
+};
+
+export const deleteLessonService = (lesson: DeleteLessonProps) => {
+  const response = axios.delete(
+    `${baseUrl}/lesson/delete/${lesson.lessonId}/${lesson.userId}/${lesson.lessonName}`,
+    {
+      headers: {
+        Authorization: `Bearer ${Cookies.get("token")}`,
+      },
+    },
+  );
   return response;
 };

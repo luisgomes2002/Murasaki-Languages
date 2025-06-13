@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const LessonsOptions = styled.div`
   display: flex;
-  margin: 10px 0;
+  margin: 10px;
   padding-right: 10px;
 
   p {

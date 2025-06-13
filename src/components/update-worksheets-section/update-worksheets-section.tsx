@@ -1,83 +1,83 @@
 import { useContext, useEffect, useState } from "react";
 import {
-  deleteExplanationService,
-  getExplanationIdService,
-} from "../../services/explanation.service";
-import {
   ExplanationAndWorksheetsCardCreate,
   ExplanationIndex,
   LessonsCreateAndUpdateArea,
 } from "../explanation/explanation-styled";
-import UpdateExplanationModal from "../update-explanation-modal/update-explanation-modal";
-import { Conversation, Explanation } from "../../util/interfaces";
+import { Conversation, Worksheets } from "../../util/interfaces";
+import { useNotification } from "../notifications-box/useNotification";
 import { useParams } from "react-router-dom";
 import { getLessonByIdService } from "../../services/lessons.service";
-import { UserContext } from "../../context/user-context";
+import {
+  deleteWorksheetsService,
+  getWorksheetIdService,
+} from "../../services/worksheet.service";
 import { Notification } from "../notifications-box/notifications-box";
-import { useNotification } from "../notifications-box/useNotification";
+import { UserContext } from "../../context/user-context";
+import UpdateWorksheetsModal from "../update-worksheets-modal/update-worksheets-modal";
 import DeletePopup from "../delete-popup/delete-popup";
 
-const UpdateExplanationSection = () => {
+const UpdateWorksheetsSection = () => {
   const [showModal, setShowModal] = useState(false);
-  const [deleteExplanationId, setDeleteExplanationId] = useState<string | null>(
+  const [deleteWorksheetsId, setDeleteWorksheetsId] = useState<string | null>(
     null,
   );
-  const [selectedExplanationId, setSelectedExplanationId] =
-    useState<string>("");
-  const [explations, setExplations] = useState<Explanation[]>([]);
+  const [worksheets, setWorksheets] = useState<Worksheets[]>([]);
+  const [selectedWorksheetsId, setSelectedWorksheetsId] = useState<string>("");
   const [lesson, setLesson] = useState<Conversation>();
-  const { id } = useParams();
-  const userContext = useContext(UserContext);
   const { message, type, showNotification, hideNotification } =
     useNotification();
+  const { id } = useParams();
+  const userContext = useContext(UserContext);
 
   const getLessonById = async (id: string) => {
     try {
       const resposne = await getLessonByIdService(id);
+
       setLesson(resposne.data);
     } catch (error: any) {
       showNotification(error.response?.data?.Message, "error");
     }
   };
 
-  const getExplanationById = async (ids: string[]) => {
+  const getWorksheetsById = async (ids: string[]) => {
     try {
       const response = await Promise.all(
-        ids.map((id) => getExplanationIdService(id)),
+        ids.map((id) => getWorksheetIdService(id)),
       );
 
-      const allExplanations = response.map((res) => res.data);
-      setExplations(allExplanations.flat());
+      const allworksheets = response.map((res) => res.data);
+      setWorksheets(allworksheets.flat());
     } catch (error: any) {
       showNotification(error.response?.data?.Message, "error");
     }
   };
 
-  const handleDeleteExplanation = async () => {
-    if (!deleteExplanationId || !id || !userContext?.user.userId) {
+  const handleDeleteWorksheet = async () => {
+    if (!deleteWorksheetsId || !id || !userContext?.user.userId) {
       showNotification("Missing user or lesson ID", "error");
       return;
     }
 
     try {
-      await deleteExplanationService({
-        explanationId: deleteExplanationId,
+      const response = await deleteWorksheetsService({
+        worksheetId: deleteWorksheetsId,
         lessonId: id,
         userId: userContext?.user.userId,
       });
-      setExplations((prev) =>
-        prev.filter((exp) => exp.id !== deleteExplanationId),
+      setWorksheets((prev) =>
+        prev.filter((exp) => exp.id !== deleteWorksheetsId),
       );
-      showNotification("Explicação deletada com sucesso!", "success");
+      showNotification(response.data.Message, "success");
     } catch (error: any) {
       showNotification(error.response?.data?.Message, "error");
     } finally {
-      setDeleteExplanationId(null);
+      setDeleteWorksheetsId(null);
     }
   };
 
   useEffect(() => {
-    if (lesson?.explanations?.length) getExplanationById(lesson.explanations);
+    if (lesson?.worksheets?.length) getWorksheetsById(lesson.worksheets);
   }, [lesson]);
 
   useEffect(() => {
@@ -86,17 +86,17 @@ const UpdateExplanationSection = () => {
 
   return (
     <LessonsCreateAndUpdateArea>
-      <h1>Update Explanations</h1>
+      <h1>Update Worksheets</h1>
 
-      {explations.map((explanation, index) => (
-        <ExplanationAndWorksheetsCardCreate key={index}>
+      {worksheets.map((worksheets, index) => (
+        <ExplanationAndWorksheetsCardCreate>
           <ExplanationIndex>
-            <p>Explanation {1 + index}:</p>
+            <p>Worksheet {1 + index}:</p>
 
             <div>
               <button
                 onClick={() => {
-                  setSelectedExplanationId(explanation.id);
+                  setSelectedWorksheetsId(worksheets.id);
                   setShowModal(true);
                 }}
               >
@@ -104,36 +104,37 @@ const UpdateExplanationSection = () => {
               </button>
               <button
                 onClick={() => {
-                  setDeleteExplanationId(explanation.id);
+                  setDeleteWorksheetsId(worksheets.id);
                 }}
               >
                 <i className="fa-solid fa-trash"></i>
               </button>
             </div>
           </ExplanationIndex>
-          <h1>{explanation.phrase}</h1>
-          <h2>{explanation.translation}</h2>
-          <h3 dangerouslySetInnerHTML={{ __html: explanation.explanation }} />
+          <h2>Question: {worksheets.question}</h2>
+          <h2>Options: {worksheets.options}</h2>
+          <h2>Answer: {worksheets.answer}</h2>
+          <h2 dangerouslySetInnerHTML={{ __html: worksheets.explanation }} />
         </ExplanationAndWorksheetsCardCreate>
       ))}
 
-      {deleteExplanationId && (
+      {deleteWorksheetsId && (
         <DeletePopup
           title="Confirmar exclusão"
-          description="Tem certeza que deseja excluir esta explicação? Essa ação não poderá ser desfeita."
-          onConfirm={handleDeleteExplanation}
-          onCancel={() => setDeleteExplanationId(null)}
+          description="Tem certeza que deseja excluir esse worksheet? Essa ação não poderá ser desfeita."
+          onConfirm={handleDeleteWorksheet}
+          onCancel={() => setDeleteWorksheetsId(null)}
           confirmText="Excluir"
           cancelText="Cancelar"
         />
       )}
 
       {showModal && (
-        <UpdateExplanationModal
-          explanationIdByModal={selectedExplanationId}
+        <UpdateWorksheetsModal
+          worksheetIdByModal={selectedWorksheetsId}
           onClose={() => {
             setShowModal(false);
-            setSelectedExplanationId("");
+            setSelectedWorksheetsId("");
           }}
         />
       )}
@@ -149,4 +150,4 @@ const UpdateExplanationSection = () => {
   );
 };
 
-export default UpdateExplanationSection;
+export default UpdateWorksheetsSection;

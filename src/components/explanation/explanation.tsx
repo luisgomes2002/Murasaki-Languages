@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { createExplanationService } from "../../services/explanation.service";
-import { ExplanationUpdateArea } from "./explanation-styled";
+import { LessonsCreateAndUpdateArea } from "./explanation-styled";
 import { useParams } from "react-router-dom";
 import { ExplanationProps } from "../../util/interfaces";
 import {
@@ -53,7 +53,7 @@ const CreateExplanation = () => {
   };
 
   return (
-    <ExplanationUpdateArea>
+    <LessonsCreateAndUpdateArea>
       <h1>Create Explanations</h1>
 
       <input
@@ -112,7 +112,7 @@ const CreateExplanation = () => {
           onClose={hideNotification}
         />
       )}
-    </ExplanationUpdateArea>
+    </LessonsCreateAndUpdateArea>
   );
 };
 

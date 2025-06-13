@@ -5,6 +5,7 @@ export const TitleSearch = styled.div`
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
+  margin-left: 10px;
 
   .title {
     font-size: 24px;
