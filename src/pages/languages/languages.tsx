@@ -9,8 +9,32 @@ import LanguagesCard from "../../components/languages-card/languages-card";
 import card5 from "../../assets/images/cards/card5.jpg";
 import coreaiaCard from "../../assets/images/cards/coreaia-card.jpg";
 import euaCard from "../../assets/images/cards/eua-card.jpg";
+import { getLessonCollectionsService } from "../../services/collections.service";
+import { useEffect, useState } from "react";
+import { LanguageCollectionsProps } from "../../util/interfaces";
+import { Notification } from "../../components/notifications-box/notifications-box";
+import { useNotification } from "../../components/notifications-box/useNotification";
 
 const Languages = () => {
+  const [languages, setLanguages] = useState<LanguageCollectionsProps[]>([]);
+  const { message, type, showNotification, hideNotification } =
+    useNotification();
+
+  const languageImages = [euaCard, card5, coreaiaCard];
+
+  const getLessonCollections = async () => {
+    try {
+      const response = await getLessonCollectionsService();
+      setLanguages(response.data);
+    } catch (error: any) {
+      showNotification(error.response?.data?.Message, "error");
+    }
+  };
+
+  useEffect(() => {
+    getLessonCollections();
+  }, []);
+
   return (
     <div>
       <PurpleHeader />
@@ -24,26 +48,25 @@ const Languages = () => {
           seu desempenho e te ajuda a evoluir mais rápido.
         </LanguageDescription>
         <LanguagesLessonCards>
-          <LanguagesCard
-            link="/languages/Japonês"
-            name="Japonês"
-            image={card5}
-            isActive={true}
-          />
-          <LanguagesCard
-            link="/languages/Coreano"
-            name="Coreano"
-            image={coreaiaCard}
-            isActive={false}
-          />
-          <LanguagesCard
-            link="/languages/Inglês"
-            name="Inglês"
-            image={euaCard}
-            isActive={false}
-          />
+          {languages.map((language, index) => (
+            <LanguagesCard
+              key={language.id}
+              link={`/languages/${language.id}`}
+              name={language.languageName}
+              image={languageImages[index % languageImages.length]}
+              isActive={language.status}
+            />
+          ))}
         </LanguagesLessonCards>
       </ShowLanguages>
+
+      {message && (
+        <Notification
+          message={message}
+          type={type}
+          onClose={hideNotification}
+        />
+      )}
       <Footer />
     </div>
   );

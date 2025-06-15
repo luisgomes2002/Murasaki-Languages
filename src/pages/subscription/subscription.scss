@@ -15,3 +15,28 @@
     flex-direction: row;
   }
 }
+
+.beta-warning {
+  background-color: rgba(206, 75, 206, 0.15);
+  border: 1px solid #da3eb877;
+  width: 90%;
+  max-width: 1000px;
+  margin: 0 auto;
+  border-radius: 20px;
+  padding: 20px;
+  color: #4a004d;
+  font-size: 16px;
+  line-height: 1.6;
+  text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
+  margin-bottom: 30px;
+  margin-top: 2%;
+
+  p {
+    margin-bottom: 16px;
+
+    strong {
+      color: #3c0d7a;
+    }
+  }
+}

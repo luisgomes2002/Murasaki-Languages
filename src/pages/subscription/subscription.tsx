@@ -29,6 +29,31 @@ const Subscription = () => {
       <WhiteHeader />
       <div className="sub">
         <h1>Escolha o plano ideal para você</h1>
+        <div className="beta-warning">
+          <p>
+            <strong>🚧 Plataforma em fase Beta</strong>
+            <br />
+            <br />
+            Nosso site ainda está em desenvolvimento, então estamos
+            constantemente testando, ajustando e melhorando para oferecer a
+            melhor experiência de aprendizado possível.
+          </p>
+          <p>
+            Estamos trabalhando em
+            <strong>novos recursos, conteúdos e melhorias</strong>, que serão
+            lançados periodicamente — tudo isso com base no feedback da nossa
+            comunidade.
+          </p>
+          <p>
+            💡 <strong>Importante:</strong> Mesmo com as futuras atualizações,{" "}
+            <strong>
+              os valores das assinaturas atuais não sofrerão reajustes
+            </strong>
+            . Quem assinar agora manterá o preço, independentemente das
+            melhorias que virão!
+          </p>
+          <p>Obrigado por fazer parte dessa jornada com a gente 💜</p>
+        </div>
 
         <section>
           {plans.map((plan) => (

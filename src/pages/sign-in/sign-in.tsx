@@ -23,6 +23,7 @@ interface loginProps {
 
 const SignIn = () => {
   const [error, setError] = useState<string>("");
+  const [loading, setLoading] = useState(false);
 
   const {
     register,
@@ -34,11 +35,14 @@ const SignIn = () => {
 
   const login = async (data: loginProps) => {
     try {
+      setLoading(true);
       const response = await signinService(data);
       Cookies.set("token", response.data.token, { expires: 5 });
       window.location.href = "/";
     } catch (error: any) {
       setError(error.response.data.Message);
+    } finally {
+      setLoading(false);
     }
   };
   return (
@@ -72,7 +76,9 @@ const SignIn = () => {
           />
           <ErrorMessage>{errors.password?.message}</ErrorMessage>
           <ErrorMessage>{error}</ErrorMessage>
-          <SubmitButton>Entra</SubmitButton>
+          <SubmitButton>
+            {loading ? <i className="fa-solid fa-c fa-spin" /> : "Entrar"}
+          </SubmitButton>
           <SubmitButton>
             Entrar com <i className="fa-brands fa-google"></i>
           </SubmitButton>

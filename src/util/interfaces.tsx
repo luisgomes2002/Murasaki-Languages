@@ -220,3 +220,9 @@ export interface DeleteLessonProps {
   userId: string;
   lessonName: string;
 }
+
+export interface LanguageCollectionsProps {
+  id: string;
+  languageName: string;
+  status: boolean;
+}
