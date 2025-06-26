@@ -8,6 +8,7 @@ import Plans from "../../components/plans/plans";
 import { Link } from "react-router-dom";
 import LessonsList from "../../components/lessons/lessons";
 import BackButton from "../../components/back-button/back-button";
+import LessonCollections from "../../components/lesson-collections/lessons-collections";
 
 const Dashboard = () => {
   const [activeSection, setActiveSection] = useState("overview");
@@ -27,7 +28,8 @@ const Dashboard = () => {
       case "Backlog":
         return <Backlog />;
       case "Collection":
-        return <Backlog />;
+        return <LessonCollections />;
+
       default:
         return <Overview />;
     }
