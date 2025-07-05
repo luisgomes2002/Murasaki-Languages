@@ -30,7 +30,6 @@ const Home = () => {
       <div className="updates">
         <h2>Próximas Atualizações</h2>
         <h3>versão atual 0.1.0</h3>
-
         <ul>
           <li>
             🎯 Atividades personalizadas de acordo com o conteúdo estudado -
@@ -47,6 +46,10 @@ const Home = () => {
             versão - 1.0.0
           </li>
         </ul>
+        {/* 🔧 (chave inglesa – consertos e ajustes) 
+        🛠️ (martelo e chave –manutenção técnica)
+         🐛 (inseto – representa um "bug")
+         ✨ Melhorias na experiência do usuário */}
       </div>
 
       <div className="cards">

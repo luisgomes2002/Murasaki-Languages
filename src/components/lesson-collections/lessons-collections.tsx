@@ -7,20 +7,20 @@ const LessonCollections = () => {
 
       <input type="text" />
 
-      {/* <div>
+      <div>
         <label>Enabled:</label>
         <select
-          value={language}
-          onChange={(e) => {
-            setLanguage(e.target.value);
-            setLevel("");
-          }}
+        // value={collection}
+        // onChange={(e) => {
+        //   setLanguage(e.target.value);
+        //   setLevel("");
+        // }}
         >
           <option value="">Select</option>
           <option value="true">TRUE</option>
           <option value="false">FALSE</option>
         </select>
-      </div> */}
+      </div>
     </CreateLessonCollection>
   );
 };

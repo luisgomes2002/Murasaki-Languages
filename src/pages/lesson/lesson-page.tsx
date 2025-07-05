@@ -19,12 +19,14 @@ import {
 } from "./lesson-page-styled";
 import { PublishedLesson } from "../../util/interfaces";
 import { useParams } from "react-router-dom";
+import { getLessonCollectionsService } from "../../services/collections.service";
 
 const LessonsPage = () => {
   const { name } = useParams();
   const [published, setPublished] = useState<PublishedLesson[]>([]);
   const [selectedLevels, setSelectedLevels] = useState<string[]>([]);
   const [onlyFree, setOnlyFree] = useState<boolean>(false);
+  const [languageTitle, setLanguageTitle] = useState<string>("");
 
   const handleLevelChange = (level: string) => {
     setSelectedLevels((prevLevels) =>
@@ -36,6 +38,22 @@ const LessonsPage = () => {
 
   const handleFreeToggle = () => {
     setOnlyFree((prev) => !prev);
+  };
+
+  const getLessonCollections = async () => {
+    try {
+      const response = await getLessonCollectionsService();
+      const collections = response.data;
+
+      const match = collections.find(
+        (collection: { id: string }) => collection.id === name,
+      );
+
+      if (match) setLanguageTitle(match.languageName);
+      else setLanguageTitle("");
+    } catch (error: any) {
+      console.error(error);
+    }
   };
 
   useEffect(() => {
@@ -64,6 +82,7 @@ const LessonsPage = () => {
       } catch (error) {
         console.error(error);
       }
+      getLessonCollections();
     };
 
     fetchLessons();
@@ -118,12 +137,12 @@ const LessonsPage = () => {
 
         <Lessons>
           <Text>
-            <h1>Aprenda {name} com Facilidade</h1>
+            <h1>Aprenda {languageTitle} com Facilidade</h1>
             <p>
-              Nesta seção, você terá acesso a aulas de {name}, exercícios
-              interativos, flashcards do Anki para download e um relatório de
-              desempenho personalizado para acompanhar sua evolução nos estudos
-              de forma prática e eficiente.
+              Nesta seção, você terá acesso a aulas de {languageTitle},
+              exercícios interativos, flashcards do Anki para download e um
+              relatório de desempenho personalizado para acompanhar sua evolução
+              nos estudos de forma prática e eficiente.
             </p>
           </Text>
           <Card>

@@ -54,7 +54,7 @@ const Languages = () => {
               link={`/languages/${language.id}`}
               name={language.languageName}
               image={languageImages[index % languageImages.length]}
-              isActive={language.status}
+              isActive={!language.status} // trocar
             />
           ))}
         </LanguagesLessonCards>
