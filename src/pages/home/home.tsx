@@ -27,6 +27,28 @@ const Home = () => {
           </Link>
         </div>
       </div>
+      <div className="updates">
+        <h2>Próximas Atualizações</h2>
+        <h3>versão atual 0.1.0</h3>
+
+        <ul>
+          <li>
+            🎯 Atividades personalizadas de acordo com o conteúdo estudado -
+            versão 0.2.0
+          </li>
+          <li>
+            🧠 Decks do Anki específicos para cada atividade - versão 0.3.0
+          </li>
+          <li>
+            📊 Relatórios inteligentes com base no seu desempenho - versão 0.4.0
+          </li>
+          <li>
+            🌍 Comunidade ativa para tirar dúvidas e conhecer outros estudantes
+            versão - 1.0.0
+          </li>
+        </ul>
+      </div>
+
       <div className="cards">
         <Card
           title="IDIOMAS"

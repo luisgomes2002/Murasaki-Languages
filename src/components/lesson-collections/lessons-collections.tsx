@@ -7,7 +7,7 @@ const LessonCollections = () => {
 
       <input type="text" />
 
-      <div>
+      {/* <div>
         <label>Enabled:</label>
         <select
           value={language}
@@ -20,7 +20,7 @@ const LessonCollections = () => {
           <option value="true">TRUE</option>
           <option value="false">FALSE</option>
         </select>
-      </div>
+      </div> */}
     </CreateLessonCollection>
   );
 };
