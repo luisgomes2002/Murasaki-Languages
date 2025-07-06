@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import Footer from "../../components/footer/footer";
 import {
   Container,
@@ -22,7 +21,7 @@ const CheckEmail = () => {
             siga as instruções para continuar.
           </Paragraph>
           <StyledLink to="/sign-in" aria-label="Ir para a página de login">
-            Voltar para login
+            Login
           </StyledLink>
         </MessageBox>
       </Content>

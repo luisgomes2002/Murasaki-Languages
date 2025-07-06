@@ -34,8 +34,9 @@ const SignIn = () => {
   });
 
   const login = async (data: loginProps) => {
+    setLoading(true);
+
     try {
-      setLoading(true);
       const response = await signinService(data);
       Cookies.set("token", response.data.token, { expires: 5 });
       window.location.href = "/";
@@ -74,14 +75,18 @@ const SignIn = () => {
               register("password").onChange(e);
             }}
           />
+          <p>
+            Esqueceu a senha?{" "}
+            <Link to="/upadate-password-email">Recuperar</Link>
+          </p>
           <ErrorMessage>{errors.password?.message}</ErrorMessage>
           <ErrorMessage>{error}</ErrorMessage>
           <SubmitButton>
             {loading ? <i className="fa-solid fa-c fa-spin" /> : "Entrar"}
           </SubmitButton>
-          <SubmitButton>
+          {/* <SubmitButton>
             Entrar com <i className="fa-brands fa-google"></i>
-          </SubmitButton>
+          </SubmitButton> */}
           <div className="login">
             <p>
               Não tem uma contar? <Link to="/sign-up">Criar uma conta</Link>

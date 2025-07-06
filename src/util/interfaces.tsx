@@ -234,3 +234,8 @@ export interface LanguageCollectionsProps {
   languageName: string;
   status: boolean;
 }
+
+export interface UpdatePassword {
+  password: string;
+  email: string;
+}

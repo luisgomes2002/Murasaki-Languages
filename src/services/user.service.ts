@@ -3,6 +3,7 @@ import Cookies from "js-cookie";
 import {
   SignInProps,
   SignUpProps,
+  UpdatePassword,
   UpdateUserInterface,
 } from "../util/interfaces";
 
@@ -57,6 +58,38 @@ export const updatePasswordService = (id: string, password: string) => {
     {
       headers: {
         Authorization: `Bearer ${Cookies.get("token")}`,
+        "Content-Type": "application/json",
+      },
+    },
+  );
+
+  return response;
+};
+
+export const sendPasswordRequestService = (email: string) => {
+  const response = axios.post(
+    `${baseUrl}/user/request-password/`,
+    JSON.stringify(email),
+    {
+      headers: {
+        Authorization: `Bearer ${Cookies.get("token")}`,
+        "Content-Type": "application/json",
+      },
+    },
+  );
+
+  return response;
+};
+
+export const updatePasswordByRequestService = (
+  token: string,
+  data: UpdatePassword,
+) => {
+  const response = axios.put(
+    `${baseUrl}/user/update-password-by-request?token=${token}`,
+    data,
+    {
+      headers: {
         "Content-Type": "application/json",
       },
     },

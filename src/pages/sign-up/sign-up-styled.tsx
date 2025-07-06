@@ -66,12 +66,16 @@ export const SubmitButton = styled.button`
   border: none;
   background-color: #0a0520;
   color: white;
-  border-radius: 5px;
+  border-radius: 8px;
   padding: 10px;
   margin: 10px 0;
   cursor: pointer;
   font-weight: 400;
   font-size: 17px;
+
+  &:hover {
+    background-color: #100833;
+  }
 `;
 
 export const StyledLink = styled.a`
@@ -82,7 +86,7 @@ export const StyledLink = styled.a`
 export const Text = styled.p`
   font-weight: 300;
   font-size: 12px;
-  min-width: 400px;
+  min-width: 200px;
   padding: 0 0 10px 0;
 `;
 

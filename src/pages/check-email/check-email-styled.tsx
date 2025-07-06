@@ -18,10 +18,16 @@ export const Content = styled.main`
 export const MessageBox = styled.div`
   text-align: center;
   max-width: 400px;
+  display: flex;
+  flex-direction: column;
   padding: 2rem;
   border-radius: 12px;
   background-color: #f9f9f9;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+
+  a {
+    padding-top: 10px;
+  }
 `;
 
 export const Icon = styled.i`

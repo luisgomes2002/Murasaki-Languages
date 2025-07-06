@@ -4,7 +4,7 @@ import { FooterContainer, IconsDiv } from "./footer-styled";
 const Footer = () => {
   return (
     <FooterContainer>
-      <Link to="">Murasaki</Link>
+      <Link to="/">Murasaki</Link>
       <p>© 2025. Murasaki Languages ●</p>
 
       <IconsDiv>

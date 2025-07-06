@@ -11,6 +11,8 @@ import LessonBox from "./pages/lesson-box/lesson-box";
 import LessonsPage from "./pages/lesson/lesson-page";
 import LessonMenu from "./pages/lesson-menu/lesson-menu";
 import CheckEmail from "./pages/check-email/check-email";
+import PasswordSendEmail from "./pages/password-send-email/password-send-email";
+import UpdatePasswordByEmail from "./pages/update-password-by-email/update-password-by-email";
 
 const Router = createBrowserRouter([
   {
@@ -57,6 +59,8 @@ const Router = createBrowserRouter([
       },
       { path: "/lesson/update/:id", element: <LessonMenu /> },
       { path: "/email", element: <CheckEmail /> },
+      { path: "/upadate-password-email", element: <PasswordSendEmail /> },
+      { path: "/update-password", element: <UpdatePasswordByEmail /> },
     ],
   },
 ]);

@@ -74,6 +74,12 @@ export const MainButton = styled(Button)`
   }
 `;
 
+export const SecondaryButton = styled(Button)`
+  background-color: #0a0520;
+  padding: 8px;
+  border-radius: 10px;
+`;
+
 export const LessonButton = styled(Button)`
   background-color: #7a14be;
   padding: 3px 6px;
