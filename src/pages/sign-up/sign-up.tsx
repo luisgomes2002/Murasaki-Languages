@@ -38,7 +38,7 @@ const SignUp = () => {
     try {
       setLoading(true);
       await signupService(data);
-      window.location.href = "/sign-in";
+      window.location.href = "/email";
     } catch (error: any) {
       setMessage(error.response.data.Message);
       setError(error.response.data.Error);

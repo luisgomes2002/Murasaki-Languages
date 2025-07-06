@@ -35,6 +35,14 @@ export interface Conversation {
   thumbLink: string;
 }
 
+export interface UpdateUserInterface {
+  name: string;
+  gender: string;
+  birth: string;
+  username: string;
+  email: string;
+}
+
 export interface Explanation {
   id: string;
   phrase: string;

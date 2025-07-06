@@ -10,6 +10,7 @@ import Languages from "./pages/languages/languages";
 import LessonBox from "./pages/lesson-box/lesson-box";
 import LessonsPage from "./pages/lesson/lesson-page";
 import LessonMenu from "./pages/lesson-menu/lesson-menu";
+import CheckEmail from "./pages/check-email/check-email";
 
 const Router = createBrowserRouter([
   {
@@ -55,6 +56,7 @@ const Router = createBrowserRouter([
         element: <LessonBox />,
       },
       { path: "/lesson/update/:id", element: <LessonMenu /> },
+      { path: "/email", element: <CheckEmail /> },
     ],
   },
 ]);

@@ -31,7 +31,7 @@ export const StyledForm = styled.form`
 
 export const StyledSelect = styled.select`
   width: 100%;
-  height: 35px;
+  height: 40px;
   margin: 10px 0;
   padding: 10px;
   font-size: 15px;
@@ -82,7 +82,7 @@ export const StyledLink = styled.a`
 export const Text = styled.p`
   font-weight: 300;
   font-size: 12px;
-  width: 400px;
+  min-width: 400px;
   padding: 0 0 10px 0;
 `;
 

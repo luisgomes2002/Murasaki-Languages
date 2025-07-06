@@ -1,6 +1,10 @@
 import axios from "axios";
 import Cookies from "js-cookie";
-import { SignInProps, SignUpProps } from "../util/interfaces";
+import {
+  SignInProps,
+  SignUpProps,
+  UpdateUserInterface,
+} from "../util/interfaces";
 
 const baseUrl = "http://localhost:8080/api";
 
@@ -29,6 +33,34 @@ export const getUserByIdService = (id: string) => {
       Authorization: `Bearer ${Cookies.get("token")}`,
     },
   });
+
+  return response;
+};
+
+export const updateUserBaseInfoService = (
+  id: string,
+  user: UpdateUserInterface,
+) => {
+  const response = axios.put(`${baseUrl}/user/update/${id}`, user, {
+    headers: {
+      Authorization: `Bearer ${Cookies.get("token")}`,
+    },
+  });
+
+  return response;
+};
+
+export const updatePasswordService = (id: string, password: string) => {
+  const response = axios.put(
+    `${baseUrl}/user/update-password/${id}`,
+    JSON.stringify(password),
+    {
+      headers: {
+        Authorization: `Bearer ${Cookies.get("token")}`,
+        "Content-Type": "application/json",
+      },
+    },
+  );
 
   return response;
 };
