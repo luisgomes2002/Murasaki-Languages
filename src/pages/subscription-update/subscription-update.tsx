@@ -1,10 +1,10 @@
-import PurpleHeader from "../../components/purple-header/purple-header";
+import TransparentHeader from "../../components/transparent-header/transparent-header";
 import "./subscription-update.scss";
 
 const SubscriptionUpdate = () => {
   return (
     <div>
-      <PurpleHeader />
+      <TransparentHeader backgroundColor="#0a0520" />
 
       <h1>Update Plan</h1>
     </div>

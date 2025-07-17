@@ -1,6 +1,5 @@
 import { useContext, useEffect, useMemo, useState } from "react";
 import Footer from "../../components/footer/footer";
-import PurpleHeader from "../../components/purple-header/purple-header";
 import { getLessonByIdService } from "../../services/lessons.service";
 import { useParams } from "react-router-dom";
 import {
@@ -22,6 +21,7 @@ import LessonWorksheet from "../../components/lesson-worksheet/lesson-worksheet"
 import { formatDate } from "../../util/format-date";
 import { useNotification } from "../../components/notifications-box/useNotification";
 import { Notification } from "../../components/notifications-box/notifications-box";
+import TransparentHeader from "../../components/transparent-header/transparent-header";
 
 const LessonBox = () => {
   const { id } = useParams();
@@ -142,7 +142,7 @@ const LessonBox = () => {
 
   return (
     <>
-      <PurpleHeader />
+      <TransparentHeader backgroundColor="#0a0520" />
       <LessonBoxArea>
         <ImgVideoBox>
           <h3>{lesson?.name}</h3>

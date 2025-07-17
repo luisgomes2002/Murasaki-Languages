@@ -1,5 +1,4 @@
 import Footer from "../../components/footer/footer";
-import PurpleHeader from "../../components/purple-header/purple-header";
 import {
   LanguageDescription,
   LanguagesLessonCards,
@@ -14,6 +13,8 @@ import { useEffect, useState } from "react";
 import { LanguageCollectionsProps } from "../../util/interfaces";
 import { Notification } from "../../components/notifications-box/notifications-box";
 import { useNotification } from "../../components/notifications-box/useNotification";
+
+import TransparentHeader from "../../components/transparent-header/transparent-header";
 
 const Languages = () => {
   const [languages, setLanguages] = useState<LanguageCollectionsProps[]>([]);
@@ -37,7 +38,7 @@ const Languages = () => {
 
   return (
     <div>
-      <PurpleHeader />
+      <TransparentHeader backgroundColor="#0a0520" />
       <ShowLanguages>
         <h1>Qual lingua quer estudar</h1>
         <LanguageDescription>

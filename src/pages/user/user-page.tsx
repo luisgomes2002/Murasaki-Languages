@@ -1,6 +1,5 @@
 import { useContext, useState } from "react";
 import Footer from "../../components/footer/footer";
-import PurpleHeader from "../../components/purple-header/purple-header";
 import { UserContext } from "../../context/user-context";
 import { Link } from "react-router-dom";
 import UpdadeUserInfo from "../../components/update-user-info/update-user-info";
@@ -11,6 +10,8 @@ import {
   UserInfoArea,
   UserUpdateArea,
 } from "./user-page-styled";
+
+import TransparentHeader from "../../components/transparent-header/transparent-header";
 
 const UserPage = () => {
   const userContext = useContext(UserContext);
@@ -33,7 +34,7 @@ const UserPage = () => {
 
   return (
     <div>
-      <PurpleHeader />
+      <TransparentHeader backgroundColor="#0a0520" />
       <UserInfoArea>
         <h1>Bem vindo, {userContext?.user.name}</h1>
 

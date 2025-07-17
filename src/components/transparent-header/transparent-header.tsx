@@ -10,7 +10,11 @@ import {
 } from "./transparent-header-styled";
 import Cookies from "js-cookie";
 
-const TransparentHeader = () => {
+interface TransparentHeaderProps {
+  backgroundColor?: string;
+}
+
+const TransparentHeader = ({ backgroundColor }: TransparentHeaderProps) => {
   const userContext = useContext(UserContext);
   const navigate = useNavigate();
 
@@ -19,30 +23,33 @@ const TransparentHeader = () => {
     navigate("/sign-in");
   };
 
+  const isWhiteNav = backgroundColor?.toLowerCase() === "white";
+
   return (
-    <TransparenNav>
+    <TransparenNav backgroundColor={backgroundColor} isWhite={isWhiteNav}>
       <Link to="/">
         MURASAKI<span>BETA</span>
       </Link>
 
       <RightDiv>
-        <Section>
+        <Section isWhite={isWhiteNav}>
           <Link to="">Sobre</Link>
           <Link to="/languages">Aulas</Link>
           <Link to="/subscription">Planos</Link>
-          {/* <Link to="">Comunidade</Link> */}
         </Section>
 
         {userContext?.user?.name ? (
           <>
-            <HeaderButtonTransparent to="/user-page">
+            <HeaderButtonTransparent to="/user-page" isWhite={isWhiteNav}>
               {userContext.user.name}
             </HeaderButtonTransparent>
 
-            <LogoutButton onClick={logout}>Sair</LogoutButton>
+            <LogoutButton onClick={logout} isWhite={isWhiteNav}>
+              Sair
+            </LogoutButton>
           </>
         ) : (
-          <HeaderButtonTransparent to="/sign-in">
+          <HeaderButtonTransparent to="/sign-in" isWhite={isWhiteNav}>
             Entrar
           </HeaderButtonTransparent>
         )}

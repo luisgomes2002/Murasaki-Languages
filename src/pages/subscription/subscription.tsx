@@ -1,11 +1,11 @@
 import { useContext, useEffect, useState } from "react";
 import SubscriptionCard from "../../components/subscription-card/subscription-card";
-import WhiteHeader from "../../components/white-header/white-header";
 import { getAllPlansService } from "../../services/plans.service";
 import "./subscription.scss";
 import Footer from "../../components/footer/footer";
 import { UserContext } from "../../context/user-context";
 import { Plan } from "../../util/interfaces";
+import TransparentHeader from "../../components/transparent-header/transparent-header";
 
 const Subscription = () => {
   const userContext = useContext(UserContext);
@@ -26,7 +26,7 @@ const Subscription = () => {
 
   return (
     <>
-      <WhiteHeader />
+      <TransparentHeader backgroundColor="white" />
       <div className="sub">
         <h1>Escolha o plano ideal para você</h1>
         <div className="beta-warning">
