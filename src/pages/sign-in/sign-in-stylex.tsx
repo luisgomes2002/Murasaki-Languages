@@ -16,4 +16,8 @@ export const BoxSignIn = styled.div`
   flex-direction: row;
   width: 100%;
   height: 100vh;
+
+  a {
+    color: #431185;
+  }
 `;

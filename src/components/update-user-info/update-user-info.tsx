@@ -18,7 +18,6 @@ import { useNotification } from "../notifications-box/useNotification";
 import { Notification } from "../notifications-box/notifications-box";
 
 const UpdateUserInfo = () => {
-  const [error, setError] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
   const userContext = useContext(UserContext);
   const { message, type, showNotification, hideNotification } =
@@ -36,6 +35,8 @@ const UpdateUserInfo = () => {
   const userInformations = async (id: string) => {
     try {
       const response = await getUserByIdService(id);
+      console.log(response);
+
       const userData = response.data;
 
       reset({
@@ -46,13 +47,12 @@ const UpdateUserInfo = () => {
         gender: userData.gender,
       });
     } catch (err) {
-      setError("Erro ao buscar dados do usuário");
+      showNotification("Erro ao buscar dados do usuário", "error");
     }
   };
 
   const updateUserBaseInfo = async (data: any) => {
     setLoading(true);
-    setError("");
 
     try {
       const userId = userContext?.user?.userId;

@@ -22,8 +22,6 @@ export const MessageBox = styled.div`
   flex-direction: column;
   padding: 2rem;
   border-radius: 12px;
-  background-color: #f9f9f9;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 
   a {
     padding-top: 10px;

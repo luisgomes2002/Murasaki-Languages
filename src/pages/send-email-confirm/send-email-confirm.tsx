@@ -1,6 +1,7 @@
 import { useState } from "react";
-import Footer from "../../components/footer/footer";
-import { sendPasswordRequestService } from "../../services/user.service";
+import { sendConfirmEmailService } from "../../services/user.service";
+import { useNotification } from "../../components/notifications-box/useNotification";
+import { Notification } from "../../components/notifications-box/notifications-box";
 import {
   Container,
   Content,
@@ -9,25 +10,24 @@ import {
   Paragraph,
 } from "../check-email/check-email-styled";
 import { StyledInput } from "../sign-up/sign-up-styled";
-import { useNotification } from "../../components/notifications-box/useNotification";
-import { Notification } from "../../components/notifications-box/notifications-box";
 import { SecondaryButton } from "../../components/create-lessons/create-lessons-styled";
 import { Link } from "react-router-dom";
+import Footer from "../../components/footer/footer";
 
-const PasswordSendEmail = () => {
+const SendEmailConfirm = () => {
+  const [loading, setLoading] = useState<boolean>(false);
   const [email, setEmail] = useState<string>("");
   const { message, type, showNotification, hideNotification } =
     useNotification();
-  const [loading, setLoading] = useState<boolean>(false);
 
-  const handleSubmit = async () => {
+  const sendConfirmEmailFunction = async () => {
     setLoading(true);
 
     try {
-      await sendPasswordRequestService(email);
-      showNotification("Email enviado com sucesso", "success");
-    } catch (error) {
-      showNotification("Erro ao enviar e-mail de recuperação.", "error");
+      await sendConfirmEmailService(email);
+      showNotification("Email enviado", "success");
+    } catch (error: any) {
+      showNotification(error.response?.data?.Message, "error");
     } finally {
       setLoading(false);
     }
@@ -38,7 +38,7 @@ const PasswordSendEmail = () => {
       <Content>
         <MessageBox>
           <Icon className="fa-solid fa-envelope" aria-hidden="true" />
-          <Paragraph>Digite o e-mail para a recuperção da senha.</Paragraph>
+          <Paragraph>Digite o e-mail para liberar o acesso a conta.</Paragraph>
           <StyledInput
             type="email"
             placeholder="Email"
@@ -47,7 +47,7 @@ const PasswordSendEmail = () => {
           />
           <SecondaryButton
             type="button"
-            onClick={handleSubmit}
+            onClick={sendConfirmEmailFunction}
             disabled={loading}
           >
             {loading ? <i className="fa-solid fa-c fa-spin" /> : "Enviar"}
@@ -68,4 +68,4 @@ const PasswordSendEmail = () => {
   );
 };
 
-export default PasswordSendEmail;
+export default SendEmailConfirm;

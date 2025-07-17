@@ -22,9 +22,9 @@ const TransparentHeader = () => {
       <RightDiv>
         <Section>
           <Link to="">Sobre</Link>
-          <Link to="">Aulas</Link>
+          <Link to="/languages">Aulas</Link>
           <Link to="/subscription">Planos</Link>
-          <Link to="">Comunidade</Link>
+          {/* <Link to="">Comunidade</Link> */}
         </Section>
 
         {userContext?.user?.name ? (

@@ -46,6 +46,7 @@ const SignIn = () => {
       setLoading(false);
     }
   };
+
   return (
     <FormContainer>
       <BoxSignIn>
@@ -75,12 +76,18 @@ const SignIn = () => {
               register("password").onChange(e);
             }}
           />
+          <ErrorMessage>{errors.password?.message}</ErrorMessage>
           <p>
             Esqueceu a senha?{" "}
             <Link to="/upadate-password-email">Recuperar</Link>
           </p>
-          <ErrorMessage>{errors.password?.message}</ErrorMessage>
-          <ErrorMessage>{error}</ErrorMessage>
+          {error && (
+            <ErrorMessage>
+              {error}{" "}
+              <Link to="/send-email-confirm"> Reenviar confirmação</Link>
+            </ErrorMessage>
+          )}
+
           <SubmitButton>
             {loading ? <i className="fa-solid fa-c fa-spin" /> : "Entrar"}
           </SubmitButton>

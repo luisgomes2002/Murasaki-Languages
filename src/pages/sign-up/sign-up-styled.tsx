@@ -94,7 +94,7 @@ export const ErrorMessage = styled.span`
   padding-bottom: 5px;
   color: red;
   font-size: 14px;
-  padding-left: 5px;
+  /* padding-left: 5px; */
 `;
 
 export const LoginText = styled.p`

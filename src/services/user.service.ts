@@ -34,6 +34,7 @@ export const getUserByIdService = (id: string) => {
       Authorization: `Bearer ${Cookies.get("token")}`,
     },
   });
+  console.log(response);
 
   return response;
 };
@@ -95,5 +96,18 @@ export const updatePasswordByRequestService = (
     },
   );
 
+  return response;
+};
+
+export const sendConfirmEmailService = (email: string) => {
+  const response = axios.post(
+    `${baseUrl}/user/send-confirm-email`,
+    JSON.stringify(email),
+    {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    },
+  );
   return response;
 };

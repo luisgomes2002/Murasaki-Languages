@@ -13,6 +13,8 @@ import LessonMenu from "./pages/lesson-menu/lesson-menu";
 import CheckEmail from "./pages/check-email/check-email";
 import PasswordSendEmail from "./pages/password-send-email/password-send-email";
 import UpdatePasswordByEmail from "./pages/update-password-by-email/update-password-by-email";
+import ConfirmEmail from "./pages/confirmed-email/confirmed-email";
+import SendEmailConfirm from "./pages/send-email-confirm/send-email-confirm";
 
 const Router = createBrowserRouter([
   {
@@ -61,6 +63,8 @@ const Router = createBrowserRouter([
       { path: "/email", element: <CheckEmail /> },
       { path: "/upadate-password-email", element: <PasswordSendEmail /> },
       { path: "/update-password", element: <UpdatePasswordByEmail /> },
+      { path: "/confirm", element: <ConfirmEmail /> },
+      { path: "/send-email-confirm", element: <SendEmailConfirm /> },
     ],
   },
 ]);

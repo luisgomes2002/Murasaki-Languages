@@ -61,7 +61,7 @@ const Home = () => {
         />
         <Card title="AULAS" link="/" image={lesson} active={false} />
         <Card title="PARCEIROS" link="/" image={partners} active={false} />
-        <Card title="DESEMPENHO" link="/" image={performance} active={true} />
+        <Card title="DESEMPENHO" link="/" image={performance} active={false} />
         <Card title="COMUNIDADE" link="/" image={community} active={false} />
       </div>
 

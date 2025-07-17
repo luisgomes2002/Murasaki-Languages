@@ -13,7 +13,6 @@ import {
   Container,
   Content,
   MessageBox,
-  StyledLink,
 } from "../check-email/check-email-styled";
 import Footer from "../../components/footer/footer";
 import { useNotification } from "../../components/notifications-box/useNotification";
@@ -75,7 +74,7 @@ const UpdatePasswordByEmail = () => {
             <StyledInput
               {...register("email")}
               type="email"
-              placeholder="email"
+              placeholder="Email"
             />
             <StyledInput
               {...register("password")}
