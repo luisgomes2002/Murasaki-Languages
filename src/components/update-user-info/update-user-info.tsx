@@ -35,7 +35,6 @@ const UpdateUserInfo = () => {
   const userInformations = async (id: string) => {
     try {
       const response = await getUserByIdService(id);
-      console.log(response);
 
       const userData = response.data;
 

@@ -25,27 +25,34 @@ const UserProvider = ({ children }: UserProviderProps) => {
   const [user, setUser] = useState<User>({});
 
   useEffect(() => {
-    const token = Cookies.get("token");
+    const checkToken = () => {
+      const token = Cookies.get("token");
 
-    if (token) {
-      try {
-        const decoded = jwtDecode<User & { exp: number }>(token);
-        const currentTime = Date.now() / 1000;
+      if (token) {
+        try {
+          const decoded = jwtDecode<User & { exp: number }>(token);
+          const currentTime = Date.now() / 1000;
 
-        if (decoded.exp < currentTime) {
+          if (decoded.exp < currentTime) {
+            Cookies.remove("token");
+            setUser({});
+          } else {
+            setUser(decoded);
+          }
+        } catch (err) {
+          console.error("Erro ao decodificar token:", err);
           Cookies.remove("token");
           setUser({});
-        } else {
-          setUser(decoded);
         }
-      } catch (err) {
-        console.error("Erro ao decodificar token:", err);
-        Cookies.remove("token");
+      } else {
         setUser({});
       }
-    } else {
-      setUser({});
-    }
+    };
+
+    checkToken();
+    const interval = setInterval(checkToken, 5000);
+
+    return () => clearInterval(interval);
   }, []);
 
   return (

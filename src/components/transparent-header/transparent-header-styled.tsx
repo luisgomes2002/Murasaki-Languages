@@ -75,7 +75,7 @@ export const Button = styled.button`
 export const HeaderButtonTransparent = styled(Link)`
   background-color: transparent;
   color: white;
-  border: 2px solid white;
+  border: 1px solid white;
   border-radius: 5px;
   padding: 5px 15px;
   margin: 10px;
@@ -83,10 +83,24 @@ export const HeaderButtonTransparent = styled(Link)`
   transition: all 0.2s ease-in;
   text-decoration: none;
   font-size: 22px;
-  font-weight: 300;
+  font-weight: 200;
 
-  &:hover {
+  /* &:hover {
     background-color: white;
     color: #6f00ff;
-  }
+  } */
+`;
+
+export const LogoutButton = styled(Button)`
+  background-color: transparent;
+  color: white;
+  border: 1px solid white;
+  border-radius: 5px;
+  padding: 5px 15px;
+  margin: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease-in;
+  text-decoration: none;
+  font-size: 22px;
+  font-weight: 200;
 `;

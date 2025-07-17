@@ -34,7 +34,6 @@ export const getUserByIdService = (id: string) => {
       Authorization: `Bearer ${Cookies.get("token")}`,
     },
   });
-  console.log(response);
 
   return response;
 };

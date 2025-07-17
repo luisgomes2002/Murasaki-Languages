@@ -1,17 +1,23 @@
 import { useContext } from "react";
 import { UserContext } from "../../context/user-context";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   TransparenNav,
   RightDiv,
   Section,
-  StyledLink,
-  Button,
   HeaderButtonTransparent,
+  LogoutButton,
 } from "./transparent-header-styled";
+import Cookies from "js-cookie";
 
 const TransparentHeader = () => {
   const userContext = useContext(UserContext);
+  const navigate = useNavigate();
+
+  const logout = () => {
+    Cookies.remove("token");
+    navigate("/sign-in");
+  };
 
   return (
     <TransparenNav>
@@ -29,11 +35,11 @@ const TransparentHeader = () => {
 
         {userContext?.user?.name ? (
           <>
-            <StyledLink to="/user-page">{userContext.user.name}</StyledLink>
-            <Button>
-              <i className="fa-solid fa-caret-down"></i>
-            </Button>
-            {/* <Link to="/sign-in">Sair</Link> */}
+            <HeaderButtonTransparent to="/user-page">
+              {userContext.user.name}
+            </HeaderButtonTransparent>
+
+            <LogoutButton onClick={logout}>Sair</LogoutButton>
           </>
         ) : (
           <HeaderButtonTransparent to="/sign-in">
