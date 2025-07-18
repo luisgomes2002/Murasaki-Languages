@@ -10,6 +10,11 @@ const ProtectedRoute = ({ redirectPath = "/sign-in" }: ProtectedRouteProps) => {
   const userContext = useContext(UserContext);
 
   const isAuthenticated = !!userContext?.user?.userId;
+  const isLoading = userContext?.isLoading;
+
+  if (isLoading) {
+    return <i className="fa-solid fa-c fa-spin" />;
+  }
 
   if (!isAuthenticated) {
     return <Navigate to={redirectPath} replace />;

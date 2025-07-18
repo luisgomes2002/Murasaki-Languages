@@ -51,7 +51,7 @@ const UserPage = () => {
               Atualizar assinatura
             </button>
           </div>
-          {["ADMIN", "MOD"].includes(userContext?.user.sub ?? "") && (
+          {["ADMIN", "MOD"].includes(userContext?.user.userType ?? "") && (
             <Link to="/dashboard">Dashboard</Link>
           )}
         </SubscriptionUpdate>

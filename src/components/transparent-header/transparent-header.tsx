@@ -33,7 +33,7 @@ const TransparentHeader = ({ backgroundColor }: TransparentHeaderProps) => {
 
       <RightDiv>
         <Section isWhite={isWhiteNav}>
-          <Link to="">Sobre</Link>
+          <Link to="/">Início</Link>
           <Link to="/languages">Aulas</Link>
           <Link to="/subscription">Planos</Link>
         </Section>

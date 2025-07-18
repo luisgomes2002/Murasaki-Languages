@@ -37,6 +37,7 @@ export const CreateLesson = styled.button`
   border: none;
   border-radius: 10px;
   font-weight: 600;
+  margin-left: 10px;
   cursor: pointer;
 `;
 

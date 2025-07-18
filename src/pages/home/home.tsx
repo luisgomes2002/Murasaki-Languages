@@ -22,7 +22,7 @@ const Home = () => {
             estudo!
           </p>
 
-          <Link to="/" className="button-home">
+          <Link to="/languages" className="button-home">
             Começe sua jornada <i className="fa-solid fa-chevron-right"></i>
           </Link>
         </div>

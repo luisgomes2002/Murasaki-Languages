@@ -239,3 +239,12 @@ export interface UpdatePassword {
   password: string;
   email: string;
 }
+
+export interface PlansProps {
+  id: string;
+  title: string;
+  description: string;
+  value: number;
+  advantages: string[];
+  link: string;
+}

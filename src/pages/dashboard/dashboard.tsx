@@ -66,12 +66,12 @@ const Dashboard = () => {
           >
             <i className="fa-solid fa-dollar-sign"></i> Plans
           </button>
-          <button
+          {/* <button
             onClick={() => setActiveSection("Reports")}
             className={activeSection === "Reports" ? "active" : ""}
           >
             <i className="fa-solid fa-file"></i> Reports
-          </button>
+          </button> */}
           <button
             onClick={() => setActiveSection("Collection")}
             className={activeSection === "Collection" ? "active" : ""}

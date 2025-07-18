@@ -40,7 +40,7 @@ const Subscription = () => {
           </p>
           <p>
             Estamos trabalhando em
-            <strong>novos recursos, conteúdos e melhorias</strong>, que serão
+            <strong> novos recursos, conteúdos e melhorias</strong>, que serão
             lançados periodicamente — tudo isso com base no feedback da nossa
             comunidade.
           </p>

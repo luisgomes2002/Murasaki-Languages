@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const UserInfoArea = styled.div`
-  margin: 5% 7%;
+  margin: 6% 7%;
 `;
 
 export const UserUpdateArea = styled.div`

@@ -11,6 +11,7 @@ export interface User {
 
 interface UserContextType {
   user: User;
+  isLoading: boolean;
 }
 
 export const UserContext = createContext<UserContextType | undefined>(
@@ -23,6 +24,7 @@ interface UserProviderProps {
 
 const UserProvider = ({ children }: UserProviderProps) => {
   const [user, setUser] = useState<User>({});
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const checkToken = () => {
@@ -47,6 +49,8 @@ const UserProvider = ({ children }: UserProviderProps) => {
       } else {
         setUser({});
       }
+
+      setIsLoading(false);
     };
 
     checkToken();
@@ -56,7 +60,9 @@ const UserProvider = ({ children }: UserProviderProps) => {
   }, []);
 
   return (
-    <UserContext.Provider value={{ user }}>{children}</UserContext.Provider>
+    <UserContext.Provider value={{ user, isLoading }}>
+      {children}
+    </UserContext.Provider>
   );
 };
 

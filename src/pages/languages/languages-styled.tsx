@@ -5,7 +5,7 @@ export const ShowLanguages = styled.div`
   background-color: white;
 
   h1 {
-    padding: 2% 0 0 0;
+    padding: 6% 0 0 0;
     font-weight: 400;
     font-size: 40px;
   }
