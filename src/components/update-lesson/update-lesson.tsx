@@ -11,7 +11,6 @@ import {
   getLessonByIdService,
   updateLessonService,
 } from "../../services/lessons.service";
-import { Conversation } from "../../util/interfaces";
 import { useContext, useEffect, useState } from "react";
 import { EditorContent, useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
@@ -20,6 +19,7 @@ import MenuBar from "../text-bar/meu-bar";
 import { UserContext } from "../../context/user-context";
 import { useNotification } from "../notifications-box/useNotification";
 import { Notification } from "../notifications-box/notifications-box";
+import { Conversation } from "../../util/lesson-interface";
 
 const UpdateLesson = () => {
   const { id } = useParams();

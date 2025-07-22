@@ -1,6 +1,6 @@
 import axios from "axios";
 import Cookies from "js-cookie";
-import { CreateLessonCollection } from "../util/interfaces";
+import { CreateLessonCollection } from "../util/collection-interface";
 
 const baseUrl = "http://localhost:8080/api";
 

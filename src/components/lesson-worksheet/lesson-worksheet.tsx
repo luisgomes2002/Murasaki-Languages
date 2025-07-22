@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { LessonWorksheetProps, Worksheets } from "../../util/interfaces";
 import { InfoBox } from "../lesson-text/lesson-text-styled";
 import {
   AnkiBox,
@@ -7,6 +6,8 @@ import {
   WorksheetBox,
 } from "./lesson-worksheet-styled";
 import { getWorksheetIdService } from "../../services/worksheet.service";
+import { LessonWorksheetProps } from "../../util/lesson-interface";
+import { Worksheets } from "../../util/worksheet-interface";
 
 const LessonWorksheet = ({ worksheets, anki }: LessonWorksheetProps) => {
   const [detailedWorksheets, setDetailedWorksheets] = useState<Worksheets[]>(

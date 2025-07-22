@@ -9,13 +9,14 @@ import {
   LessonsCreateAndUpdateArea,
 } from "../explanation/explanation-styled";
 import UpdateExplanationModal from "../update-explanation-modal/update-explanation-modal";
-import { Conversation, Explanation } from "../../util/interfaces";
 import { useParams } from "react-router-dom";
 import { getLessonByIdService } from "../../services/lessons.service";
 import { UserContext } from "../../context/user-context";
 import { Notification } from "../notifications-box/notifications-box";
 import { useNotification } from "../notifications-box/useNotification";
 import DeletePopup from "../delete-popup/delete-popup";
+import { Explanation } from "../../util/explanation-interface";
+import { Conversation } from "../../util/lesson-interface";
 
 const UpdateExplanationSection = () => {
   const [showModal, setShowModal] = useState(false);

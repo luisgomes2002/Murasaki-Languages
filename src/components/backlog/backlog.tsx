@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import "./backlog.scss";
 import { getAllBacklogService } from "../../services/backlog.service";
 import { Link } from "react-router-dom";
-import { BacklogProps } from "../../util/interfaces";
 import Dashboardtitle from "../dashboard-title/dashboard-title";
+import { BacklogProps } from "../../util/backlog-interface";
 
 const Backlog = () => {
   const [data, setData] = useState<BacklogProps[]>([]);

@@ -4,7 +4,6 @@ import {
   ExplanationIndex,
   LessonsCreateAndUpdateArea,
 } from "../explanation/explanation-styled";
-import { Conversation, Worksheets } from "../../util/interfaces";
 import { useNotification } from "../notifications-box/useNotification";
 import { useParams } from "react-router-dom";
 import { getLessonByIdService } from "../../services/lessons.service";
@@ -16,6 +15,8 @@ import { Notification } from "../notifications-box/notifications-box";
 import { UserContext } from "../../context/user-context";
 import UpdateWorksheetsModal from "../update-worksheets-modal/update-worksheets-modal";
 import DeletePopup from "../delete-popup/delete-popup";
+import { Conversation } from "../../util/lesson-interface";
+import { Worksheets } from "../../util/worksheet-interface";
 
 const UpdateWorksheetsSection = () => {
   const [showModal, setShowModal] = useState(false);

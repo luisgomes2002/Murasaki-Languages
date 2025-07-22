@@ -10,11 +10,11 @@ import coreaiaCard from "../../assets/images/cards/coreaia-card.jpg";
 import euaCard from "../../assets/images/cards/eua-card.jpg";
 import { getLessonCollectionsService } from "../../services/collections.service";
 import { useEffect, useState } from "react";
-import { LanguageCollectionsProps } from "../../util/interfaces";
 import { Notification } from "../../components/notifications-box/notifications-box";
 import { useNotification } from "../../components/notifications-box/useNotification";
 
 import TransparentHeader from "../../components/transparent-header/transparent-header";
+import { LanguageCollectionsProps } from "../../util/collection-interface";
 
 const Languages = () => {
   const [languages, setLanguages] = useState<LanguageCollectionsProps[]>([]);

@@ -12,10 +12,10 @@ import {
   LinksList,
   MainButton,
 } from "../create-lessons/create-lessons-styled";
-import { WorksheetsProps } from "../../util/interfaces";
 import { EditorContent, useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import MenuBar from "../text-bar/meu-bar";
+import { WorksheetsProps } from "../../util/worksheet-interface";
 
 const CreateWorksheets = () => {
   const { id } = useParams();

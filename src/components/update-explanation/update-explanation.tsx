@@ -7,7 +7,6 @@ import {
 import StarterKit from "@tiptap/starter-kit";
 import MenuBar from "../text-bar/meu-bar";
 import { useContext, useEffect, useState } from "react";
-import { ExplanationProps } from "../../util/interfaces";
 import {
   getExplanationIdService,
   updateExplanationService,
@@ -15,6 +14,7 @@ import {
 import { UserContext } from "../../context/user-context";
 import { Notification } from "../notifications-box/notifications-box";
 import { useNotification } from "../notifications-box/useNotification";
+import { ExplanationProps } from "../../util/explanation-interface";
 
 interface Props {
   explanationIdByModal: string;

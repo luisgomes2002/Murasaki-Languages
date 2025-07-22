@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import { getExplanationIdService } from "../../services/explanation.service";
-import { Explanation, LessonTextProps } from "../../util/interfaces";
 import {
   ExplanationsBox,
   InfoBox,
   LessonTextDecoration,
 } from "./lesson-text-styled";
+import { LessonTextProps } from "../../util/lesson-interface";
+import { Explanation } from "../../util/explanation-interface";
 
 const LessonText = ({ text, explanation }: LessonTextProps) => {
   const [detailedExplanations, setDetailedExplanations] = useState<

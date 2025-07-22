@@ -9,13 +9,13 @@ import {
   EditorContainer,
 } from "./create-lessons-styled";
 import { createLessonService } from "../../services/lessons.service";
-import { CreateLesson } from "../../util/interfaces";
 import { UserContext } from "../../context/user-context";
 import { EditorContent, useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import MenuBar from "../../components/text-bar/meu-bar";
 import { useNotification } from "../notifications-box/useNotification";
 import { Notification } from "../notifications-box/notifications-box";
+import { CreateLesson } from "../../util/lesson-interface";
 
 const CreateLessons = () => {
   const [linkInput, setLinkInput] = useState("");

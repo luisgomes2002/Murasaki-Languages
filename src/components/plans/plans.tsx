@@ -9,7 +9,9 @@ import {
 } from "../users/users-styled";
 import "./plans.scss";
 import { CreateLesson, SelectAndCreateLesson } from "../lessons/lessons-styled";
-import { PlansProps } from "../../util/interfaces";
+import { useNotification } from "../notifications-box/useNotification";
+import { Notification } from "../notifications-box/notifications-box";
+import { PlansProps } from "../../util/plans-interface";
 
 const Plans = () => {
   const [plans, setPlans] = useState<PlansProps[]>([]);
@@ -23,6 +25,8 @@ const Plans = () => {
   });
   const [editMode, setEditMode] = useState(false);
   const [editingId, setEditingId] = useState<string | null>(null);
+  const { message, type, showNotification, hideNotification } =
+    useNotification();
 
   const allPlans = async () => {
     const response = await getAllPlansService();
@@ -61,7 +65,8 @@ const Plans = () => {
       // await updatePlanService(editingId, newPlan);
     } else {
       // criar novo plano (adicionar createPlanService aqui, se quiser)
-      console.log("Criando plano:", newPlan);
+      console.log("Criando plano: ", newPlan);
+      showNotification("Criando plano: ", "success");
     }
 
     setShowModal(false);
@@ -185,6 +190,13 @@ const Plans = () => {
               </button>
             </div>
           </div>
+          {message && (
+            <Notification
+              message={message}
+              type={type}
+              onClose={hideNotification}
+            />
+          )}
         </div>
       )}
     </>

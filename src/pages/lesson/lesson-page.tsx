@@ -17,9 +17,9 @@ import {
   Text,
   Card,
 } from "./lesson-page-styled";
-import { PublishedLesson } from "../../util/interfaces";
 import { useParams } from "react-router-dom";
 import { getLessonCollectionsService } from "../../services/collections.service";
+import { PublishedLesson } from "../../util/lesson-interface";
 
 const LessonsPage = () => {
   const { name } = useParams();

@@ -1,6 +1,9 @@
 import axios from "axios";
 import Cookies from "js-cookie";
-import { DeleteExplanationProps, ExplanationProps } from "../util/interfaces";
+import {
+  DeleteExplanationProps,
+  ExplanationProps,
+} from "../util/explanation-interface";
 
 const baseUrl = "http://localhost:8080/api";
 

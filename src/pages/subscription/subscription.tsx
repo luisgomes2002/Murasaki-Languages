@@ -4,8 +4,8 @@ import { getAllPlansService } from "../../services/plans.service";
 import "./subscription.scss";
 import Footer from "../../components/footer/footer";
 import { UserContext } from "../../context/user-context";
-import { Plan } from "../../util/interfaces";
 import TransparentHeader from "../../components/transparent-header/transparent-header";
+import { Plan } from "../../util/plans-interface";
 
 const Subscription = () => {
   const userContext = useContext(UserContext);

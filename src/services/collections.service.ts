@@ -1,6 +1,6 @@
 import axios from "axios";
 import Cookies from "js-cookie";
-import { LanguageCollectionsProps } from "../util/interfaces";
+import { LanguageCollectionsProps } from "../util/collection-interface";
 
 const baseUrl = "http://localhost:8080/api";
 

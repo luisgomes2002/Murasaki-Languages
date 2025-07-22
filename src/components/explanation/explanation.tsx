@@ -2,7 +2,6 @@ import { useContext, useState } from "react";
 import { createExplanationService } from "../../services/explanation.service";
 import { LessonsCreateAndUpdateArea } from "./explanation-styled";
 import { useParams } from "react-router-dom";
-import { ExplanationProps } from "../../util/interfaces";
 import {
   EditorContainer,
   MainButton,
@@ -13,6 +12,7 @@ import StarterKit from "@tiptap/starter-kit";
 import { UserContext } from "../../context/user-context";
 import { useNotification } from "../notifications-box/useNotification";
 import { Notification } from "../notifications-box/notifications-box";
+import { ExplanationProps } from "../../util/explanation-interface";
 
 const CreateExplanation = () => {
   const userContext = useContext(UserContext);
