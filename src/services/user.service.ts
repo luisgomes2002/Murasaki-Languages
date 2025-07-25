@@ -1,7 +1,10 @@
 import axios from "axios";
 import Cookies from "js-cookie";
-import { SignInProps, SignUpProps } from "../util/auth-interface";
-import { UpdatePassword, UpdateUserInterface } from "../util/user-interface";
+import { SignInProps, SignUpProps } from "../util/interfaces/auth-interface";
+import {
+  UpdatePassword,
+  UpdateUserInterface,
+} from "../util/interfaces/user-interface";
 
 const baseUrl = "http://localhost:8080/api";
 

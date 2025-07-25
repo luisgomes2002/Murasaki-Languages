@@ -15,8 +15,8 @@ import { UserContext } from "../../context/user-context";
 import { Notification } from "../notifications-box/notifications-box";
 import { useNotification } from "../notifications-box/useNotification";
 import DeletePopup from "../delete-popup/delete-popup";
-import { Explanation } from "../../util/explanation-interface";
-import { Conversation } from "../../util/lesson-interface";
+import { Explanation } from "../../util/interfaces/explanation-interface";
+import { Conversation } from "../../util/interfaces/lesson-interface";
 
 const UpdateExplanationSection = () => {
   const [showModal, setShowModal] = useState(false);

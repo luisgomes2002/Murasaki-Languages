@@ -22,7 +22,10 @@ import DeletePopup from "../delete-popup/delete-popup";
 import { UserContext } from "../../context/user-context";
 import { useNotification } from "../notifications-box/useNotification";
 import { Notification } from "../notifications-box/notifications-box";
-import { Conversation, DeleteLessonProps } from "../../util/lesson-interface";
+import {
+  Conversation,
+  DeleteLessonProps,
+} from "../../util/interfaces/lesson-interface";
 
 const LessonsList = () => {
   const [lessons, setLessons] = useState<Conversation[]>([]);

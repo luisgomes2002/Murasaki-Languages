@@ -19,7 +19,7 @@ import {
   Text,
   Title,
 } from "./sign-up-styled";
-import { SignUpProps } from "../../util/auth-interface";
+import { SignUpProps } from "../../util/interfaces/auth-interface";
 
 const SignUp = () => {
   const [error, setError] = useState<string>("");

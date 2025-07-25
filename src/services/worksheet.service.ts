@@ -4,7 +4,7 @@ import {
   DeleteWorksheetPros,
   WorksheetsProps,
   WorksheetsUpdateProps,
-} from "../util/worksheet-interface";
+} from "../util/interfaces/worksheet-interface";
 
 const baseUrl = "http://localhost:8080/api";
 

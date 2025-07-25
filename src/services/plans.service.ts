@@ -1,6 +1,6 @@
 import axios from "axios";
 import Cookies from "js-cookie";
-import { PlansProps } from "../util/plans-interface";
+import { PlansProps } from "../util/interfaces/plans-interface";
 
 const baseUrl = "http://localhost:8080/api";
 

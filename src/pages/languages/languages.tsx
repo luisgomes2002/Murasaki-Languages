@@ -14,14 +14,14 @@ import { Notification } from "../../components/notifications-box/notifications-b
 import { useNotification } from "../../components/notifications-box/useNotification";
 
 import TransparentHeader from "../../components/transparent-header/transparent-header";
-import { LanguageCollectionsProps } from "../../util/collection-interface";
+import { LanguageCollectionsProps } from "../../util/interfaces/collection-interface";
 
 const Languages = () => {
   const [languages, setLanguages] = useState<LanguageCollectionsProps[]>([]);
   const { message, type, showNotification, hideNotification } =
     useNotification();
 
-  const languageImages = [euaCard, card5, coreaiaCard];
+  const languageImages = [card5, euaCard, coreaiaCard];
 
   const getLessonCollections = async () => {
     try {
@@ -55,7 +55,7 @@ const Languages = () => {
               link={`/languages/${language.id}`}
               name={language.languageName}
               image={languageImages[index % languageImages.length]}
-              isActive={!language.status} // trocar
+              isActive={language.status}
             />
           ))}
         </LanguagesLessonCards>

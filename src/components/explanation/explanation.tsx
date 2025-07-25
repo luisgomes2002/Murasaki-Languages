@@ -12,7 +12,7 @@ import StarterKit from "@tiptap/starter-kit";
 import { UserContext } from "../../context/user-context";
 import { useNotification } from "../notifications-box/useNotification";
 import { Notification } from "../notifications-box/notifications-box";
-import { ExplanationProps } from "../../util/explanation-interface";
+import { ExplanationProps } from "../../util/interfaces/explanation-interface";
 
 const CreateExplanation = () => {
   const userContext = useContext(UserContext);

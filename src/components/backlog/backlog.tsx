@@ -3,7 +3,7 @@ import "./backlog.scss";
 import { getAllBacklogService } from "../../services/backlog.service";
 import { Link } from "react-router-dom";
 import Dashboardtitle from "../dashboard-title/dashboard-title";
-import { BacklogProps } from "../../util/backlog-interface";
+import { BacklogProps } from "../../util/interfaces/backlog-interface";
 
 const Backlog = () => {
   const [data, setData] = useState<BacklogProps[]>([]);

@@ -6,8 +6,8 @@ import {
   WorksheetBox,
 } from "./lesson-worksheet-styled";
 import { getWorksheetIdService } from "../../services/worksheet.service";
-import { LessonWorksheetProps } from "../../util/lesson-interface";
-import { Worksheets } from "../../util/worksheet-interface";
+import { LessonWorksheetProps } from "../../util/interfaces/lesson-interface";
+import { Worksheets } from "../../util/interfaces/worksheet-interface";
 
 const LessonWorksheet = ({ worksheets, anki }: LessonWorksheetProps) => {
   const [detailedWorksheets, setDetailedWorksheets] = useState<Worksheets[]>(

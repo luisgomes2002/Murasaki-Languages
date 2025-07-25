@@ -15,7 +15,7 @@ import StarterKit from "@tiptap/starter-kit";
 import MenuBar from "../../components/text-bar/meu-bar";
 import { useNotification } from "../notifications-box/useNotification";
 import { Notification } from "../notifications-box/notifications-box";
-import { CreateLesson } from "../../util/lesson-interface";
+import { CreateLesson } from "../../util/interfaces/lesson-interface";
 
 const CreateLessons = () => {
   const [linkInput, setLinkInput] = useState("");

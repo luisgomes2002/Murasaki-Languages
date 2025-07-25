@@ -3,7 +3,7 @@ import Cookies from "js-cookie";
 import {
   DeleteExplanationProps,
   ExplanationProps,
-} from "../util/explanation-interface";
+} from "../util/interfaces/explanation-interface";
 
 const baseUrl = "http://localhost:8080/api";
 

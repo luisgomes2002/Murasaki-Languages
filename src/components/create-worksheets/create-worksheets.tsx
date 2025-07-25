@@ -15,7 +15,7 @@ import {
 import { EditorContent, useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import MenuBar from "../text-bar/meu-bar";
-import { WorksheetsProps } from "../../util/worksheet-interface";
+import { WorksheetsProps } from "../../util/interfaces/worksheet-interface";
 
 const CreateWorksheets = () => {
   const { id } = useParams();

@@ -1,4 +1,4 @@
-import { LanguagesCardProps } from "../../util/card-interface";
+import { LanguagesCardProps } from "../../util/interfaces/card-interface";
 import { LanguagesCardArea } from "./languages-card-styled";
 
 const LanguagesCard = (data: LanguagesCardProps) => {

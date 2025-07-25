@@ -4,7 +4,7 @@ import {
   CreateLesson,
   DeleteLessonProps,
   LessonUpdate,
-} from "../util/lesson-interface";
+} from "../util/interfaces/lesson-interface";
 
 const baseUrl = "http://localhost:8080/api";
 

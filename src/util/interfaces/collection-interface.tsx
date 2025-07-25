@@ -1,12 +1,7 @@
 export interface CreateLessonCollection {
   userId: string;
   collectionName: string;
-}
-
-export interface LessonCollection {
-  id: string;
-  languageName: string;
-  lessonsId: string[];
+  status: boolean;
 }
 
 export interface LanguageCollectionsProps {

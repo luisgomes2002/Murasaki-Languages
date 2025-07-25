@@ -27,7 +27,7 @@ import {
 } from "../../services/metrics.service";
 import { Notification } from "../notifications-box/notifications-box";
 import { useNotification } from "../notifications-box/useNotification";
-import { Metrics, MetricsDates } from "../../util/metrics-interface";
+import { Metrics, MetricsDates } from "../../util/interfaces/metrics-interface";
 
 const Overview = () => {
   const [dates, setDates] = useState<MetricsDates[]>([]);

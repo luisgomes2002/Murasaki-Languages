@@ -19,7 +19,7 @@ import {
 } from "./lesson-page-styled";
 import { useParams } from "react-router-dom";
 import { getLessonCollectionsService } from "../../services/collections.service";
-import { PublishedLesson } from "../../util/lesson-interface";
+import { PublishedLesson } from "../../util/interfaces/lesson-interface";
 
 const LessonsPage = () => {
   const { name } = useParams();

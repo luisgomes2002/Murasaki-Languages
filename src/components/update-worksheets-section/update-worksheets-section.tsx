@@ -15,8 +15,8 @@ import { Notification } from "../notifications-box/notifications-box";
 import { UserContext } from "../../context/user-context";
 import UpdateWorksheetsModal from "../update-worksheets-modal/update-worksheets-modal";
 import DeletePopup from "../delete-popup/delete-popup";
-import { Conversation } from "../../util/lesson-interface";
-import { Worksheets } from "../../util/worksheet-interface";
+import { Conversation } from "../../util/interfaces/lesson-interface";
+import { Worksheets } from "../../util/interfaces/worksheet-interface";
 
 const UpdateWorksheetsSection = () => {
   const [showModal, setShowModal] = useState(false);

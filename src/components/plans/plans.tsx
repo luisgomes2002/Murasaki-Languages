@@ -11,11 +11,11 @@ import "./plans.scss";
 import { CreateLesson, SelectAndCreateLesson } from "../lessons/lessons-styled";
 import { useNotification } from "../notifications-box/useNotification";
 import { Notification } from "../notifications-box/notifications-box";
-import { PlansProps } from "../../util/plans-interface";
+import { PlansProps } from "../../util/interfaces/plans-interface";
 
 const Plans = () => {
   const [plans, setPlans] = useState<PlansProps[]>([]);
-  const [showModal, setShowModal] = useState(false);
+  const [showModal, setShowModal] = useState<boolean>(false);
   const [newPlan, setNewPlan] = useState<Omit<PlansProps, "id">>({
     title: "",
     description: "",
@@ -23,14 +23,19 @@ const Plans = () => {
     advantages: [],
     link: "",
   });
-  const [editMode, setEditMode] = useState(false);
+  const [editMode, setEditMode] = useState<boolean>(false);
   const [editingId, setEditingId] = useState<string | null>(null);
   const { message, type, showNotification, hideNotification } =
     useNotification();
 
   const allPlans = async () => {
-    const response = await getAllPlansService();
-    setPlans(response.data);
+    try {
+      const response = await getAllPlansService();
+      setPlans(response.data);
+      showNotification(response.data.Message, "success");
+    } catch (error: any) {
+      showNotification(error.response?.data.Message, "error");
+    }
   };
 
   useEffect(() => {

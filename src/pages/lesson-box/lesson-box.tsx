@@ -21,7 +21,10 @@ import { formatDate } from "../../util/format-date";
 import { useNotification } from "../../components/notifications-box/useNotification";
 import { Notification } from "../../components/notifications-box/notifications-box";
 import TransparentHeader from "../../components/transparent-header/transparent-header";
-import { CompleteLessonProps, Conversation } from "../../util/lesson-interface";
+import {
+  CompleteLessonProps,
+  Conversation,
+} from "../../util/interfaces/lesson-interface";
 
 const LessonBox = () => {
   const { id } = useParams();

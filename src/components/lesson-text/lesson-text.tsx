@@ -5,8 +5,8 @@ import {
   InfoBox,
   LessonTextDecoration,
 } from "./lesson-text-styled";
-import { LessonTextProps } from "../../util/lesson-interface";
-import { Explanation } from "../../util/explanation-interface";
+import { LessonTextProps } from "../../util/interfaces/lesson-interface";
+import { Explanation } from "../../util/interfaces/explanation-interface";
 
 const LessonText = ({ text, explanation }: LessonTextProps) => {
   const [detailedExplanations, setDetailedExplanations] = useState<

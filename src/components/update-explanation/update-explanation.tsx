@@ -14,7 +14,7 @@ import {
 import { UserContext } from "../../context/user-context";
 import { Notification } from "../notifications-box/notifications-box";
 import { useNotification } from "../notifications-box/useNotification";
-import { ExplanationProps } from "../../util/explanation-interface";
+import { ExplanationProps } from "../../util/interfaces/explanation-interface";
 
 interface Props {
   explanationIdByModal: string;

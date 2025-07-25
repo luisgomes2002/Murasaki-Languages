@@ -1,6 +1,6 @@
 import axios from "axios";
 import Cookies from "js-cookie";
-import { LanguageCollectionsProps } from "../util/collection-interface";
+import { LanguageCollectionsProps } from "../util/interfaces/collection-interface";
 
 const baseUrl = "http://localhost:8080/api";
 
@@ -13,12 +13,19 @@ export const getLessonCollectionsService = () => {
   return response;
 };
 
-export const createLessonCollectionService = (userId: string) => {
-  const response = axios.post(`${baseUrl}/lesson-collection/create/${userId}`, {
-    headers: {
-      Authorization: `Bearer ${Cookies.get("token")}`,
+export const createLessonCollectionService = (
+  userId: string,
+  languageName: string,
+) => {
+  const response = axios.post(
+    `${baseUrl}/lesson-collection/create/${userId}`,
+    { languageName },
+    {
+      headers: {
+        Authorization: `Bearer ${Cookies.get("token")}`,
+      },
     },
-  });
+  );
   return response;
 };
 
