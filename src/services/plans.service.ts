@@ -1,6 +1,6 @@
 import axios from "axios";
 import Cookies from "js-cookie";
-import { PlansProps } from "../util/interfaces/plans-interface";
+import { CreatePlan } from "../util/interfaces/plans-interface";
 
 const baseUrl = "http://localhost:8080/api";
 
@@ -11,11 +11,11 @@ export const getAllPlansService = () => {
 export const updatePlanService = (
   planId: string,
   userId: string,
-  plan: PlansProps,
+  plan: CreatePlan,
 ) => {
   const response = axios.put(
     `${baseUrl}/plans/update/${planId}/${userId}`,
-    { plan },
+    plan,
     {
       headers: {
         Authorization: `Bearer ${Cookies.get("token")}`,
@@ -26,16 +26,12 @@ export const updatePlanService = (
   return response;
 };
 
-export const createPlanService = (plan: PlansProps, userId: string) => {
-  const response = axios.post(
-    `${baseUrl}/plans/create/${userId}`,
-    { plan },
-    {
-      headers: {
-        Authorization: `Bearer ${Cookies.get("token")}`,
-      },
+export const createPlanService = (plan: CreatePlan, userId: string) => {
+  const response = axios.post(`${baseUrl}/plans/create/${userId}`, plan, {
+    headers: {
+      Authorization: `Bearer ${Cookies.get("token")}`,
     },
-  );
+  });
   return response;
 };
 

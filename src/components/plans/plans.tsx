@@ -1,5 +1,9 @@
-import { useEffect, useState } from "react";
-import { getAllPlansService } from "../../services/plans.service";
+import { useContext, useEffect, useState } from "react";
+import {
+  createPlanService,
+  getAllPlansService,
+  updatePlanService,
+} from "../../services/plans.service";
 import Dashboardtitle from "../dashboard-title/dashboard-title";
 import {
   DeleteButton,
@@ -11,12 +15,13 @@ import "./plans.scss";
 import { CreateLesson, SelectAndCreateLesson } from "../lessons/lessons-styled";
 import { useNotification } from "../notifications-box/useNotification";
 import { Notification } from "../notifications-box/notifications-box";
-import { PlansProps } from "../../util/interfaces/plans-interface";
+import { CreatePlan, PlansProps } from "../../util/interfaces/plans-interface";
+import { UserContext } from "../../context/user-context";
 
 const Plans = () => {
   const [plans, setPlans] = useState<PlansProps[]>([]);
   const [showModal, setShowModal] = useState<boolean>(false);
-  const [newPlan, setNewPlan] = useState<Omit<PlansProps, "id">>({
+  const [newPlan, setNewPlan] = useState<CreatePlan>({
     title: "",
     description: "",
     value: 0,
@@ -27,6 +32,7 @@ const Plans = () => {
   const [editingId, setEditingId] = useState<string | null>(null);
   const { message, type, showNotification, hideNotification } =
     useNotification();
+  const userContext = useContext(UserContext);
 
   const allPlans = async () => {
     try {
@@ -66,12 +72,32 @@ const Plans = () => {
   };
 
   const handleSave = async () => {
+    if (!userContext?.user.userId) {
+      showNotification("Usuário não encontrado", "error");
+      return;
+    }
+
     if (editMode && editingId) {
-      // await updatePlanService(editingId, newPlan);
+      try {
+        const response = await updatePlanService(
+          editingId,
+          userContext?.user.userId,
+          newPlan,
+        );
+        showNotification(response.data.Message, "success");
+      } catch (error: any) {
+        showNotification(error.response?.data?.Message, "error");
+      }
     } else {
-      // criar novo plano (adicionar createPlanService aqui, se quiser)
-      console.log("Criando plano: ", newPlan);
-      showNotification("Criando plano: ", "success");
+      try {
+        const response = await createPlanService(
+          newPlan,
+          userContext?.user.userId,
+        );
+        showNotification(response.data.Message, "success");
+      } catch (error: any) {
+        showNotification(error.response?.data?.Message, "error");
+      }
     }
 
     setShowModal(false);

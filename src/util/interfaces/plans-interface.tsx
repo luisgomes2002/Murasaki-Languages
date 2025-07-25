@@ -1,4 +1,4 @@
-export interface Plan {
+export interface PlansProps {
   id: string;
   title: string;
   description: string;
@@ -7,8 +7,7 @@ export interface Plan {
   link: string;
 }
 
-export interface PlansProps {
-  id: string;
+export interface CreatePlan {
   title: string;
   description: string;
   value: number;

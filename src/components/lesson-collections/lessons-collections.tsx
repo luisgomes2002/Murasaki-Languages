@@ -8,12 +8,7 @@ import Dashboardtitle from "../dashboard-title/dashboard-title";
 import { CreateLesson, SelectAndCreateLesson } from "../lessons/lessons-styled";
 import { Notification } from "../notifications-box/notifications-box";
 import { useNotification } from "../notifications-box/useNotification";
-import {
-  DeleteButton,
-  EditButton,
-  InfoTable,
-  Table,
-} from "../users/users-styled";
+import { EditButton, InfoTable, Table } from "../users/users-styled";
 import {
   CreateLessonCollection,
   LanguageCollectionsProps,
