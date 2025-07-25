@@ -58,13 +58,13 @@ const CreateExplanation = () => {
 
       <input
         type="text"
-        placeholder="phrase"
+        placeholder="Phrase"
         value={phrase}
         onChange={(e) => setPhrase(e.target.value)}
       />
       <input
         type="text"
-        placeholder="translation"
+        placeholder="Translation"
         value={translation}
         onChange={(e) => setTranslation(e.target.value)}
       />

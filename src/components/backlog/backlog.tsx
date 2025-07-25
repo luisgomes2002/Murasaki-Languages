@@ -1,26 +1,35 @@
 import { useEffect, useState } from "react";
-import "./backlog.scss";
 import { getAllBacklogService } from "../../services/backlog.service";
 import { Link } from "react-router-dom";
 import Dashboardtitle from "../dashboard-title/dashboard-title";
 import { BacklogProps } from "../../util/interfaces/backlog-interface";
+import Pagination from "../pagination/pagination";
+import { InfoTable, Table } from "../users/users-styled";
 
 const Backlog = () => {
   const [data, setData] = useState<BacklogProps[]>([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const pageSize = 15;
 
-  const getBacklog = async () => {
-    const response = await getAllBacklogService();
-    setData(response.data);
+  const fetchData = async (page: number) => {
+    try {
+      const response = await getAllBacklogService(page - 1, pageSize);
+      setData(response.data.content);
+      setTotalPages(response.data.totalPages);
+    } catch (error) {
+      console.error("Erro ao buscar backlogs:", error);
+    }
   };
 
   useEffect(() => {
-    getBacklog();
-  }, []);
+    fetchData(currentPage);
+  }, [currentPage]);
 
   return (
-    <div className="backlog-area">
+    <Table>
       <Dashboardtitle sectionTitle="Backlog" />
-      <table className="backlog-table">
+      <InfoTable>
         <thead>
           <tr>
             <th>ID</th>
@@ -39,8 +48,14 @@ const Backlog = () => {
             </tr>
           ))}
         </tbody>
-      </table>
-    </div>
+      </InfoTable>
+
+      <Pagination
+        currentPage={currentPage}
+        totalPages={totalPages}
+        onPageChange={(page) => setCurrentPage(page)}
+      />
+    </Table>
   );
 };
 

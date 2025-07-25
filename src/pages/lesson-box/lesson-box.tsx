@@ -138,9 +138,7 @@ const LessonBox = () => {
   }, [id, userContext?.user.userId]);
 
   useEffect(() => {
-    if (completedLesson && id) {
-      setIsCompleted(completedLesson.includes(id));
-    }
+    if (completedLesson && id) setIsCompleted(completedLesson.includes(id));
   }, [completedLesson, id]);
 
   return (
@@ -169,7 +167,9 @@ const LessonBox = () => {
           </Options>
           {renderContent()}
         </TextSection>
+        <h1>Fontes</h1>
       </LessonBoxArea>
+
       <Footer />
 
       {message && (

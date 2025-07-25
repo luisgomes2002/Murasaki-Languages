@@ -14,12 +14,12 @@ const Footer = () => {
         <Link to="">
           <i className="fa-brands fa-youtube"></i>
         </Link>
-        <Link to="">
+        {/* <Link to="">
           <i className="fa-brands fa-github"></i>
         </Link>
         <Link to="">
           <i className="fa-solid fa-envelope"></i>
-        </Link>
+        </Link> */}
       </IconsDiv>
     </FooterContainer>
   );

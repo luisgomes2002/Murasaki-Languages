@@ -34,7 +34,6 @@ const Users = () => {
             <th>Email</th>
             <th>Função</th>
             <th>Ações</th>
-            <th>Excluir</th>
           </tr>
         </thead>
         <tbody>
@@ -50,11 +49,6 @@ const Users = () => {
                 <EditButton>
                   <i className="fa-solid fa-pen"></i>
                 </EditButton>
-              </td>
-              <td>
-                <DeleteButton>
-                  <i className="fa-solid fa-trash"></i>
-                </DeleteButton>
               </td>
             </tr>
           ))}

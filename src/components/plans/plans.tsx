@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import {
   createPlanService,
+  deletePlanService,
   getAllPlansService,
   updatePlanService,
 } from "../../services/plans.service";
@@ -17,6 +18,7 @@ import { useNotification } from "../notifications-box/useNotification";
 import { Notification } from "../notifications-box/notifications-box";
 import { CreatePlan, PlansProps } from "../../util/interfaces/plans-interface";
 import { UserContext } from "../../context/user-context";
+import DeletePopup from "../delete-popup/delete-popup";
 
 const Plans = () => {
   const [plans, setPlans] = useState<PlansProps[]>([]);
@@ -33,6 +35,7 @@ const Plans = () => {
   const { message, type, showNotification, hideNotification } =
     useNotification();
   const userContext = useContext(UserContext);
+  const [planToDelete, setPlanToDelete] = useState<PlansProps | null>(null);
 
   const allPlans = async () => {
     try {
@@ -106,6 +109,23 @@ const Plans = () => {
     await allPlans();
   };
 
+  const handleDeletePlan = async () => {
+    if (!planToDelete || !userContext?.user.userId) return;
+
+    try {
+      const response = await deletePlanService(
+        planToDelete.id,
+        userContext.user.userId,
+      );
+      showNotification(response.data.Message, "success");
+    } catch (error: any) {
+      showNotification(error.response?.data?.Message, "error");
+    }
+
+    setPlanToDelete(null);
+    await allPlans();
+  };
+
   return (
     <>
       <Table>
@@ -153,7 +173,7 @@ const Plans = () => {
                   </EditButton>
                 </td>
                 <td>
-                  <DeleteButton>
+                  <DeleteButton onClick={() => setPlanToDelete(plan)}>
                     <i className="fa-solid fa-trash"></i>
                   </DeleteButton>
                 </td>
@@ -221,14 +241,26 @@ const Plans = () => {
               </button>
             </div>
           </div>
-          {message && (
-            <Notification
-              message={message}
-              type={type}
-              onClose={hideNotification}
-            />
-          )}
         </div>
+      )}
+
+      {message && (
+        <Notification
+          message={message}
+          type={type}
+          onClose={hideNotification}
+        />
+      )}
+
+      {planToDelete && (
+        <DeletePopup
+          title="Confirmar exclusão"
+          description="Tem certeza que deseja excluir este plano? Essa ação não poderá ser desfeita."
+          onConfirm={handleDeletePlan}
+          onCancel={() => setPlanToDelete(null)}
+          confirmText="Excluir"
+          cancelText="Cancelar"
+        />
       )}
     </>
   );

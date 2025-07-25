@@ -3,11 +3,10 @@ import Cookies from "js-cookie";
 
 const baseUrl = "http://localhost:8080/api";
 
-export const getAllBacklogService = () => {
-  const response = axios.get(`${baseUrl}/backlog/`, {
+export const getAllBacklogService = (page = 0, size = 15) => {
+  return axios.get(`${baseUrl}/backlog/?page=${page}&size=${size}`, {
     headers: {
       Authorization: `Bearer ${Cookies.get("token")}`,
     },
   });
-  return response;
 };

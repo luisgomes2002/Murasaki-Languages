@@ -31,6 +31,7 @@ const UpdateExplanationSection = () => {
   const userContext = useContext(UserContext);
   const { message, type, showNotification, hideNotification } =
     useNotification();
+  const [showDeleteModal, setShowDeleteModal] = useState<boolean>(false);
 
   const getLessonById = async (id: string) => {
     try {
