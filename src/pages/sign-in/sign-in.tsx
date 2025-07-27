@@ -83,7 +83,7 @@ const SignIn = () => {
           </p>
           {error && (
             <ErrorMessage>
-              {error}{" "}
+              {error}
               <Link to="/send-email-confirm"> Reenviar confirmação</Link>
             </ErrorMessage>
           )}
