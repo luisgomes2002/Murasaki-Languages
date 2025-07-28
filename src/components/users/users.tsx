@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { getAllUsersService } from "../../services/user.service";
 import { Link } from "react-router-dom";
 import Dashboardtitle from "../dashboard-title/dashboard-title";
-import { InfoTable, EditButton, DeleteButton, Table } from "./users-styled";
+import { InfoTable, EditButton, Table } from "./users-styled";
 
 interface UserProps {
   id: string;
