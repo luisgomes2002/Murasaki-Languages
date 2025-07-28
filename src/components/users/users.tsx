@@ -3,6 +3,9 @@ import { getAllUsersService } from "../../services/user.service";
 import { Link } from "react-router-dom";
 import Dashboardtitle from "../dashboard-title/dashboard-title";
 import { InfoTable, EditButton, Table } from "./users-styled";
+import Pagination from "../pagination/pagination";
+import { Notification } from "../notifications-box/notifications-box";
+import { useNotification } from "../notifications-box/useNotification";
 
 interface UserProps {
   id: string;
@@ -13,15 +16,27 @@ interface UserProps {
 
 const Users = () => {
   const [data, setData] = useState<UserProps[]>([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const pageSize = 12;
+  const { message, type, showNotification, hideNotification } =
+    useNotification();
 
-  const getUsers = async () => {
-    const response = await getAllUsersService();
-    setData(response.data);
+  const getUsers = async (page: number) => {
+    try {
+      const response = await getAllUsersService(page - 1, pageSize);
+      console.log(response);
+      setData(response.data.content);
+      setTotalPages(response.data.totalPages);
+      showNotification(response.data.Message, "success");
+    } catch (error: any) {
+      showNotification(error.response?.data?.Message, "error");
+    }
   };
 
   useEffect(() => {
-    getUsers();
-  }, []);
+    getUsers(currentPage);
+  }, [currentPage]);
 
   return (
     <Table>
@@ -54,6 +69,19 @@ const Users = () => {
           ))}
         </tbody>
       </InfoTable>
+      <Pagination
+        currentPage={currentPage}
+        totalPages={totalPages}
+        onPageChange={(page) => setCurrentPage(page)}
+      />
+
+      {message && (
+        <Notification
+          message={message}
+          type={type}
+          onClose={hideNotification}
+        />
+      )}
     </Table>
   );
 };

@@ -20,6 +20,7 @@ import {
 import { useParams } from "react-router-dom";
 import { getLessonCollectionsService } from "../../services/collections.service";
 import { PublishedLesson } from "../../util/interfaces/lesson-interface";
+import Pagination from "../../components/pagination/pagination";
 
 const LessonsPage = () => {
   const { name } = useParams();
@@ -27,6 +28,9 @@ const LessonsPage = () => {
   const [selectedLevels, setSelectedLevels] = useState<string[]>([]);
   const [onlyFree, setOnlyFree] = useState<boolean>(false);
   const [languageTitle, setLanguageTitle] = useState<string>("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const pageSize = 15;
 
   const handleLevelChange = (level: string) => {
     setSelectedLevels((prevLevels) =>
@@ -158,6 +162,11 @@ const LessonsPage = () => {
               />
             ))}
           </Card>
+          <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            onPageChange={(page) => setCurrentPage(page)}
+          />
         </Lessons>
       </LessonsArea>
       <Footer />

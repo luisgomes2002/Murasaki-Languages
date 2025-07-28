@@ -18,8 +18,8 @@ export const signupService = (data: SignUpProps) => {
   return response;
 };
 
-export const getAllUsersService = () => {
-  const response = axios.get(`${baseUrl}/user/`, {
+export const getAllUsersService = (page = 0, size = 12) => {
+  const response = axios.get(`${baseUrl}/user/?page=${page}&size=${size}`, {
     headers: {
       Authorization: `Bearer ${Cookies.get("token")}`,
     },
