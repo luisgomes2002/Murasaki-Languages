@@ -19,7 +19,7 @@ export const SideBar = styled.div`
   margin: 2%;
 
   input {
-    width: 300px;
+    width: 250px;
     margin: 10% 0;
     height: 40px;
     border: none;
@@ -96,7 +96,6 @@ export const Text = styled.div`
     font-size: 40px;
     font-weight: 600;
     color: white;
-    width: 80%;
     font-weight: 300;
   }
 
@@ -105,7 +104,6 @@ export const Text = styled.div`
     font-size: 20px;
     font-weight: 600;
     color: white;
-    width: 80%;
     font-weight: 300;
     padding-bottom: 30px;
   }
@@ -113,6 +111,5 @@ export const Text = styled.div`
 
 export const Card = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  width: 80%;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
 `;

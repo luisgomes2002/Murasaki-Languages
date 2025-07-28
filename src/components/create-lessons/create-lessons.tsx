@@ -52,7 +52,7 @@ const CreateLessons = () => {
       };
 
       if (!userContext?.user?.userId) {
-        console.error("Usuário não está autenticado.");
+        showNotification("Usuário não está autenticado.", "error");
         setLoading(false);
         return;
       }

@@ -26,6 +26,8 @@ import {
   Conversation,
   DeleteLessonProps,
 } from "../../util/interfaces/lesson-interface";
+import Pagination from "../pagination/pagination";
+import axios from "axios";
 
 const LessonsList = () => {
   const [lessons, setLessons] = useState<Conversation[]>([]);
@@ -39,15 +41,24 @@ const LessonsList = () => {
   const userContext = useContext(UserContext);
   const { message, type, showNotification, hideNotification } =
     useNotification();
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const pageSize = 15;
 
-  const fetchLessons = async (visibility?: string) => {
+  const fetchLessons = async (visibility?: string, page: number = 1) => {
     try {
       if (visibility) {
-        const response = await getLessonByVisibilityService(visibility);
-        setLessons(response.data ?? []);
+        const response = await getLessonByVisibilityService(
+          visibility,
+          page - 1,
+          pageSize,
+        );
+        setLessons(response.data.content ?? []);
+        setTotalPages(response.data.totalPages);
       } else {
-        const response = await getAllLessonsService();
-        setLessons(response.data ?? []);
+        const response = await getAllLessonsService(page - 1, pageSize);
+        setLessons(response.data.content ?? []);
+        setTotalPages(response.data.totalPages);
       }
     } catch (error) {
       console.error("Erro ao buscar aulas:", error);
@@ -57,10 +68,11 @@ const LessonsList = () => {
   const handleCheckboxClick = (visibility: string) => {
     if (selectedVisibility === visibility) {
       setSelectedVisibility(null);
-      fetchLessons();
+      fetchLessons(undefined, currentPage);
     } else {
       setSelectedVisibility(visibility);
-      fetchLessons(visibility);
+      fetchLessons(visibility, 1); // Reinicia na página 1
+      setCurrentPage(1);
     }
   };
 
@@ -77,17 +89,24 @@ const LessonsList = () => {
         lessonName: deleteLesson.lessonName,
       });
       showNotification("Atividade deletada", "success");
-    } catch (error: any) {
-      showNotification(error.response?.data?.Message, "error");
+      await fetchLessons(selectedVisibility ?? undefined, currentPage);
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        showNotification(
+          error.response?.data?.Message || "Erro inesperado",
+          "error",
+        );
+      } else {
+        showNotification("Erro desconhecido", "error");
+      }
     } finally {
       setDeleteLesson(null);
-      // await fetchLessons(); -- NÃO ATUALIZA POR CAUSA DO CACHE --
     }
   };
 
   useEffect(() => {
-    fetchLessons();
-  }, []);
+    fetchLessons(selectedVisibility ?? undefined, currentPage);
+  }, [currentPage]);
 
   return (
     <>
@@ -115,6 +134,7 @@ const LessonsList = () => {
             <i className="fa-solid fa-book-bookmark"></i> New
           </CreateLesson>
         </SelectAndCreateLesson>
+
         <InfoTable>
           <thead>
             <tr>
@@ -137,7 +157,7 @@ const LessonsList = () => {
                 <td>{lesson.title}</td>
                 <td>{lesson.languageType}</td>
                 <td>{lesson.languagesLevels}</td>
-                <td>{lesson.published ? "True" : "False"}</td>
+                <td>{lesson.published ? "Publicado" : "Em andamento"}</td>
                 <td>{lesson.visibility}</td>
                 <td>
                   <Link to={`/lesson/update/${lesson.id}`}>
@@ -150,9 +170,17 @@ const LessonsList = () => {
                   <DeleteButton
                     type="button"
                     onClick={() => {
+                      if (!userContext?.user.userId) {
+                        showNotification(
+                          "Usuário não está autenticado.",
+                          "error",
+                        );
+                        return;
+                      }
+
                       setDeleteLesson({
                         lessonId: lesson.id,
-                        userId: userContext?.user.userId,
+                        userId: userContext.user.userId,
                         lessonName: lesson.title,
                       });
                     }}
@@ -164,6 +192,12 @@ const LessonsList = () => {
             ))}
           </tbody>
         </InfoTable>
+
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={setCurrentPage}
+        />
       </Table>
 
       {deleteLesson && (
@@ -181,7 +215,7 @@ const LessonsList = () => {
         <CreateLessonModal
           onClose={() => {
             setShowModal(false);
-            fetchLessons();
+            fetchLessons(selectedVisibility ?? undefined, currentPage);
           }}
         />
       )}

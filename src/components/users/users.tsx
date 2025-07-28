@@ -18,14 +18,13 @@ const Users = () => {
   const [data, setData] = useState<UserProps[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-  const pageSize = 12;
+  const pageSize = 15;
   const { message, type, showNotification, hideNotification } =
     useNotification();
 
   const getUsers = async (page: number) => {
     try {
       const response = await getAllUsersService(page - 1, pageSize);
-      console.log(response);
       setData(response.data.content);
       setTotalPages(response.data.totalPages);
       showNotification(response.data.Message, "success");

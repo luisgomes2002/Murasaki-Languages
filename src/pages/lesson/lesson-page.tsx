@@ -30,7 +30,7 @@ const LessonsPage = () => {
   const [languageTitle, setLanguageTitle] = useState<string>("");
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-  const pageSize = 15;
+  const pageSize = 15; // ajuste aqui o tamanho de página
 
   const handleLevelChange = (level: string) => {
     setSelectedLevels((prevLevels) =>
@@ -38,10 +38,12 @@ const LessonsPage = () => {
         ? prevLevels.filter((l) => l !== level)
         : [...prevLevels, level],
     );
+    setCurrentPage(1); // reiniciar para a primeira página ao mudar filtro
   };
 
   const handleFreeToggle = () => {
     setOnlyFree((prev) => !prev);
+    setCurrentPage(1);
   };
 
   const getLessonCollections = async () => {
@@ -60,45 +62,54 @@ const LessonsPage = () => {
     }
   };
 
-  useEffect(() => {
-    const fetchLessons = async () => {
-      try {
-        let allLessons: PublishedLesson[] = [];
+  const fetchLessons = async () => {
+    try {
+      let response;
 
-        if (selectedLevels.length === 0 && !onlyFree) {
-          const res = await getAllJapaneseLessonsByPublishedTrueService();
-          allLessons = res.data;
-        } else if (selectedLevels.length === 0 && onlyFree) {
-          const res = await getPublicLessonService();
-          allLessons = res.data;
-        } else {
-          const promises = selectedLevels.map((level) =>
-            onlyFree
-              ? getPublicJapaneseLessonByLevelService(level)
-              : getJapaneseLessonByLevelService(level),
-          );
-
-          const responses = await Promise.all(promises);
-          allLessons = responses.flatMap((r) => r.data);
-        }
-
-        setPublished(allLessons);
-      } catch (error) {
-        console.error(error);
+      // Sem filtro
+      if (selectedLevels.length === 0 && !onlyFree) {
+        response = await getAllJapaneseLessonsByPublishedTrueService(
+          currentPage - 1,
+          pageSize,
+        );
+        setPublished(response.data.content);
+        setTotalPages(response.data.totalPages);
       }
-      getLessonCollections();
-    };
+      // Só grátis
+      else if (selectedLevels.length === 0 && onlyFree) {
+        response = await getPublicLessonService(currentPage - 1, pageSize);
+        setPublished(response.data.content);
+        setTotalPages(response.data.totalPages);
+      }
+      // Filtros por nível (com ou sem grátis)
+      else {
+        const promises = selectedLevels.map((level) =>
+          onlyFree
+            ? getPublicJapaneseLessonByLevelService(level)
+            : getJapaneseLessonByLevelService(level),
+        );
 
-    fetchLessons();
-  }, [selectedLevels, onlyFree]);
+        const responses = await Promise.all(promises);
+        const allLessons = responses.flatMap((r) => r.data.content ?? r.data);
+
+        // Paginação manual
+        const startIndex = (currentPage - 1) * pageSize;
+        const endIndex = startIndex + pageSize;
+        const paginatedLessons = allLessons.slice(startIndex, endIndex);
+
+        setPublished(paginatedLessons);
+        setTotalPages(Math.ceil(allLessons.length / pageSize));
+      }
+
+      getLessonCollections();
+    } catch (error) {
+      console.error("Erro ao buscar aulas:", error);
+    }
+  };
 
   useEffect(() => {
-    if (name === "Japonês") {
-      getAllJapaneseLessonsByPublishedTrueService()
-        .then((res) => setPublished(res.data))
-        .catch((err) => console.error(err));
-    }
-  }, [name]);
+    fetchLessons();
+  }, [selectedLevels, onlyFree, currentPage]);
 
   return (
     <>
@@ -145,8 +156,8 @@ const LessonsPage = () => {
             <p>
               Nesta seção, você terá acesso a aulas de {languageTitle},
               exercícios interativos, flashcards do Anki para download e um
-              relatório de desempenho personalizado para acompanhar sua evolução
-              nos estudos de forma prática e eficiente.
+              relatório de desempenho personalizado para acompanhar sua
+              evolução.
             </p>
           </Text>
           <Card>
