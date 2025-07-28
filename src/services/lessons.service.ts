@@ -44,10 +44,6 @@ export const createLessonService = (data: CreateLesson, userid: string) => {
   return response;
 };
 
-export const publishLessonsService = () => {
-  const response = axios.post(`${baseUrl}/lesson/publish/`);
-};
-
 export const updateLessonService = (data: LessonUpdate, userId: string) => {
   const response = axios.put(
     `${baseUrl}/lesson/update/${data.id}/${userId}`,

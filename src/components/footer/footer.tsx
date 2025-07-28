@@ -8,10 +8,10 @@ const Footer = () => {
       <p>© 2025. Murasaki Languages ●</p>
 
       <IconsDiv>
-        <a href="" target="_black">
+        <a href="https://www.instagram.com/_gomesluis/" target="_black">
           <i className="fa-brands fa-instagram"></i>
         </a>
-        <a href="" target="_black">
+        <a href="https://www.youtube.com/@MurasakiLanguages" target="_black">
           <i className="fa-brands fa-youtube"></i>
         </a>
         {/* <Link to="">

@@ -1,7 +1,7 @@
 import { useContext, useEffect, useMemo, useState } from "react";
 import Footer from "../../components/footer/footer";
 import { getLessonByIdService } from "../../services/lessons.service";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import {
   CompletedButton,
   ImgVideoBox,
@@ -36,6 +36,26 @@ const LessonBox = () => {
   const [activeSection, setActiveSection] = useState("text");
   const { message, type, showNotification, hideNotification } =
     useNotification();
+  const navigate = useNavigate();
+
+  const isLoading = userContext?.isLoading;
+
+  if (isLoading) {
+    return <i className="fa-solid fa-c fa-spin" />;
+  }
+
+  const allowedUserTypes = ["BASIC", "PRO", "PREMIUM"];
+
+  if (lesson?.visibility === "PRIVATE") {
+    if (!userContext?.user.userType) {
+      showNotification("Usuário não está autenticado.", "error");
+      return;
+    }
+
+    if (!allowedUserTypes.includes(userContext?.user.userType)) {
+      navigate("/subscription");
+    }
+  }
 
   const renderContent = () => {
     if (!lesson) return <p>Carregando...</p>;

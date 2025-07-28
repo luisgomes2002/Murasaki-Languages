@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { UserContext } from "../../context/user-context";
 import { Link, useNavigate } from "react-router-dom";
 import {
@@ -7,6 +7,7 @@ import {
   Section,
   HeaderButtonTransparent,
   LogoutButton,
+  MenuIcon,
 } from "./transparent-header-styled";
 import Cookies from "js-cookie";
 
@@ -17,10 +18,15 @@ interface TransparentHeaderProps {
 const TransparentHeader = ({ backgroundColor }: TransparentHeaderProps) => {
   const userContext = useContext(UserContext);
   const navigate = useNavigate();
+  const [menuOpen, setMenuOpen] = useState<boolean>(false);
 
   const logout = () => {
     Cookies.remove("token");
     navigate("/sign-in");
+  };
+
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen);
   };
 
   const isWhiteNav = backgroundColor?.toLowerCase() === "white";
@@ -31,7 +37,7 @@ const TransparentHeader = ({ backgroundColor }: TransparentHeaderProps) => {
         MURASAKI<span>BETA</span>
       </Link>
 
-      <RightDiv>
+      <RightDiv menuOpen={menuOpen}>
         <Section isWhite={isWhiteNav}>
           <Link to="/">Início</Link>
           <Link to="/languages">Aulas</Link>
@@ -54,6 +60,12 @@ const TransparentHeader = ({ backgroundColor }: TransparentHeaderProps) => {
           </HeaderButtonTransparent>
         )}
       </RightDiv>
+
+      <MenuIcon
+        className="fa-solid fa-bars"
+        isWhite={isWhiteNav}
+        onClick={toggleMenu}
+      />
     </TransparenNav>
   );
 };

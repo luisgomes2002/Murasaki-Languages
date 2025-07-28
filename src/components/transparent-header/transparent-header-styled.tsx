@@ -37,11 +37,61 @@ export const TransparenNav = styled.nav<NavProps>`
       padding: 0 8px;
     }
   }
+
+  @media screen and (max-width: 1440px) {
+  }
+  @media screen and (max-width: 1280px) {
+  }
+  @media screen and (max-width: 1024px) {
+  }
+  @media screen and (max-width: 768px) {
+  }
+  @media screen and (max-width: 414px) {
+  }
+  @media screen and (max-width: 375px) {
+  }
 `;
 
-export const RightDiv = styled.div`
+interface RightDivProps {
+  menuOpen?: boolean;
+}
+
+export const RightDiv = styled.div<RightDivProps>`
   display: flex;
   align-items: center;
+
+  @media screen and (max-width: 1440px) {
+  }
+  @media screen and (max-width: 1280px) {
+  }
+  @media screen and (max-width: 1024px) {
+  }
+
+  @media screen and (max-width: 768px) {
+    display: ${({ menuOpen }) => (menuOpen ? "flex" : "none")};
+    flex-direction: column;
+    width: 100%;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: white;
+    padding: 20px;
+    border-radius: 0 0 10px 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+    a,
+    button {
+      color: black;
+      font-weight: 300;
+      margin: 10px 0;
+      border: none;
+    }
+  }
+
+  @media screen and (max-width: 414px) {
+  }
+  @media screen and (max-width: 375px) {
+  }
 `;
 
 interface SectionProps {
@@ -57,6 +107,16 @@ export const Section = styled.section<SectionProps>`
     transition: all 0.2s ease-in;
     margin: 20px;
     font-weight: 400;
+  }
+
+  @media screen and (max-width: 768px) {
+    display: flex;
+    flex-direction: column;
+
+    a {
+      color: black;
+      font-weight: 300;
+    }
   }
 `;
 
@@ -105,4 +165,19 @@ export const LogoutButton = styled.button<ButtonProps>`
   cursor: pointer;
   transition: all 0.2s ease-in;
   font-weight: 300;
+`;
+
+interface IconProps {
+  isWhite?: boolean;
+}
+
+export const MenuIcon = styled.i<IconProps>`
+  display: none;
+  color: ${({ isWhite }) => (isWhite ? "#3c0d7a" : "white")};
+  font-size: 28px;
+  cursor: pointer;
+
+  @media screen and (max-width: 768px) {
+    display: block;
+  }
 `;
