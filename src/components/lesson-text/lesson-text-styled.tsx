@@ -58,3 +58,13 @@ export const InfoBox = styled.div`
     font-weight: 500;
   }
 `;
+
+export const ExplanationContent = styled.div<{ isOpen: boolean }>`
+  max-height: ${({ isOpen }) => (isOpen ? "1000px" : "0")};
+  overflow: hidden;
+  opacity: ${({ isOpen }) => (isOpen ? "1" : "0")};
+  transition: all 0.2s ease-in-out;
+  transform: ${({ isOpen }) => (isOpen ? "scaleY(1)" : "scaleY(0)")};
+  transform-origin: top;
+  pointer-events: ${({ isOpen }) => (isOpen ? "auto" : "none")};
+`;

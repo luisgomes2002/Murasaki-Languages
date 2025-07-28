@@ -8,12 +8,12 @@ const Footer = () => {
       <p>© 2025. Murasaki Languages ●</p>
 
       <IconsDiv>
-        <Link to="">
+        <a href="" target="_black">
           <i className="fa-brands fa-instagram"></i>
-        </Link>
-        <Link to="">
+        </a>
+        <a href="" target="_black">
           <i className="fa-brands fa-youtube"></i>
-        </Link>
+        </a>
         {/* <Link to="">
           <i className="fa-brands fa-github"></i>
         </Link>

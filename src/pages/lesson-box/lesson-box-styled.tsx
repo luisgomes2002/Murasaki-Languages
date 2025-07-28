@@ -116,3 +116,19 @@ export const Options = styled.div<{ $activeSection: string }>`
         : "2px solid transparent"};
   }
 `;
+
+export const Sources = styled.div`
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  width: 1000px;
+
+  h1 {
+    color: #fff;
+  }
+
+  a {
+    padding: 5px 0;
+    color: #fff;
+  }
+`;

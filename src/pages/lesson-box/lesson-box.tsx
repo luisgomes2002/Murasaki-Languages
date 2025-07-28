@@ -7,6 +7,7 @@ import {
   ImgVideoBox,
   LessonBoxArea,
   Options,
+  Sources,
   TextSection,
 } from "./lesson-box-styled";
 import {
@@ -161,13 +162,20 @@ const LessonBox = () => {
         <TextSection>
           <Options $activeSection={activeSection}>
             <button onClick={() => setActiveSection("text")}>Texto</button>
-            <button onClick={() => setActiveSection("lesson")}>
+            {/* <button onClick={() => setActiveSection("lesson")}>
               Atividades
-            </button>
+            </button> */}
           </Options>
           {renderContent()}
         </TextSection>
-        <h1>Fontes</h1>
+        <Sources>
+          <h1>Fontes</h1>
+          {lesson?.links.map((link, index) => (
+            <a key={index} href={link} target="_black">
+              {link}
+            </a>
+          ))}
+        </Sources>
       </LessonBoxArea>
 
       <Footer />

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { getExplanationIdService } from "../../services/explanation.service";
 import {
+  ExplanationContent,
   ExplanationsBox,
   InfoBox,
   LessonTextDecoration,
@@ -12,6 +13,7 @@ const LessonText = ({ text, explanation }: LessonTextProps) => {
   const [detailedExplanations, setDetailedExplanations] = useState<
     Explanation[]
   >([]);
+  const [openIndexes, setOpenIndexes] = useState<boolean[]>([]);
 
   const getExplanation = async (ids: string[]) => {
     try {
@@ -30,6 +32,17 @@ const LessonText = ({ text, explanation }: LessonTextProps) => {
     getExplanation(explanation);
   }, [explanation]);
 
+  useEffect(() => {
+    // Inicializa todos como abertos
+    setOpenIndexes(Array(detailedExplanations.length).fill(true));
+  }, [detailedExplanations]);
+
+  const toggleExplanation = (index: number) => {
+    setOpenIndexes((prev) =>
+      prev.map((open, i) => (i === index ? !open : open)),
+    );
+  };
+
   return (
     <ExplanationsBox>
       <LessonTextDecoration>
@@ -40,14 +53,20 @@ const LessonText = ({ text, explanation }: LessonTextProps) => {
         <div key={item.id}>
           <InfoBox>
             <h1>Frase {index + 1}:</h1>
-            <span>
-              <i className="fa-solid fa-chevron-up"></i>
+            <span onClick={() => toggleExplanation(index)}>
+              <i
+                className={`fa-solid ${
+                  openIndexes[index] ? "fa-chevron-up" : "fa-chevron-down"
+                }`}
+              ></i>
             </span>
           </InfoBox>
 
-          <h1>{item.phrase}</h1>
-          <h2>{item.translation}</h2>
-          <p dangerouslySetInnerHTML={{ __html: item.explanation }} />
+          <ExplanationContent isOpen={openIndexes[index]}>
+            <h1>{item.phrase}</h1>
+            <h2>{item.translation}</h2>
+            <p dangerouslySetInnerHTML={{ __html: item.explanation }} />
+          </ExplanationContent>
         </div>
       ))}
     </ExplanationsBox>
